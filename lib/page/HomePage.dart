@@ -2,6 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:stik_vendas/page/EstoquePage.dart';
 import 'package:stik_vendas/page/FaturamentoPage.dart';
+import 'package:stik_vendas/page/FeedsPage.dart';
+import 'package:stik_vendas/page/LoginPage.dart';
 import 'package:stik_vendas/page/PedidoPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color:  Color.fromARGB(255, 168, 168, 168),
+                        color: Color.fromARGB(255, 168, 168, 168),
                         borderRadius: BorderRadius.circular(13),
                       ),
                       alignment: Alignment.center,
@@ -114,12 +116,13 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FaturamentoPage()),
+                        MaterialPageRoute(
+                            builder: (context) => FaturamentoPage()),
                       );
                     },
-                     child: Container(
+                    child: Container(
                       decoration: BoxDecoration(
-                        color:  Color.fromARGB(255, 168, 168, 168),
+                        color: Color.fromARGB(255, 168, 168, 168),
                         borderRadius: BorderRadius.circular(13),
                       ),
                       alignment: Alignment.center,
@@ -159,11 +162,20 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             _currentIndex = index;
           });
+
+          // if (_currentIndex == 0) {
+          //   Navigator.push(context,
+          //    MaterialPageRoute(builder: (context) => HomePage()));
+
+          if (_currentIndex == 1) {
+            Navigator.pop(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          } else if (_currentIndex == 2) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => FeedsPage()));
+          }
         },
       ),
     );
   }
 }
-
-
-

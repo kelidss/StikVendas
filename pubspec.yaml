@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   curved_navigation_bar: ^1.0.3
   cupertino_icons: ^1.0.2
+  fl_chart: ^0.66.0
+  pie_chart: ^5.4.0
 
 
 dev_dependencies:
