@@ -16,8 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-
+  int _activePage = 0;
+  final List<Widget> children = [HomePage(), LoginPage(), FeedsPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: CurvedNavigationBar(
+      bottomNavigationBar:CurvedNavigationBar(
         backgroundColor: Colors.white,
         color: const Color(0xFF9E0000),
         animationDuration: const Duration(milliseconds: 300),
@@ -158,21 +158,17 @@ class _HomePageState extends State<HomePage> {
           Icon(Icons.exit_to_app, color: Colors.white),
           Icon(Icons.feed, color: Colors.white),
         ],
-        onTap: (index) {
+        onTap: (index) async {
           setState(() {
-            _currentIndex = index;
+            _activePage = index;
           });
-
-          // if (_currentIndex == 0) {
-          //   Navigator.push(context,
-          //    MaterialPageRoute(builder: (context) => HomePage()));
-
-          if (_currentIndex == 1) {
-            Navigator.pop(
-                context, MaterialPageRoute(builder: (context) => LoginPage()));
-          } else if (_currentIndex == 2) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => FeedsPage()));
+          await Future.delayed(Duration(seconds: 1));
+            //if (_currentIndex == 0) {
+             // await Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage()));}
+             if (_activePage == 1) {
+             Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+            } else if (_activePage == 2) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FeedsPage()));        
           }
         },
       ),

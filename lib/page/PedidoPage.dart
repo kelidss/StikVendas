@@ -33,22 +33,22 @@ class _PedidoPageState extends State<PedidoPage> {
             Icon(Icons.exit_to_app, color: Colors.white),
             Icon(Icons.feed, color: Colors.white),
           ],
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-
+          onTap: (index) async {
+          setState(() {
+            _currentIndex = index;
+          });
+          await Future.delayed(Duration(seconds: 1));
             if (_currentIndex == 0) {
-              Navigator.pop(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
-            } else if (_currentIndex == 1) {
-              Navigator.pop(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
+              Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage()));}
+            else if (_currentIndex == 1) {
+             Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
             } else if (_currentIndex == 2) {
-              Navigator.pop(context,
-                  MaterialPageRoute(builder: (context) => FeedsPage()));
-            }
-          },
-        ),
-      );
-}
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FeedsPage()));        
+          }
+        },
+      ),
+
+        );
+
+        }
+  
