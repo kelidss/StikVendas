@@ -15,6 +15,10 @@ dependencies:
   fl_chart: ^0.66.0
   pie_chart: ^5.4.0
   google_nav_bar: ^5.0.6
+  fancy_bottom_navigation: ^0.3.3
+  lottie: ^3.0.0
+  carousel_slider: ^4.2.1
+  flutter_carousel_widget: ^2.2.0
 
 
 dev_dependencies:
