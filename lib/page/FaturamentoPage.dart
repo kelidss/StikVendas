@@ -43,7 +43,7 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
            else if (_currentIndex == 1) {
              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
             } else if (_currentIndex == 2) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => FeedsPage()));        
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FeedsPage(username: '')));     
           }
         },
       ),

@@ -43,7 +43,8 @@ class _EstoquePageState extends State<EstoquePage> {
              else if (_currentIndex == 1) {
              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
             } else if (_currentIndex == 2) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => FeedsPage()));        
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FeedsPage(username: '')));
+                    
           }
         },
       ),

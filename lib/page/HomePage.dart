@@ -1,3 +1,4 @@
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:stik_vendas/page/EstoquePage.dart';
@@ -16,11 +17,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+  int currentIndex = 0;
   final List<Widget> children = [
     const HomePage(),
     const LoginPage(),
-    const FeedsPage()
+    const FeedsPage(username: '',)
   ];
   @override
   Widget build(BuildContext context) {
@@ -158,25 +159,29 @@ class _HomePageState extends State<HomePage> {
         color: const Color(0xFF9E0000),
         animationDuration: const Duration(milliseconds: 300),
         items: const [
+          
           Icon(Icons.home, color: Colors.white),
           Icon(Icons.exit_to_app, color: Colors.white),
           Icon(Icons.feed, color: Colors.white),
+       
         ],
+        index: 0,
         onTap: (index) async {
           setState(() {
-            _currentIndex = index;
+            currentIndex = index;
           });
-          letIndexChange:
-          (index) => true;
-          await Future.delayed(Duration(seconds: 1));
-          //if (_currentIndex == 0) {
-          // await Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage()));}
-          if (_currentIndex == 1) {
-            Navigator.push(
+          await Future.delayed(const Duration(seconds: 1));
+
+          if (currentIndex == 0) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          } else if (currentIndex == 1) {
+            Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => LoginPage()));
-          } else if (_currentIndex == 2) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => FeedsPage()));
+          } else if (currentIndex == 2) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => FeedsPage(username: '')));
+                  
           }
         },
       ),
