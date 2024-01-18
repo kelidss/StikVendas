@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +9,24 @@ import 'package:stik_vendas/page/HomePage.dart';
 import 'package:stik_vendas/page/LoginPage.dart';
 
 class FeedsPage extends StatefulWidget {
-  final String username;
-  const FeedsPage({Key? key, required this.username}) : super(key: key);
+  final String? nomeUsuario;
+  FeedsPage({Key? key, this.nomeUsuario}) : super(key: key);
+
   @override
-  State<FeedsPage> createState() => _FeedsPageState();
+  State<FeedsPage> createState() => FeedsPageState();
+   final TextEditingController usuarioController = TextEditingController();
 }
 
-class _FeedsPageState extends State<FeedsPage> {
+class FeedsPageState extends State<FeedsPage> {
   int currentIndex = 2;
+  final List<Widget> children = [
+    HomePage(),
+    const LoginPage(),
+    FeedsPage(),
+  ];
+  
+
+  //String nomeUsuario = nomeUsuario;
   //List<String> emailTexts = [];
 
   // @override
@@ -124,17 +136,20 @@ class _FeedsPageState extends State<FeedsPage> {
           setState(() {
             currentIndex = index;
           });
-          await Future.delayed(Duration(seconds: 1));
+          await Future.delayed(const Duration(seconds: 1));
 
           if (currentIndex == 0) {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomePage(
+                        )));
           } else if (currentIndex == 1) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => LoginPage()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const LoginPage()));
           } else if (currentIndex == 2) {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => FeedsPage(username: widget.username)));
+                context, MaterialPageRoute(builder: (context) => FeedsPage()));
           }
         },
       ),

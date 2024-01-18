@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stik_vendas/page/HomePage.dart';
-//import 'package:stik_vendas/page/PedidoPage.dart';
-//import 'package:stik_vendas/page/PedidoPage.dart';
+
+class UserData {
+  static String? nomeUsuario;
+}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,16 +16,6 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _senhaController = TextEditingController();
   final TextEditingController _usuarioController = TextEditingController();
   String _bemvindo = '';
-
-  void _mostraBemVindo() {
-    setState(() {
-      if (_usuarioController.text.isNotEmpty || _senhaController.text.isNotEmpty) {
-        _bemvindo = 'Bem vindo ${_usuarioController.text}';
-      } else {
-        _bemvindo = "Vazio!";
-      }
-    });
-  }
 
   void _limparCampo() {
     setState(() {
@@ -85,14 +77,22 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 30),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(
-                            nomeUsuario: _usuarioController.text,
+                      if (_usuarioController.text.isNotEmpty &&
+                          _senhaController.text.isNotEmpty) {
+                        UserData.nomeUsuario = _usuarioController.text;
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
                           ),
-                        ),
-                      );
+                        );
+                      } else {
+                        setState(() {
+                          _bemvindo = "Usuário ou senha inválidos!";
+                          debugPrint('Usuário ou senha inválidos!');
+                        });
+                      }
                     },
                     child: Container(
                       width: 150,
@@ -166,5 +166,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-

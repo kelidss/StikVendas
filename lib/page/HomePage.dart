@@ -1,4 +1,3 @@
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:stik_vendas/page/EstoquePage.dart';
@@ -7,22 +6,25 @@ import 'package:stik_vendas/page/FeedsPage.dart';
 import 'package:stik_vendas/page/LoginPage.dart';
 import 'package:stik_vendas/page/PedidoPage.dart';
 
+
 class HomePage extends StatefulWidget {
+  HomePage({Key? key, this.nomeUsuario}) : super(key: key);
+
   final String? nomeUsuario;
 
-  const HomePage({Key? key, this.nomeUsuario}) : super(key: key);
-
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => HomePageState();
+  final TextEditingController usuarioController = TextEditingController();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  final List<Widget> children = [
-    const HomePage(),
-    const LoginPage(),
-    const FeedsPage(username: '',)
-  ];
+  //final List<Widget> children = [
+  //  const HomePage(),
+  //  const LoginPage(),
+  //  const FeedsPage(),
+  // ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               alignment: Alignment.topLeft,
               child: Text(
-                'Olá, ${widget.nomeUsuario}',
+                'Olá, ${UserData.nomeUsuario}',
                 style: const TextStyle(
                   color: Colors.black87,
                   fontSize: 18,
@@ -159,29 +161,27 @@ class _HomePageState extends State<HomePage> {
         color: const Color(0xFF9E0000),
         animationDuration: const Duration(milliseconds: 300),
         items: const [
-          
           Icon(Icons.home, color: Colors.white),
           Icon(Icons.exit_to_app, color: Colors.white),
           Icon(Icons.feed, color: Colors.white),
-       
         ],
-        index: 0,
+        // index: 0,
         onTap: (index) async {
           setState(() {
             currentIndex = index;
           });
           await Future.delayed(const Duration(seconds: 1));
 
-          if (currentIndex == 0) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          } else if (currentIndex == 1) {
+          // if (currentIndex == 0) {
+          //  Navigator.pop(
+          //     context, MaterialPageRoute(builder: (context) => HomePage()));
+          //   } else
+          if (currentIndex == 1) {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => LoginPage()));
           } else if (currentIndex == 2) {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => FeedsPage(username: '')));
-                  
+                context, MaterialPageRoute(builder: (context) => FeedsPage()));
           }
         },
       ),
