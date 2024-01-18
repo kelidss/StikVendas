@@ -14,7 +14,7 @@ class FeedsPage extends StatefulWidget {
 
   @override
   State<FeedsPage> createState() => FeedsPageState();
-   final TextEditingController usuarioController = TextEditingController();
+  final TextEditingController usuarioController = TextEditingController();
 }
 
 class FeedsPageState extends State<FeedsPage> {
@@ -24,7 +24,6 @@ class FeedsPageState extends State<FeedsPage> {
     const LoginPage(),
     FeedsPage(),
   ];
-  
 
   //String nomeUsuario = nomeUsuario;
   //List<String> emailTexts = [];
@@ -76,29 +75,36 @@ class FeedsPageState extends State<FeedsPage> {
               ),
               items: [
                 Container(
-                  color: Color.fromARGB(255, 228, 131, 220),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 168, 168, 168),
+                    borderRadius: BorderRadius.circular(13),
+                  ),
                   child: Center(
                       child: Text(
-                    'Mensagem 1',
+                    'Mensagem de sms',
                   )),
-                  width: 300,
+                  width: 350,
                 ),
                 Container(
-                  color: Color.fromARGB(255, 105, 117, 226),
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 168, 168, 168),
+                      borderRadius: BorderRadius.circular(13)),
                   child: Center(
                       child: Text(
-                    'Mensagem 2',
+                    '',
                   )),
-                  width: 300,
+                  width: 350,
                 ),
                 Container(
-                  color: Color.fromARGB(255, 0, 160, 235),
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 168, 168, 168),
+                      borderRadius: BorderRadius.circular(13)),
                   child: Center(
                       child: Text(
                     'Mensagem 3',
                     style: TextStyle(color: Colors.black),
                   )),
-                  width: 300,
+                  width: 350,
                 ),
               ]
               /* items: emailTexts.map((text) {
@@ -140,10 +146,7 @@ class FeedsPageState extends State<FeedsPage> {
 
           if (currentIndex == 0) {
             Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomePage(
-                        )));
+                context, MaterialPageRoute(builder: (context) => HomePage()));
           } else if (currentIndex == 1) {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => const LoginPage()));

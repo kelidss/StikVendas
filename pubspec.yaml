@@ -26,6 +26,7 @@ dependencies:
   path_provider: ^2.1.2
   io: ^1.0.4
   sqflite: ^2.3.0
+  mvc_pattern: ^8.12.0
 
 
 dev_dependencies:

@@ -90,7 +90,6 @@ class _LoginPageState extends State<LoginPage> {
                       } else {
                         setState(() {
                           _bemvindo = "Usuário ou senha inválidos!";
-                          debugPrint('Usuário ou senha inválidos!');
                         });
                       }
                     },
