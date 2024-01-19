@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -69,42 +70,42 @@ class FeedsPageState extends State<FeedsPage> {
                 height: 200.0,
                 enableInfiniteScroll: true,
                 autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
                 autoPlayCurve: Curves.fastOutSlowIn,
               ),
               items: [
                 Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 168, 168, 168),
+                    color: const Color.fromARGB(255, 168, 168, 168),
                     borderRadius: BorderRadius.circular(13),
                   ),
-                  child: Center(
+                  width: 350,
+                  child: const Center(
                       child: Text(
                     'Mensagem de sms',
                   )),
-                  width: 350,
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 168, 168, 168),
+                      color: const Color.fromARGB(255, 168, 168, 168),
                       borderRadius: BorderRadius.circular(13)),
-                  child: Center(
+                  width: 350,
+                  child: const Center(
                       child: Text(
                     '',
                   )),
-                  width: 350,
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 168, 168, 168),
+                      color: const Color.fromARGB(255, 168, 168, 168),
                       borderRadius: BorderRadius.circular(13)),
-                  child: Center(
+                  width: 350,
+                  child: const Center(
                       child: Text(
                     'Mensagem 3',
                     style: TextStyle(color: Colors.black),
                   )),
-                  width: 350,
                 ),
               ]
               /* items: emailTexts.map((text) {
@@ -143,13 +144,24 @@ class FeedsPageState extends State<FeedsPage> {
             currentIndex = index;
           });
           await Future.delayed(const Duration(seconds: 1));
-
-          if (currentIndex == 0) {
+          if (currentIndex == 1) {
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.warning,
+              animType: AnimType.scale,
+              title: 'Confirmação',
+              desc: 'Tem certeza que deseja sair?',
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+            ).show();
+          } else if (currentIndex == 0) {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => HomePage()));
-          } else if (currentIndex == 1) {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const LoginPage()));
           } else if (currentIndex == 2) {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => FeedsPage()));

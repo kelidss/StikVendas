@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stik_vendas/page/FeedsPage.dart';
 import 'package:stik_vendas/page/HomePage.dart';
 import 'package:stik_vendas/page/LoginPage.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class EstoquePage extends StatefulWidget {
   const EstoquePage({super.key});
@@ -12,7 +13,7 @@ class EstoquePage extends StatefulWidget {
 }
 
 class _EstoquePageState extends State<EstoquePage> {
-  int _currentIndex = 0;
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -36,24 +37,34 @@ class _EstoquePageState extends State<EstoquePage> {
           ],
           onTap: (index) async {
             setState(() {
-              _currentIndex = index;
+              currentIndex = index;
             });
-            await Future.delayed(Duration(seconds: 1));
-            if (_currentIndex == 0) {
-              Navigator.pop(
+            await Future.delayed(const Duration(seconds: 1));
+          if (currentIndex == 1) {
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.warning,
+              animType: AnimType.scale,
+              title: 'Confirmação',
+              desc: 'Tem certeza que deseja sair?',
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {
+                Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => HomePage()));
-            } else if (_currentIndex == 1) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
-            } else if (_currentIndex == 2) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => FeedsPage()));
-            }
-          },
-        ),
-      );
-}
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+            ).show();
+          } else if (currentIndex == 0) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          } else if (currentIndex == 2) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => FeedsPage()));
+          }
+        },
+      ),
+    );
+  }
+
+

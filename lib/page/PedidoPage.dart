@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:stik_vendas/page/FeedsPage.dart';
@@ -12,7 +13,7 @@ class PedidoPage extends StatefulWidget {
 }
 
 class _PedidoPageState extends State<PedidoPage> {
-  int _currentIndex = 0;
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -35,20 +36,35 @@ class _PedidoPageState extends State<PedidoPage> {
           ],
           onTap: (index) async {
           setState(() {
-            _currentIndex = index;
-          });
-          await Future.delayed(Duration(seconds: 1));
-            if (_currentIndex == 0) {
-              Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage()));}
-            else if (_currentIndex == 1) {
-             Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-            } else if (_currentIndex == 2) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => FeedsPage()));       
+            currentIndex = index;
+              });
+         await Future.delayed(const Duration(seconds: 1));
+          if (currentIndex == 1) {
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.warning,
+              animType: AnimType.scale,
+              title: 'Confirmação',
+              desc: 'Tem certeza que deseja sair?',
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+            ).show();
+          } else if (currentIndex == 0) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          } else if (currentIndex == 2) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => FeedsPage()));
           }
         },
       ),
+    );
+  }
 
-        );
 
-        }
   

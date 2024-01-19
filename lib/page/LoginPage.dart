@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:stik_vendas/page/HomePage.dart';
 
@@ -46,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     'Bem vindo!',
                     style: TextStyle(
                       color: Colors.black38,
@@ -89,19 +90,25 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       } else {
                         setState(() {
-                          _bemvindo = "Usuário ou senha inválidos!";
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.error,
+                            animType: AnimType.scale,
+                            title: 'Atenção',
+                            desc: 'Usuário ou senha inválidos!',
+                          ).show();
                         });
                       }
                     },
                     child: Container(
                       width: 150,
                       child: Card(
-                        color: Color(0xFF9E0000),
+                        color: const Color(0xFF9E0000),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8),
                           child: Center(
                             child: Text(
                               'Login',
@@ -125,8 +132,8 @@ class _LoginPageState extends State<LoginPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8),
                           child: Center(
                             child: Text(
                               'Limpar Campo',
@@ -150,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   Text(
                     " $_bemvindo",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 19.6,
                       fontWeight: FontWeight.w400,
