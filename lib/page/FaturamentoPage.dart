@@ -4,6 +4,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:stik_vendas/page/FeedsPage.dart';
 import 'package:stik_vendas/page/HomePage.dart';
 import 'package:stik_vendas/page/LoginPage.dart';
+import 'package:d_chart/commons/data_model.dart';
+import 'package:d_chart/ordinal/bar.dart';
 
 class FaturamentoPage extends StatefulWidget {
   const FaturamentoPage({super.key});
@@ -25,6 +27,24 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
           ),
           centerTitle: true,
           backgroundColor: const Color(0xFF9E0000),
+
+        ),
+        body: ListView(
+          padding: EdgeInsets.all(16),
+          children: [
+            AspectRatio(aspectRatio: 16/9, child: DChartBarO(groupList:[
+              OrdinalGroup(
+                id: '1',
+                data:[
+                   OrdinalData(domain: 'janeiro', measure: 2),
+                    OrdinalData(domain: 'fev', measure: 6),
+                    OrdinalData(domain: 'março', measure: 3),
+                    OrdinalData(domain: 'abril', measure: 7),
+                ]
+              )
+            ],)
+            )
+          ],
         ),
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.white,
