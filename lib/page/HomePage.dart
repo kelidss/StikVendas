@@ -6,6 +6,7 @@ import 'package:stik_vendas/page/FaturamentoPage.dart';
 import 'package:stik_vendas/page/FeedsPage.dart';
 import 'package:stik_vendas/page/LoginPage.dart';
 import 'package:stik_vendas/page/PedidoPage.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key, this.nomeUsuario}) : super(key: key);
@@ -40,7 +41,8 @@ class HomePageState extends State<HomePage> {
         ),
         backgroundColor: Colors.white,
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+          //(10.0),
           child: Column(
             children: [
               Container(
@@ -48,14 +50,16 @@ class HomePageState extends State<HomePage> {
                 child: Text(
                   'Olá, ${UserData.nomeUsuario}',
                   style: const TextStyle(
+                    fontWeight: FontWeight.bold,
                     color: Colors.black87,
                     fontSize: 18,
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               Expanded(
                 child: GridView.count(
+                  shrinkWrap: true,
                   crossAxisCount: 3,
                   crossAxisSpacing: 12,
                   children: <Widget>[
@@ -63,16 +67,17 @@ class HomePageState extends State<HomePage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => PedidoPage()),
+                          MaterialPageRoute(
+                              builder: (context) => const PedidoPage()),
                         );
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 168, 168, 168),
+                          color: const Color(0xFF9E0000),
                           borderRadius: BorderRadius.circular(13),
                         ),
                         alignment: Alignment.center,
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
@@ -85,7 +90,7 @@ class HomePageState extends State<HomePage> {
                               'Pedido',
                               style:
                                   TextStyle(fontSize: 14, color: Colors.white),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -95,16 +100,16 @@ class HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => EstoquePage()),
+                              builder: (context) => const EstoquePage()),
                         );
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 168, 168, 168),
+                          color: const Color(0xFF9E0000),
                           borderRadius: BorderRadius.circular(13),
                         ),
                         alignment: Alignment.center,
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
@@ -127,16 +132,16 @@ class HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => FaturamentoPage()),
+                              builder: (context) => const FaturamentoPage()),
                         );
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 168, 168, 168),
+                          color: const Color(0xFF9E0000),
                           borderRadius: BorderRadius.circular(13),
                         ),
                         alignment: Alignment.center,
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
@@ -157,9 +162,61 @@ class HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+              Center (child:
+              Container(
+                height: 50,
+                width: 300,
+                decoration: const BoxDecoration(
+                 // color: Colors.green,
+                ),
+                  child : const Center(
+                  child: Text(
+                    'Progresso da sua meta.',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
+                          ) ),
+                        ),
+                      ),
+                  
+              const SizedBox(height: 20,),
+              Padding(
+                padding: 
+                const EdgeInsets.only(
+                  left: 5.0, top: 0.0, right: 5.0, bottom: 65),
+                  child: 
+                SizedBox(
+                    height: 215,
+                  //  width: 600,
+                    //decoration: const BoxDecoration(
+                     // color: Colors.white,
+                  //  ),
+                    child: CircularPercentIndicator(
+                        animation: true,
+                        radius: 100,
+                        lineWidth: 20,
+                        percent: 0.40,
+                        progressColor: Colors.green,
+                        backgroundColor: Colors.grey,
+                        circularStrokeCap: CircularStrokeCap.round,
+                        center: const Text(
+                          '40.0%',style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                        )
+                        //  const Icon(Icons.attach_money,
+                        //  size: 40,
+                        //  color: Color.fromARGB(
+                        //   255,
+                        //   17,
+                        //  146,
+                        //  0,
+                        //  )
+                        // ),
+                        )),
+          //  ]
+              )
             ],
           ),
         ),
+        
         bottomNavigationBar: CurvedNavigationBar(
             backgroundColor: Colors.white,
             color: const Color(0xFF9E0000),
@@ -175,6 +232,7 @@ class HomePageState extends State<HomePage> {
               });
               await Future.delayed(const Duration(seconds: 1));
               if (currentIndex == 1) {
+                // ignore: use_build_context_synchronously
                 AwesomeDialog(
                   context: context,
                   dialogType: DialogType.warning,
@@ -185,11 +243,12 @@ class HomePageState extends State<HomePage> {
                   btnOkOnPress: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
                     );
                   },
                 ).show();
               } else if (currentIndex == 2) {
+                // ignore: use_build_context_synchronously
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => FeedsPage()),

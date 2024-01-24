@@ -93,7 +93,7 @@ class FeedsPageState extends State<FeedsPage> {
                   width: 350,
                   child: const Center(
                       child: Text(
-                    '',
+                    'Mensagem 2',
                   )),
                 ),
                 Container(

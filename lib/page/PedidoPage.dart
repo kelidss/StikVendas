@@ -1,8 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:d_chart/commons/config_render.dart';
-import 'package:d_chart/commons/data_model.dart';
-import 'package:d_chart/commons/method_type.dart';
 import 'package:flutter/material.dart';
 import 'package:stik_vendas/page/FeedsPage.dart';
 import 'package:stik_vendas/page/HomePage.dart';

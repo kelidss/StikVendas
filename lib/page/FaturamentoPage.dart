@@ -27,23 +27,22 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
           ),
           centerTitle: true,
           backgroundColor: const Color(0xFF9E0000),
-
         ),
         body: ListView(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           children: [
-            AspectRatio(aspectRatio: 16/9, child: DChartBarO(groupList:[
-              OrdinalGroup(
-                id: '1',
-                data:[
-                   OrdinalData(domain: 'janeiro', measure: 2),
-                    OrdinalData(domain: 'fev', measure: 6),
-                    OrdinalData(domain: 'março', measure: 3),
-                    OrdinalData(domain: 'abril', measure: 7),
-                ]
-              )
-            ],)
-            )
+            AspectRatio(
+                aspectRatio: 16 / 9,
+                child: DChartBarO(
+                  groupList: [
+                    OrdinalGroup(id: '1', data: [
+                      OrdinalData(domain: 'janeiro', measure: 2),
+                      OrdinalData(domain: 'fev', measure: 6),
+                      OrdinalData(domain: 'março', measure: 3),
+                      OrdinalData(domain: 'abril', measure: 7),
+                    ])
+                  ],
+                ))
           ],
         ),
         bottomNavigationBar: CurvedNavigationBar(
@@ -60,30 +59,29 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
               currentIndex = index;
             });
             await Future.delayed(const Duration(seconds: 1));
-          if (currentIndex == 1) {
-            AwesomeDialog(
-              context: context,
-              dialogType: DialogType.warning,
-              animType: AnimType.scale,
-              title: 'Confirmação',
-              desc: 'Tem certeza que deseja sair?',
-              btnCancelOnPress: () {},
-              btnOkOnPress: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-            ).show();
-          } else if (currentIndex == 0) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          } else if (currentIndex == 2) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => FeedsPage()));
-          }
-        },
-      ),
-    );
-  }
-
+            if (currentIndex == 1) {
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.warning,
+                animType: AnimType.scale,
+                title: 'Confirmação',
+                desc: 'Tem certeza que deseja sair?',
+                btnCancelOnPress: () {},
+                btnOkOnPress: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+              ).show();
+            } else if (currentIndex == 0) {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+            } else if (currentIndex == 2) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => FeedsPage()));
+            }
+          },
+        ),
+      );
+}
