@@ -24,18 +24,6 @@ class _EstoquePageState extends State<EstoquePage> {
     },
   );
 
-  final _selectedRows = <int>{};
-
-  void _onRowSelected(int index, bool selected) {
-    setState(() {
-      if (selected) {
-        _selectedRows.add(index);
-      } else {
-        _selectedRows.remove(index);
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -51,13 +39,22 @@ class _EstoquePageState extends State<EstoquePage> {
         body: ListView(
           children: [
             PaginatedDataTable(
-              source: _EstoqueDataSource(_data, _selectedRows, _onRowSelected),
+              source: _EstoqueDataSource(_data),
               columns: [
-                DataColumn(label: Text('ID')),
+                DataColumn(label: Text('COD')),
                 DataColumn(label: Text('Descrição')),
                 DataColumn(label: Text('Estoque')),
               ],
-              header: const Center(child: Text('Posição de estoque')),
+              header: const Center(
+                child: Text(
+                  'Posição de estoque',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
               columnSpacing: 30,
               horizontalMargin: 10,
               rowsPerPage: 10,
@@ -107,10 +104,8 @@ class _EstoquePageState extends State<EstoquePage> {
 
 class _EstoqueDataSource extends DataTableSource {
   final List<Map<String, dynamic>> _data;
-  final Set<int> _selectedRows;
-  final Function(int index, bool selected) _onRowSelected;
 
-  _EstoqueDataSource(this._data, this._selectedRows, this._onRowSelected);
+  _EstoqueDataSource(this._data);
 
   @override
   DataRow? getRow(int index) {
@@ -121,10 +116,9 @@ class _EstoqueDataSource extends DataTableSource {
         DataCell(Text(item['Title'].toString())),
         DataCell(Text(item['quantidade estoque'].toString())),
       ],
-      selected: _selectedRows.contains(index),
-      onSelectChanged: (selected) {
-        _onRowSelected(index, selected ?? false);
-      },
+      // Set selected to false, making the rows not selectable
+      selected: false,
+      // onSelectChanged is not called, making the rows not selectable
     );
   }
 
@@ -135,5 +129,5 @@ class _EstoqueDataSource extends DataTableSource {
   int get rowCount => _data.length;
 
   @override
-  int get selectedRowCount => _selectedRows.length;
+  int get selectedRowCount => 0; // No rows are selected
 }
