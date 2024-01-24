@@ -28,6 +28,7 @@ dependencies:
   syncfusion_flutter_charts: ^24.1.46+1
   d_chart: ^2.6.7
   percent_indicator: ^4.2.3
+  intl: ^0.18.1
 
 
 dev_dependencies:

@@ -40,7 +40,7 @@ class _EstoquePageState extends State<EstoquePage> {
           children: [
             PaginatedDataTable(
               source: _EstoqueDataSource(_data),
-              columns: [
+              columns: const [
                 DataColumn(label: Text('COD')),
                 DataColumn(label: Text('Descrição')),
                 DataColumn(label: Text('Estoque')),
