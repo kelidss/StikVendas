@@ -80,7 +80,7 @@ class FeedsPageState extends State<FeedsPage> {
                     color: const Color.fromARGB(255, 168, 168, 168),
                     borderRadius: BorderRadius.circular(13),
                   ),
-                  width: 350,
+                  width: 300,
                   child: const Center(
                       child: Text(
                     'Mensagem de sms',
@@ -90,7 +90,7 @@ class FeedsPageState extends State<FeedsPage> {
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 168, 168, 168),
                       borderRadius: BorderRadius.circular(13)),
-                  width: 350,
+                  width: 300,
                   child: const Center(
                       child: Text(
                     'Mensagem 2',
@@ -100,7 +100,7 @@ class FeedsPageState extends State<FeedsPage> {
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 168, 168, 168),
                       borderRadius: BorderRadius.circular(13)),
-                  width: 350,
+                  width: 300,
                   child: const Center(
                       child: Text(
                     'Mensagem 3',

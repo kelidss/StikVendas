@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:stik_vendas/page/EstoquePage.dart';
+import 'package:stik_vendas/page/FeedsPage.dart';
 import 'package:stik_vendas/page/HomePage.dart';
 //import 'package:provider/provider.dart';
 import 'package:stik_vendas/page/LoginPage.dart';
 
 void main() {
   runApp(
-      //   ChangeNotifierProvider(
-      //     create: (context) => UserData(),
-      // child: const
       const MyApp()
-      //  )
       );
 }
 
@@ -24,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: LoginPage(),
+      home: FeedsPage(),
     );
   }
 }

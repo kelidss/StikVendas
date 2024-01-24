@@ -1,12 +1,13 @@
+import 'dart:math';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:stik_vendas/page/FeedsPage.dart';
 import 'package:stik_vendas/page/HomePage.dart';
 import 'package:stik_vendas/page/LoginPage.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 
 class EstoquePage extends StatefulWidget {
-  const EstoquePage({super.key});
+  const EstoquePage({Key? key}) : super(key: key);
 
   @override
   State<EstoquePage> createState() => _EstoquePageState();
@@ -14,10 +15,31 @@ class EstoquePage extends StatefulWidget {
 
 class _EstoquePageState extends State<EstoquePage> {
   int currentIndex = 0;
+  final List<Map<String, dynamic>> _data = List.generate(
+    200,
+    (index) => {
+      'ID': index,
+      'Title': "Linha tal cor tal tecido tal $index",
+      'quantidade estoque': Random().nextInt(100000),
+    },
+  );
+
+  final _selectedRows = <int>{};
+
+  void _onRowSelected(int index, bool selected) {
+    setState(() {
+      if (selected) {
+        _selectedRows.add(index);
+      } else {
+        _selectedRows.remove(index);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Estoque',
             style: TextStyle(
               color: Colors.white,
@@ -25,6 +47,22 @@ class _EstoquePageState extends State<EstoquePage> {
           ),
           centerTitle: true,
           backgroundColor: const Color(0xFF9E0000),
+        ),
+        body: ListView(
+          children: [
+            PaginatedDataTable(
+              source: _EstoqueDataSource(_data, _selectedRows, _onRowSelected),
+              columns: [
+                DataColumn(label: Text('ID')),
+                DataColumn(label: Text('Descrição')),
+                DataColumn(label: Text('Estoque')),
+              ],
+              header: const Center(child: Text('Posição de estoque')),
+              columnSpacing: 30,
+              horizontalMargin: 10,
+              rowsPerPage: 10,
+            ),
+          ],
         ),
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.white,
@@ -40,31 +78,62 @@ class _EstoquePageState extends State<EstoquePage> {
               currentIndex = index;
             });
             await Future.delayed(const Duration(seconds: 1));
-          if (currentIndex == 1) {
-            AwesomeDialog(
-              context: context,
-              dialogType: DialogType.warning,
-              animType: AnimType.scale,
-              title: 'Confirmação',
-              desc: 'Tem certeza que deseja sair?',
-              btnCancelOnPress: () {},
-              btnOkOnPress: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-            ).show();
-          } else if (currentIndex == 0) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          } else if (currentIndex == 2) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => FeedsPage()));
-          }
-        },
-      ),
+            if (currentIndex == 1) {
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.warning,
+                animType: AnimType.scale,
+                title: 'Confirmação',
+                desc: 'Tem certeza que deseja sair?',
+                btnCancelOnPress: () {},
+                btnOkOnPress: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+              ).show();
+            } else if (currentIndex == 0) {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+            } else if (currentIndex == 2) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => FeedsPage()));
+            }
+          },
+        ),
+      );
+}
+
+class _EstoqueDataSource extends DataTableSource {
+  final List<Map<String, dynamic>> _data;
+  final Set<int> _selectedRows;
+  final Function(int index, bool selected) _onRowSelected;
+
+  _EstoqueDataSource(this._data, this._selectedRows, this._onRowSelected);
+
+  @override
+  DataRow? getRow(int index) {
+    final item = _data[index];
+    return DataRow(
+      cells: [
+        DataCell(Text(item['ID'].toString())),
+        DataCell(Text(item['Title'].toString())),
+        DataCell(Text(item['quantidade estoque'].toString())),
+      ],
+      selected: _selectedRows.contains(index),
+      onSelectChanged: (selected) {
+        _onRowSelected(index, selected ?? false);
+      },
     );
   }
 
+  @override
+  bool get isRowCountApproximate => false;
 
+  @override
+  int get rowCount => _data.length;
+
+  @override
+  int get selectedRowCount => _selectedRows.length;
+}
