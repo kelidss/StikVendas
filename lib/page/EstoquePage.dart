@@ -29,13 +29,20 @@ class _EstoquePageState extends State<EstoquePage> {
         appBar: AppBar(
           title: const Text(
             'Estoque',
-            style: TextStyle(
-              color: Colors.white,
-            ),
+         style: TextStyle(
+            color: Colors.white,
           ),
-          centerTitle: true,
-          backgroundColor: const Color(0xFF9E0000),
         ),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF9E0000),
+        leading:
+         IconButton(
+          icon: Icon(Icons.keyboard_backspace_sharp),
+          onPressed: () {
+            Navigator.pop(context); 
+          }, 
+        ),
+      ),
         body: ListView(
           children: [
             PaginatedDataTable(
@@ -94,7 +101,7 @@ class _EstoquePageState extends State<EstoquePage> {
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => HomePage()));
             } else if (currentIndex == 2) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => FeedsPage()));
             }
           },

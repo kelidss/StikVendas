@@ -119,7 +119,7 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => HomePage()));
             } else if (currentIndex == 2) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => FeedsPage()));
             }
           },

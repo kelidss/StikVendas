@@ -60,7 +60,7 @@ class _PedidoPageState extends State<PedidoPage> {
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => HomePage()));
             } else if (currentIndex == 2) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => FeedsPage()));
             }
           },

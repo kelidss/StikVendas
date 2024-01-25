@@ -40,6 +40,7 @@ class HomePageState extends State<HomePage> {
           children: [
             Container(
               alignment: Alignment.topLeft,
+              padding: const EdgeInsets.all(16),
               child: Text(
                 'Olá, ${UserData.nomeUsuario}',
                 style: const TextStyle(
@@ -92,7 +93,7 @@ class HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => EstoquePage()),
+                        MaterialPageRoute(builder: (context) => const EstoquePage()),
                       );
                     },
                     child: Container(
@@ -123,7 +124,7 @@ class HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => FaturamentoPage()),
+                            builder: (context) => const FaturamentoPage()),
                       );
                     },
                     child: Container(
@@ -214,10 +215,8 @@ class HomePageState extends State<HomePage> {
               desc: 'Tem certeza que deseja sair?',
               btnCancelOnPress: () {},
               btnOkOnPress: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
+                Navigator.push( context, MaterialPageRoute(builder: (context) => FeedsPage()));
+             //   );
               },
             ).show();
           } else if (currentIndex == 2) {

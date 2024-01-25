@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                /*  const SizedBox(height: 10),
                   InkWell(
                     onTap: _limparCampo,
                     child: Container(
@@ -146,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),
