@@ -44,7 +44,6 @@ class _EstoquePageState extends State<EstoquePage> {
         ),
         body: ListView(
           children: [
-          
             PaginatedDataTable(
               source: _EstoqueDataSource(_data),
               columns: const [
@@ -53,21 +52,21 @@ class _EstoquePageState extends State<EstoquePage> {
                 DataColumn(label: Text('Estoque')),
               ],
               header: const TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Procurar...', suffixIcon: Icon(Icons.search),
-                //  hintText: ('teste')
-                  ),
+                decoration: InputDecoration(
+                  labelText: 'Procurar...', suffixIcon: Icon(Icons.search),
+                  //  hintText: ('teste')
+                ),
               ),
               // Center(
-               // child: Text(
-               //   'Posição de estoque',
-                 // style: TextStyle(
-                  //  fontWeight: FontWeight.bold,
-                 //   color: Colors.black87,
-                //    fontSize: 18,
-               //   ),
+              // child: Text(
+              //   'Posição de estoque',
+              // style: TextStyle(
+              //  fontWeight: FontWeight.bold,
+              //   color: Colors.black87,
+              //    fontSize: 18,
+              //   ),
               //  ),
-           //   ),
+              //   ),
               columnSpacing: 30,
               horizontalMargin: 10,
               rowsPerPage: 10,

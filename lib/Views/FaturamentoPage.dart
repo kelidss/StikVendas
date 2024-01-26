@@ -41,12 +41,23 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
                 headingRowHeight: 30,
                 columnSpacing: 7,
                 horizontalMargin: 8,
-                columns: [
-                  DataColumn(label: Text('Data de Emissão')),
+                columns: const [
+                  DataColumn(
+                      label: Text(
+                    'Emissão',
+                    // style: TextStyle(fontSize: 13),
+                  )),
                   DataColumn(label: Text('Descrição')),
                   DataColumn(label: Text('Valor')),
                 ],
-                source: _FaturamentoDataSource(_controller.getFaturamentoData()),
+                header: const TextField(
+                  decoration: InputDecoration(
+                      labelText: 'procurar...',
+                      suffixIcon: Icon(Icons.search),
+                      hintMaxLines: 300),
+                ),
+                source:
+                    _FaturamentoDataSource(_controller.getFaturamentoData()),
                 rowsPerPage: 5,
               ),
             ),
