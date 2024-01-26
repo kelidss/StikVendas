@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:stik_vendas/page/HomePage.dart';
-import 'package:stik_vendas/page/LoginPage.dart';
+import 'package:stik_vendas/Views/HomePage.dart';
+import 'package:stik_vendas/Views/LoginPage.dart';
 
 class FeedsPage extends StatefulWidget {
   final String? nomeUsuario;
@@ -28,15 +28,16 @@ class FeedsPageState extends State<FeedsPage> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF9E0000),
-        leading:
-         IconButton(
-          icon: Icon(Icons.keyboard_backspace_sharp),
-          onPressed: () {
-            Navigator.pop(context); 
-          }, 
-        ),
+        backgroundColor: const Color(0xFFD52B1E),
+        //leading:
+        // IconButton(
+        //  icon: Icon(Icons.keyboard_backspace_sharp),
+         // onPressed: () {
+         //   Navigator.pop(context); 
+         // }, 
+     //  ),
       ),
+
       body: Column(
         children: [
           const SizedBox(height: 30),
@@ -90,7 +91,7 @@ class FeedsPageState extends State<FeedsPage> {
       ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
-        color: const Color(0xFF9E0000),
+        color: const Color(0xFFD52B1E),
         animationDuration: const Duration(milliseconds: 300),
         items: const [
           Icon(Icons.home, color: Colors.white),

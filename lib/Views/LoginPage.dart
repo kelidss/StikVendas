@@ -1,10 +1,7 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:stik_vendas/page/HomePage.dart';
-
-class UserData {
-  static String? nomeUsuario;
-}
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:stik_vendas/Models/Model_Login.dart';
+import 'HomePage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,14 +14,6 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _senhaController = TextEditingController();
   final TextEditingController _usuarioController = TextEditingController();
   String _bemvindo = '';
-
-  void _limparCampo() {
-    setState(() {
-      _usuarioController.clear();
-      _senhaController.clear();
-      _bemvindo = "";
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       width: 150,
                       child: Card(
-                        color: const Color(0xFF9E0000),
+                        color: const Color(0xFFD52B1E),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
                         ),
@@ -122,31 +111,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                /*  const SizedBox(height: 10),
-                  InkWell(
-                    onTap: _limparCampo,
-                    child: Container(
-                      width: 150,
-                      child: Card(
-                        color: Color(0xFF9E0000),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Center(
-                            child: Text(
-                              'Limpar Campo',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),*/
                 ],
               ),
             ),

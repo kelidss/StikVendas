@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:stik_vendas/page/EstoquePage.dart';
-import 'package:stik_vendas/page/FaturamentoPage.dart';
-import 'package:stik_vendas/page/FeedsPage.dart';
-import 'package:stik_vendas/page/HomePage.dart';
-import 'package:stik_vendas/page/LoginPage.dart';
+import 'package:stik_vendas/Views/EstoquePage.dart';
+import 'package:stik_vendas/Views/FaturamentoPage.dart';
+import 'package:stik_vendas/Views/FeedsPage.dart';
+import 'package:stik_vendas/Views/HomePage.dart';
+import 'package:stik_vendas/Views/LoginPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/', // Rota inicial
       routes: {
-        '/': (context) => LoginPage(), // Página inicial
+        '/': (context) => const LoginPage(), // Página inicial
         '/feeds': (context) => FeedsPage(),
-        '/estoque': (context) => EstoquePage(),
-        '/faturamento': (context) => FaturamentoPage(),
+        '/estoque': (context) => const EstoquePage(),
+        '/faturamento': (context) => const FaturamentoPage(),
        // '/login': (context) => LoginPage(),
         '/home': (context) => HomePage(), 
       },

@@ -1,11 +1,12 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:stik_vendas/page/EstoquePage.dart';
-import 'package:stik_vendas/page/FaturamentoPage.dart';
-import 'package:stik_vendas/page/FeedsPage.dart';
-import 'package:stik_vendas/page/LoginPage.dart';
-import 'package:stik_vendas/page/PedidoPage.dart';
+import 'package:stik_vendas/Models/Model_Login.dart';
+import 'package:stik_vendas/Views/EstoquePage.dart';
+import 'package:stik_vendas/Views/FaturamentoPage.dart';
+import 'package:stik_vendas/Views/FeedsPage.dart';
+import 'package:stik_vendas/Views/LoginPage.dart';
+import 'package:stik_vendas/Views/PedidoPage.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,7 +26,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF9E0000),
+        backgroundColor: const Color(0xFFD52B1E),
         centerTitle: true,
         title: const Text(
           'Home',
@@ -68,7 +69,7 @@ class HomePageState extends State<HomePage> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFF9E0000),
+                        color: const Color(0xFFD52B1E),
                         borderRadius: BorderRadius.circular(13),
                       ),
                       alignment: Alignment.center,
@@ -98,7 +99,7 @@ class HomePageState extends State<HomePage> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFF9E0000),
+                        color: const Color(0xFFD52B1E),
                         borderRadius: BorderRadius.circular(13),
                       ),
                       alignment: Alignment.center,
@@ -129,7 +130,7 @@ class HomePageState extends State<HomePage> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFF9E0000),
+                        color: const Color(0xFFD52B1E),
                         borderRadius: BorderRadius.circular(13),
                       ),
                       alignment: Alignment.center,
@@ -194,7 +195,7 @@ class HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
-        color: const Color(0xFF9E0000),
+        color: const Color(0xFFD52B1E),
         animationDuration: const Duration(milliseconds: 300),
         items: const [
           Icon(Icons.home, color: Colors.white),
@@ -215,7 +216,7 @@ class HomePageState extends State<HomePage> {
               desc: 'Tem certeza que deseja sair?',
               btnCancelOnPress: () {},
               btnOkOnPress: () {
-                Navigator.push( context, MaterialPageRoute(builder: (context) => FeedsPage()));
+                Navigator.push( context, MaterialPageRoute(builder: (context) => LoginPage()));
              //   );
               },
             ).show();

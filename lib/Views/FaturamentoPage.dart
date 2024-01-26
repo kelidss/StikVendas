@@ -1,16 +1,17 @@
-import 'dart:math';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:intl/intl.dart';
-import 'package:stik_vendas/page/FeedsPage.dart';
-import 'package:stik_vendas/page/HomePage.dart';
-import 'package:stik_vendas/page/LoginPage.dart';
 import 'package:d_chart/commons/data_model.dart';
 import 'package:d_chart/ordinal/bar.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:stik_vendas/Controllers/Controller_Faturamento.dart';
+import 'package:stik_vendas/Models/Model_Faturamento.dart';
+import 'package:stik_vendas/Views/FeedsPage.dart';
+import 'package:stik_vendas/Views/HomePage.dart';
+import 'package:stik_vendas/Views/LoginPage.dart';
 
 class FaturamentoPage extends StatefulWidget {
-  const FaturamentoPage({super.key});
+  const FaturamentoPage({Key? key}) : super(key: key);
 
   @override
   State<FaturamentoPage> createState() => _FaturamentoPageState();
@@ -18,16 +19,7 @@ class FaturamentoPage extends StatefulWidget {
 
 class _FaturamentoPageState extends State<FaturamentoPage> {
   int currentIndex = 0;
-  final List<Map<String, dynamic>> _data = List.generate(
-    200,
-    (index) => {
-      //'COD': index,
-      'Data de Emissão': '01/01/2024',
-      'Descrição': 'Keliane dos Santos Soares', // Nome inserido na Descrição
-      // 'Quantidade': Random().nextInt(100000),
-      'Valor': Random().nextDouble() * 79,
-    },
-  );
+  final FaturamentoController _controller = FaturamentoController();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -39,7 +31,7 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
             ),
           ),
           centerTitle: true,
-          backgroundColor: const Color(0xFF9E0000),
+          backgroundColor: const Color(0xFFD52B1E),
         ),
         body: ListView(
           children: [
@@ -49,25 +41,12 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
                 headingRowHeight: 30,
                 columnSpacing: 7,
                 horizontalMargin: 8,
-                //header: const Center(
-                // child:
-                // Text(
-                // 'Faturamento Diário',
-                //  style: TextStyle(
-                //  fontWeight: FontWeight.bold,
-                //  color: Colors.black87,
-                //  fontSize: 18,
-                // ),
-                // ),
-                //),
                 columns: [
                   DataColumn(label: Text('Data de Emissão')),
-                  //   DataColumn(label: Text('COD')),
                   DataColumn(label: Text('Descrição')),
-                  // DataColumn(label: Text('Quantidade')),
                   DataColumn(label: Text('Valor')),
                 ],
-                source: _EstoqueDataSource(_data),
+                source: _FaturamentoDataSource(_controller.getFaturamentoData()),
                 rowsPerPage: 5,
               ),
             ),
@@ -88,7 +67,7 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
         ),
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.white,
-          color: const Color(0xFF9E0000),
+          color: const Color(0xFFD52B1E),
           animationDuration: const Duration(milliseconds: 300),
           items: const [
             Icon(Icons.home, color: Colors.white),
@@ -127,10 +106,10 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
       );
 }
 
-class _EstoqueDataSource extends DataTableSource {
-  final List<Map<String, dynamic>> _data;
+class _FaturamentoDataSource extends DataTableSource {
+  final List<Faturamento> _data;
 
-  _EstoqueDataSource(this._data);
+  _FaturamentoDataSource(this._data);
 
   @override
   DataRow? getRow(int index) {
@@ -139,11 +118,9 @@ class _EstoqueDataSource extends DataTableSource {
 
     return DataRow(
       cells: [
-        DataCell(Text(item['Data de Emissão'].toString())),
-        // DataCell(Text(item['COD'].toString())),
-        DataCell(Text(item['Descrição'].toString())),
-        //   DataCell(Text(item['Quantidade'].toString())),
-        DataCell(Text(numberFormat.format(item['Valor']))),
+        DataCell(Text(item.dataEmissao)),
+        DataCell(Text(item.descricao)),
+        DataCell(Text(numberFormat.format(item.valor))),
       ],
       selected: false,
     );

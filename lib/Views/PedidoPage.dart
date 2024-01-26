@@ -1,9 +1,9 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:stik_vendas/page/FeedsPage.dart';
-import 'package:stik_vendas/page/HomePage.dart';
-import 'package:stik_vendas/page/LoginPage.dart';
+import 'package:stik_vendas/Views/FeedsPage.dart';
+import 'package:stik_vendas/Views/HomePage.dart';
+import 'package:stik_vendas/Views/LoginPage.dart';
 
 class PedidoPage extends StatefulWidget {
   const PedidoPage({super.key});
@@ -25,11 +25,11 @@ class _PedidoPageState extends State<PedidoPage> {
             ),
           ),
           centerTitle: true,
-          backgroundColor: const Color(0xFF9E0000),
+          backgroundColor: const Color(0xFFD52B1E),
         ),
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.white,
-          color: const Color(0xFF9E0000),
+          color: const Color(0xFFD52B1E),
           animationDuration: const Duration(milliseconds: 300),
           items: const [
             Icon(Icons.home, color: Colors.white),
