@@ -52,9 +52,9 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
                 ],
                 header: const TextField(
                   decoration: InputDecoration(
-                      labelText: 'procurar...',
-                      suffixIcon: Icon(Icons.search),
-                      hintMaxLines: 300),
+                    labelText: 'procurar...',
+                    suffixIcon: Icon(Icons.search),
+                  ),
                 ),
                 source:
                     _FaturamentoDataSource(_controller.getFaturamentoData()),
