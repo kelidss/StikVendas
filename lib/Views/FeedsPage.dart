@@ -32,12 +32,11 @@ class FeedsPageState extends State<FeedsPage> {
         //leading:
         // IconButton(
         //  icon: Icon(Icons.keyboard_backspace_sharp),
-         // onPressed: () {
-         //   Navigator.pop(context); 
-         // }, 
-     //  ),
+        // onPressed: () {
+        //   Navigator.pop(context);
+        // },
+        //  ),
       ),
-
       body: Column(
         children: [
           const SizedBox(height: 30),

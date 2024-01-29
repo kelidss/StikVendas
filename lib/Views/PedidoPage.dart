@@ -1,9 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
+//import 'packpage:mask_text_input_formatter';
 //import 'flutter/services';
 
 class PedidoPage extends StatefulWidget {
@@ -76,9 +79,11 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior:
                         FloatingLabelBehavior.auto, // Rótulo flutuante
                   ),
+                  inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   // inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
+
                 const SizedBox(height: 10),
                 TextFormField(
                   // TextField(
@@ -91,6 +96,7 @@ class _PedidoPageState extends State<PedidoPage> {
                       //   contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto),
+                  inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
                 const SizedBox(height: 10),
@@ -289,6 +295,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
+                  keyboardType: TextInputType.datetime,
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
@@ -300,6 +307,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
+                  keyboardType: TextInputType.datetime,
                 ),
                 const SizedBox(height: 10),
                 Expanded(
