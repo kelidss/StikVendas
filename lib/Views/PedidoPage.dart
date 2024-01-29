@@ -56,10 +56,10 @@ class _PedidoPageState extends State<PedidoPage> {
         padding: const EdgeInsets.all(8.0),
         child: PageView(
           controller: pageController,
-          physics: const NeverScrollableScrollPhysics(),
+          //physics: const NeverScrollableScrollPhysics(),
           children: [
             //Pedido Doc
-            Column(
+            Wrap(
               children: [
                 const SizedBox(
                   height: 15,
@@ -69,14 +69,15 @@ class _PedidoPageState extends State<PedidoPage> {
                   controller: DtPedidoController,
                   decoration: const InputDecoration(
                     labelText: 'Data Pedido',
+                    hintText: '**/**/****',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior:
                         FloatingLabelBehavior.auto, // Rótulo flutuante
                   ),
-          //    inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
-              ///keyboardType: TextInputType.datetime,
+                  // inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
+                  keyboardType: TextInputType.datetime,
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
@@ -85,10 +86,12 @@ class _PedidoPageState extends State<PedidoPage> {
                   //  keyboardType:TextInputType.datetime,
                   decoration: const InputDecoration(
                       labelText: 'Data Entrega',
+                      hintText: '**/**/****',
                       border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                      //   contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto),
+                  keyboardType: TextInputType.datetime,
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
@@ -96,7 +99,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Vendedor',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    // contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior:
                         FloatingLabelBehavior.auto, // Rótulo flutuante
@@ -108,7 +111,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Cliente',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -119,7 +122,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Documento',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //   contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -130,7 +133,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Cobrança',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -141,7 +144,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Forma de Pagamento',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -152,7 +155,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Frete',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -163,7 +166,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Observação',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -216,7 +219,7 @@ class _PedidoPageState extends State<PedidoPage> {
               ],
             ),
             //Pedido Item
-            Column(
+            Wrap(
               children: [
                 const SizedBox(
                   height: 15,
@@ -226,7 +229,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Artigo',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //   contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior:
                         FloatingLabelBehavior.auto, // Rótulo flutuante
@@ -238,7 +241,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                       labelText: 'Detalhe do Artigo',
                       border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                      //       contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto),
                 ),
@@ -248,7 +251,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Unidade',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //   contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior:
                         FloatingLabelBehavior.auto, // Rótulo flutuante
@@ -260,7 +263,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Quantidade',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    // contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -271,7 +274,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Valor Base',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    // contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -282,7 +285,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Preço Efetivo',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -293,7 +296,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Valor Bruto',
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
