@@ -33,14 +33,34 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
           centerTitle: true,
           backgroundColor: const Color(0xFFD52B1E),
         ),
-        body: ListView(
+        
+        body: 
+        ListView(
           children: [
-            Container(
-              padding: const EdgeInsets.all(8),
+           // Container(
+           //   decoration: const BoxDecoration(
+              //       color: Colors.green,
+                   // ),
+           // const SizedBox(height: 10),
+          //  child: Center(
+           //   child: const SizedBox(
+              //  height: 100,
+              //  width: 200,
+           //   )
+           //   ),
+           //criar um botão no top para direcionar o usuario para a pagina feed 
+           // caso ele queira visualizar um resumo do seu faturamento mensal 
+             InkWell(onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FeedsPage()),
+                      );
+             },
               child: PaginatedDataTable(
-                headingRowHeight: 30,
-                columnSpacing: 7,
-                horizontalMargin: 8,
+               // headingRowHeight: 30,
+                //columnSpacing: 5,
+              //  horizontalMargin: 30,
                 columns: const [
                   DataColumn(
                       label: Text(
@@ -52,30 +72,21 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
                 ],
                 header: const TextField(
                   decoration: InputDecoration(
-                    labelText: 'procurar...',
+                    labelText: 'Procurar...',
                     suffixIcon: Icon(Icons.search),
                   ),
                 ),
                 source:
                     _FaturamentoDataSource(_controller.getFaturamentoData()),
-                rowsPerPage: 5,
+                rowsPerPage: 10,
               ),
             ),
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: DChartBarO(
-                groupList: [
-                  OrdinalGroup(id: '1', data: [
-                    OrdinalData(domain: 'janeiro', measure: 2),
-                    OrdinalData(domain: 'fev', measure: 6),
-                    OrdinalData(domain: 'março', measure: 3),
-                    OrdinalData(domain: 'abril', measure: 7),
-                  ])
-                ],
-              ),
-            ),
+            
           ],
+          
         ),
+        
+        
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.white,
           color: const Color(0xFFD52B1E),

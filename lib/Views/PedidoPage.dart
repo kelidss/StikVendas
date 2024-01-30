@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
@@ -23,7 +24,7 @@ class _PedidoPageState extends State<PedidoPage> {
     _pageController = PageController();
   }
 
-  bool _todosCamposPreenchidos() {
+  _todosCamposPreenchidos1() {
     return DtPedidoController.text.isNotEmpty &&
         DtEntregaController.text.isNotEmpty &&
         VendedorController.text.isNotEmpty &&
@@ -31,20 +32,13 @@ class _PedidoPageState extends State<PedidoPage> {
         TpDocumentoController.text.isNotEmpty &&
         TipoCobracaController.text.isNotEmpty &&
         FormaPgtoController.text.isNotEmpty &&
-        FreteController.text.isNotEmpty &&
-        ArtigoController.text.isNotEmpty &&
-        DetArtigoController.text.isNotEmpty &&
-        UndController.text.isNotEmpty &&
-        QtdController.text.isNotEmpty &&
-        VrBaseController.text.isNotEmpty &&
-        PrEfetivoController.text.isNotEmpty &&
-        VrBrutoController.text.isNotEmpty;
+        FreteController.text.isNotEmpty;
   }
 
-  void _avancarParaProximaPagina() {
-    if (_todosCamposPreenchidos()) {
+  _avancarParaProximaPagina1() {
+    if (_todosCamposPreenchidos1()) {
       _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 100),
         curve: Curves.easeInOut,
       );
     } else {
@@ -54,7 +48,38 @@ class _PedidoPageState extends State<PedidoPage> {
         animType: AnimType.scale,
         title: 'Preencha todos os campos',
         btnOkOnPress: () {
-          Navigator.pop(context);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const PedidoPage()));
+        },
+      ).show();
+    }
+  }
+
+  _todosCamposPreenchidos2() {
+    return ArtigoController.text.isNotEmpty &&
+        DetArtigoController.text.isNotEmpty &&
+        UndController.text.isNotEmpty &&
+        QtdController.text.isNotEmpty &&
+        VrBaseController.text.isNotEmpty &&
+        PrEfetivoController.text.isNotEmpty &&
+        VrBrutoController.text.isNotEmpty;
+  }
+
+  _avancarParaProximaPagina2() {
+    if (_todosCamposPreenchidos2()) {
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.warning,
+        animType: AnimType.scale,
+        title: 'Preencha todos os campos',
+        btnOkOnPress: () {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const PedidoPage()));
         },
       ).show();
     }
@@ -74,14 +99,15 @@ class _PedidoPageState extends State<PedidoPage> {
         backgroundColor: const Color(0xFFD52B1E),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(20.0),
         child: PageView(
           controller: _pageController,
+
           children: [
             Wrap(
               children: [
                 const SizedBox(
-                  height: 15,
+                  height: 60,
                 ),
                 TextFormField(
                   controller: DtPedidoController,
@@ -95,7 +121,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: DtEntregaController,
                   decoration: const InputDecoration(
@@ -107,18 +133,17 @@ class _PedidoPageState extends State<PedidoPage> {
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: VendedorController,
                   decoration: const InputDecoration(
                     labelText: 'Vendedor',
                     border: OutlineInputBorder(),
                     isDense: true,
-                    floatingLabelBehavior:
-                        FloatingLabelBehavior.auto,
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: ClienteController,
                   decoration: const InputDecoration(
@@ -128,7 +153,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: TpDocumentoController,
                   decoration: const InputDecoration(
@@ -138,7 +163,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: TipoCobracaController,
                   decoration: const InputDecoration(
@@ -148,7 +173,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: FormaPgtoController,
                   decoration: const InputDecoration(
@@ -158,7 +183,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: FreteController,
                   decoration: const InputDecoration(
@@ -168,7 +193,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: ObservacaoController,
                   decoration: const InputDecoration(
@@ -178,7 +203,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: OcClienteController,
                   decoration: const InputDecoration(
@@ -189,14 +214,14 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       InkWell(
                         onTap: () {
-                          _avancarParaProximaPagina();
+                          _avancarParaProximaPagina1();
                         },
                         child: Container(
                           width: 100,
@@ -223,7 +248,7 @@ class _PedidoPageState extends State<PedidoPage> {
             Wrap(
               children: [
                 const SizedBox(
-                  height: 15,
+                  height: 60,
                 ),
                 TextFormField(
                   controller: ArtigoController,
@@ -243,18 +268,17 @@ class _PedidoPageState extends State<PedidoPage> {
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: UndController,
                   decoration: const InputDecoration(
                     labelText: 'Unidade',
                     border: OutlineInputBorder(),
                     isDense: true,
-                    floatingLabelBehavior:
-                        FloatingLabelBehavior.auto,
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: QtdController,
                   decoration: const InputDecoration(
@@ -264,17 +288,18 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: VrBaseController,
                   decoration: const InputDecoration(
+                    hintText: '0,0',
                     labelText: 'Valor Base',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: PrEfetivoController,
                   decoration: const InputDecoration(
@@ -285,7 +310,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                   keyboardType: TextInputType.datetime,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 TextFormField(
                   controller: VrBrutoController,
                   decoration: const InputDecoration(
@@ -296,7 +321,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                   keyboardType: TextInputType.datetime,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 60),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -304,7 +329,7 @@ class _PedidoPageState extends State<PedidoPage> {
                       InkWell(
                         onTap: () {
                           _pageController.previousPage(
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 100),
                               curve: Curves.easeInOut);
                         },
                         child: Container(
@@ -327,7 +352,7 @@ class _PedidoPageState extends State<PedidoPage> {
                       const SizedBox(width: 10),
                       InkWell(
                         onTap: () {
-                          _avancarParaProximaPagina();
+                          _avancarParaProximaPagina2();
                         },
                         child: Container(
                           width: 150,
@@ -351,6 +376,18 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ],
             ),
+            // tentando adicionar um indicador para as pages
+           /* SmoothPageIndicator(controller: _pageController, count: 3,
+             effect: JumpingDotEffect(
+              activeDotColor: Colors.deepPurple,
+              dotColor: Colors.deepPurple.shade100,
+              dotHeight: 30,
+              dotWidth: 30,
+              spacing: 16,
+              //verticalOffset: 50,
+              jumpScale: 3,
+            ),
+            ),*/
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(15),
@@ -404,9 +441,11 @@ class _PedidoPageState extends State<PedidoPage> {
           if (_currentIndex == 0) {
             Navigator.pop(context);
           } else if (_currentIndex == 1) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const LoginPage()));
           } else if (_currentIndex == 2) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FeedsPage()));
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => FeedsPage()));
           }
         },
       ),

@@ -36,7 +36,7 @@ class _EstoquePageState extends State<EstoquePage> {
           centerTitle: true,
           backgroundColor: const Color(0xFFD52B1E),
           leading: IconButton(
-            icon: Icon(Icons.keyboard_backspace_sharp),
+            icon: const Icon(Icons.keyboard_backspace_sharp),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -99,7 +99,7 @@ class _EstoquePageState extends State<EstoquePage> {
                 btnOkOnPress: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
                   );
                 },
               ).show();
