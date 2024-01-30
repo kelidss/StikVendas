@@ -1,13 +1,11 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
-//import 'packpage:mask_text_input_formatter';
-//import 'flutter/services';
 
 class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
@@ -19,27 +17,60 @@ class PedidoPage extends StatefulWidget {
 
 class _PedidoPageState extends State<PedidoPage> {
   int _currentIndex = 0;
-
-  late DateTime _selectedDate; // Armazenar a data selecionada
-
-  void _avancarParaProximaPagina() {
-    pageController.nextPage(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  }
+  // late DateTime _selectedDate;
+  late PageController _pageController;
 
   @override
   void initState() {
     super.initState();
-    _selectedDate =
-        DateTime.now(); // Inicializa a data selecionada com a data atual
+    _pageController = PageController();
   }
 
-  void _updateSelectedDate(DateTime value) {
-    setState(() {
-      _selectedDate = value;
-    });
+  bool _todosCamposPreenchidos() {
+    return DtPedidoController.text.isNotEmpty &&
+        DtEntregaController.text.isNotEmpty &&
+        VendedorController.text.isNotEmpty &&
+        ClienteController.text.isNotEmpty &&
+        TpDocumentoController.text.isNotEmpty &&
+        TipoCobracaController.text.isNotEmpty &&
+        FormaPgtoController.text.isNotEmpty &&
+        FreteController.text.isNotEmpty &&
+        ObservacaoController.text.isNotEmpty &&
+        OcClienteController.text.isNotEmpty &&
+        ArtigoController.text.isNotEmpty &&
+        DetArtigoController.text.isNotEmpty &&
+        UndController.text.isNotEmpty &&
+        QtdController.text.isNotEmpty &&
+        VrBaseController.text.isNotEmpty &&
+        PrEfetivoController.text.isNotEmpty &&
+        VrBrutoController.text.isNotEmpty;
+  }
+
+  void _avancarParaProximaPagina() {
+    if (_todosCamposPreenchidos()) {
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      (
+      ) {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.warning,
+          animType: AnimType.scale,
+          title: 'preencha todos os campos',
+        //  desc: 'Tem certeza que deseja sair?',
+        //  btnCancelOnPress: () {},
+          btnOkOnPress: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const PedidoPage()),
+            );
+          },
+        ).show();
+      };
+    }
   }
 
   @override
@@ -58,32 +89,25 @@ class _PedidoPageState extends State<PedidoPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: PageView(
-          controller: pageController,
-          //physics: const NeverScrollableScrollPhysics(),
+          controller: _pageController,
           children: [
-            //Pedido Doc
             Wrap(
               children: [
                 const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
-                  //    TextField(
                   controller: DtPedidoController,
                   decoration: const InputDecoration(
                     labelText: 'Data Pedido',
                     hintText: '**/**/****',
                     border: OutlineInputBorder(),
-                    //    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
-                    floatingLabelBehavior:
-                        FloatingLabelBehavior.auto, // Rótulo flutuante
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
-                  // inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
-
                 const SizedBox(height: 10),
                 TextFormField(
                   // TextField(
@@ -192,15 +216,17 @@ class _PedidoPageState extends State<PedidoPage> {
                 //Botão Avançar
                 Expanded(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                    //  if (_todosCamposPreenchidos())
                       InkWell(
                         onTap: () {
-                          pageController.nextPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut);
+                          _pageController.nextPage(
+                             duration: const Duration(milliseconds: 300),
+                             curve: Curves.easeInOut);
                           _avancarParaProximaPagina();
-                        },
+                       },
+                      
                         child: Container(
                           width: 100,
                           height: 50,
@@ -221,10 +247,9 @@ class _PedidoPageState extends State<PedidoPage> {
                       ),
                     ],
                   ),
-                ),
+               ),
               ],
             ),
-            //Pedido Item
             Wrap(
               children: [
                 const SizedBox(
@@ -316,7 +341,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          pageController.nextPage(
+                          _pageController.nextPage(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeInOut);
                           _avancarParaProximaPagina();
@@ -344,7 +369,6 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ],
             ),
-            //Resumo Pedido
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(15),

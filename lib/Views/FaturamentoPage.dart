@@ -4,7 +4,7 @@ import 'package:d_chart/commons/data_model.dart';
 import 'package:d_chart/ordinal/bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:stik_vendas/Controllers/Controller_Feed.dart';
+import 'package:stik_vendas/Controllers/Controller_Faturamento.dart';
 import 'package:stik_vendas/Models/Model_Faturamento.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/HomePage.dart';
@@ -91,6 +91,7 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
             });
             await Future.delayed(const Duration(seconds: 1));
             if (currentIndex == 1) {
+              // ignore: use_build_context_synchronously
               AwesomeDialog(
                 context: context,
                 dialogType: DialogType.warning,
@@ -101,14 +102,16 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
                 btnOkOnPress: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
                   );
                 },
               ).show();
             } else if (currentIndex == 0) {
+              // ignore: use_build_context_synchronously
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => HomePage()));
             } else if (currentIndex == 2) {
+              // ignore: use_build_context_synchronously
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => FeedsPage()));
             }

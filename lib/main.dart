@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
         '/feeds': (context) => FeedsPage(),
         '/estoque': (context) => const EstoquePage(),
         '/faturamento': (context) => const FaturamentoPage(),
-       // '/login': (context) => LoginPage(),
-        '/home': (context) => HomePage(), 
+        // '/login': (context) => LoginPage(),
+        '/home': (context) => HomePage(),
       },
     );
   }

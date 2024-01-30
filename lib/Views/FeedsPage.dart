@@ -104,6 +104,7 @@ class FeedsPageState extends State<FeedsPage> {
           });
           await Future.delayed(const Duration(seconds: 1));
           if (currentIndex == 1) {
+            // ignore: use_build_context_synchronously
             AwesomeDialog(
               context: context,
               dialogType: DialogType.warning,
@@ -114,14 +115,16 @@ class FeedsPageState extends State<FeedsPage> {
               btnOkOnPress: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
             ).show();
           } else if (currentIndex == 0) {
+            // ignore: use_build_context_synchronously
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => HomePage()));
           } else if (currentIndex == 2) {
+            // ignore: use_build_context_synchronously
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => FeedsPage()));
           }

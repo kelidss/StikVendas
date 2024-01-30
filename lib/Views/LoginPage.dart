@@ -7,13 +7,14 @@ class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _senhaController = TextEditingController();
   final TextEditingController _usuarioController = TextEditingController();
-  String _bemvindo = '';
+  final String _bemvindo = '';
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                         });
                       }
                     },
-                    child: Container(
+                    child: SizedBox(
                       width: 150,
                       child: Card(
                         color: const Color(0xFFD52B1E),

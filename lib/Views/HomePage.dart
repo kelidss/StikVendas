@@ -94,7 +94,8 @@ class HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const EstoquePage()),
+                        MaterialPageRoute(
+                            builder: (context) => const EstoquePage()),
                       );
                     },
                     child: Container(
@@ -208,6 +209,7 @@ class HomePageState extends State<HomePage> {
           });
           await Future.delayed(const Duration(seconds: 1));
           if (currentIndex == 1) {
+            // ignore: use_build_context_synchronously
             AwesomeDialog(
               context: context,
               dialogType: DialogType.warning,
@@ -216,11 +218,13 @@ class HomePageState extends State<HomePage> {
               desc: 'Tem certeza que deseja sair?',
               btnCancelOnPress: () {},
               btnOkOnPress: () {
-                Navigator.push( context, MaterialPageRoute(builder: (context) => LoginPage()));
-             //   );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
+                //   );
               },
             ).show();
           } else if (currentIndex == 2) {
+            // ignore: use_build_context_synchronously
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => FeedsPage()),

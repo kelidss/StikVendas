@@ -88,6 +88,7 @@ class _EstoquePageState extends State<EstoquePage> {
             });
             await Future.delayed(const Duration(seconds: 1));
             if (currentIndex == 1) {
+              // ignore: use_build_context_synchronously
               AwesomeDialog(
                 context: context,
                 dialogType: DialogType.warning,
@@ -103,9 +104,11 @@ class _EstoquePageState extends State<EstoquePage> {
                 },
               ).show();
             } else if (currentIndex == 0) {
+              // ignore: use_build_context_synchronously
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => HomePage()));
             } else if (currentIndex == 2) {
+              // ignore: use_build_context_synchronously
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => FeedsPage()));
             }
