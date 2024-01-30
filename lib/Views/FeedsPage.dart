@@ -37,7 +37,7 @@ class FeedsPageState extends State<FeedsPage> {
         // },
         //  ),
       ),
-      body: Column(
+      body: Wrap(
         children: [
           const SizedBox(height: 30),
           CarouselSlider(

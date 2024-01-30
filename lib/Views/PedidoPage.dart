@@ -1,23 +1,20 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
-import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 
 class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _PedidoPageState createState() => _PedidoPageState();
 }
 
 class _PedidoPageState extends State<PedidoPage> {
   int _currentIndex = 0;
-  // late DateTime _selectedDate;
   late PageController _pageController;
 
   @override
@@ -35,8 +32,6 @@ class _PedidoPageState extends State<PedidoPage> {
         TipoCobracaController.text.isNotEmpty &&
         FormaPgtoController.text.isNotEmpty &&
         FreteController.text.isNotEmpty &&
-        ObservacaoController.text.isNotEmpty &&
-        OcClienteController.text.isNotEmpty &&
         ArtigoController.text.isNotEmpty &&
         DetArtigoController.text.isNotEmpty &&
         UndController.text.isNotEmpty &&
@@ -53,23 +48,15 @@ class _PedidoPageState extends State<PedidoPage> {
         curve: Curves.easeInOut,
       );
     } else {
-      (
-      ) {
-        AwesomeDialog(
-          context: context,
-          dialogType: DialogType.warning,
-          animType: AnimType.scale,
-          title: 'preencha todos os campos',
-        //  desc: 'Tem certeza que deseja sair?',
-        //  btnCancelOnPress: () {},
-          btnOkOnPress: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const PedidoPage()),
-            );
-          },
-        ).show();
-      };
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.warning,
+        animType: AnimType.scale,
+        title: 'Preencha todos os campos',
+        btnOkOnPress: () {
+          Navigator.pop(context);
+        },
+      ).show();
     }
   }
 
@@ -110,14 +97,11 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
-                  // TextField(
                   controller: DtEntregaController,
-                  //  keyboardType:TextInputType.datetime,
                   decoration: const InputDecoration(
                       labelText: 'Data Entrega',
                       hintText: '**/**/****',
                       border: OutlineInputBorder(),
-                      //   contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto),
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
@@ -129,10 +113,9 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Vendedor',
                     border: OutlineInputBorder(),
-                    // contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior:
-                        FloatingLabelBehavior.auto, // Rótulo flutuante
+                        FloatingLabelBehavior.auto,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -141,7 +124,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Cliente',
                     border: OutlineInputBorder(),
-                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -152,7 +134,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Documento',
                     border: OutlineInputBorder(),
-                    //   contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -163,7 +144,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Cobrança',
                     border: OutlineInputBorder(),
-                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -174,7 +154,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Forma de Pagamento',
                     border: OutlineInputBorder(),
-                    //contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -185,7 +164,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Frete',
                     border: OutlineInputBorder(),
-                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -196,7 +174,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Observação',
                     border: OutlineInputBorder(),
-                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -213,27 +190,20 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                //Botão Avançar
                 Expanded(
                   child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                    //  if (_todosCamposPreenchidos())
                       InkWell(
                         onTap: () {
-                          _pageController.nextPage(
-                             duration: const Duration(milliseconds: 300),
-                             curve: Curves.easeInOut);
                           _avancarParaProximaPagina();
-                       },
-                      
+                        },
                         child: Container(
                           width: 100,
                           height: 50,
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(
-                                10), // Bordas arredondadas
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
                             child: Text(
@@ -247,7 +217,7 @@ class _PedidoPageState extends State<PedidoPage> {
                       ),
                     ],
                   ),
-               ),
+                ),
               ],
             ),
             Wrap(
@@ -260,10 +230,8 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Artigo',
                     border: OutlineInputBorder(),
-                    //   contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
-                    floatingLabelBehavior:
-                        FloatingLabelBehavior.auto, // Rótulo flutuante
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -272,7 +240,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                       labelText: 'Detalhe do Artigo',
                       border: OutlineInputBorder(),
-                      //       contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto),
                 ),
@@ -282,10 +249,9 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Unidade',
                     border: OutlineInputBorder(),
-                    //   contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior:
-                        FloatingLabelBehavior.auto, // Rótulo flutuante
+                        FloatingLabelBehavior.auto,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -294,7 +260,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Quantidade',
                     border: OutlineInputBorder(),
-                    // contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -305,7 +270,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Valor Base',
                     border: OutlineInputBorder(),
-                    // contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -316,7 +280,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Preço Efetivo',
                     border: OutlineInputBorder(),
-                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -328,7 +291,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Valor Bruto',
                     border: OutlineInputBorder(),
-                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -341,9 +303,30 @@ class _PedidoPageState extends State<PedidoPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          _pageController.nextPage(
+                          _pageController.previousPage(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeInOut);
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Voltar',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      InkWell(
+                        onTap: () {
                           _avancarParaProximaPagina();
                         },
                         child: Container(
@@ -351,8 +334,7 @@ class _PedidoPageState extends State<PedidoPage> {
                           height: 50,
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(
-                                10), // Bordas arredondadas
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
                             child: Text(
@@ -420,14 +402,11 @@ class _PedidoPageState extends State<PedidoPage> {
           });
 
           if (_currentIndex == 0) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+            Navigator.pop(context);
           } else if (_currentIndex == 1) {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const LoginPage()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
           } else if (_currentIndex == 2) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => FeedsPage()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FeedsPage()));
           }
         },
       ),
