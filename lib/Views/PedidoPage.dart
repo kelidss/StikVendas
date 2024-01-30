@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+//import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
@@ -21,6 +21,7 @@ class _PedidoPageState extends State<PedidoPage> {
   @override
   void initState() {
     super.initState();
+    textEditingController = textEditingController;
     _pageController = PageController();
   }
 
@@ -40,6 +41,7 @@ class _PedidoPageState extends State<PedidoPage> {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 100),
         curve: Curves.easeInOut,
+      
       );
     } else {
       AwesomeDialog(
@@ -102,7 +104,6 @@ class _PedidoPageState extends State<PedidoPage> {
         padding: const EdgeInsets.all(20.0),
         child: PageView(
           controller: _pageController,
-
           children: [
             Wrap(
               children: [
@@ -303,6 +304,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: PrEfetivoController,
                   decoration: const InputDecoration(
+                    hintText: '0,0',
                     labelText: 'Preço Efetivo',
                     border: OutlineInputBorder(),
                     isDense: true,
@@ -314,6 +316,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: VrBrutoController,
                   decoration: const InputDecoration(
+                    hintText: '0,0',
                     labelText: 'Valor Bruto',
                     border: OutlineInputBorder(),
                     isDense: true,
@@ -349,7 +352,6 @@ class _PedidoPageState extends State<PedidoPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10),
                       InkWell(
                         onTap: () {
                           _avancarParaProximaPagina2();
@@ -371,13 +373,14 @@ class _PedidoPageState extends State<PedidoPage> {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 10),
                     ],
                   ),
                 ),
               ],
             ),
             // tentando adicionar um indicador para as pages
-           /* SmoothPageIndicator(controller: _pageController, count: 3,
+            /* SmoothPageIndicator(controller: _pageController, count: 3,
              effect: JumpingDotEffect(
               activeDotColor: Colors.deepPurple,
               dotColor: Colors.deepPurple.shade100,
