@@ -22,8 +22,15 @@ class _PedidoPageState extends State<PedidoPage> {
   void initState() {
     super.initState();
     textEditingController = textEditingController;
+
     _pageController = PageController();
   }
+
+  String? _selectedTipoDocumento;
+  String? _selectedTipoCobranca;
+  String? _selectedFormaPagamento;
+  String? _selectedArtigo;
+  String? _selectedDetalheDoArtigo;
 
   _todosCamposPreenchidos1() {
     return DtPedidoController.text.isNotEmpty &&
@@ -41,7 +48,6 @@ class _PedidoPageState extends State<PedidoPage> {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 100),
         curve: Curves.easeInOut,
-      
       );
     } else {
       AwesomeDialog(
@@ -105,6 +111,7 @@ class _PedidoPageState extends State<PedidoPage> {
         child: PageView(
           controller: _pageController,
           children: [
+            // pagina 1
             Wrap(
               children: [
                 const SizedBox(
@@ -155,8 +162,23 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                 ),
                 const SizedBox(height: 60),
-                TextFormField(
-                  controller: TpDocumentoController,
+                DropdownButtonFormField<String>(
+                  value: _selectedTipoDocumento,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedTipoDocumento = newValue;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'RG',
+                      child: Text('RG'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'CPF',
+                      child: Text('CPF'),
+                    ),
+                  ],
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Documento',
                     border: OutlineInputBorder(),
@@ -165,8 +187,23 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                 ),
                 const SizedBox(height: 60),
-                TextFormField(
-                  controller: TipoCobracaController,
+                DropdownButtonFormField<String>(
+                  value: _selectedTipoCobranca,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedTipoCobranca = newValue;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'Opção 1',
+                      child: Text('Opção 1'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Opção 2',
+                      child: Text('Opção 2'),
+                    ),
+                  ],
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Cobrança',
                     border: OutlineInputBorder(),
@@ -175,10 +212,25 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                 ),
                 const SizedBox(height: 60),
-                TextFormField(
-                  controller: FormaPgtoController,
+                DropdownButtonFormField<String>(
+                  value: _selectedFormaPagamento,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedFormaPagamento = newValue;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'BOLETO',
+                      child: Text('BOLETO'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'PIX',
+                      child: Text('PIX'),
+                    ),
+                  ],
                   decoration: const InputDecoration(
-                    labelText: 'Forma de Pagamento',
+                    labelText: 'Forma de pagamento',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -246,28 +298,60 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ],
             ),
+            //pagina 2
             Wrap(
               children: [
                 const SizedBox(
                   height: 60,
                 ),
-                TextFormField(
-                  controller: ArtigoController,
+                DropdownButtonFormField<String>(
+                  value: _selectedArtigo,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedTipoDocumento = newValue;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'teste',
+                      child: Text('teste'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'teste2',
+                      child: Text('teste2'),
+                    ),
+                  ],
                   decoration: const InputDecoration(
-                    labelText: 'Artigo',
+                    labelText: 'Tipo de Documento',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
                 const SizedBox(height: 10),
-                TextFormField(
-                  controller: DetArtigoController,
+                DropdownButtonFormField<String>(
+                  value: _selectedDetalheDoArtigo,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedTipoDocumento = newValue;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'teste3',
+                      child: Text('teste3'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'teste4',
+                      child: Text('teste4'),
+                    ),
+                  ],
                   decoration: const InputDecoration(
-                      labelText: 'Detalhe do Artigo',
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto),
+                    labelText: 'Tipo de Documento',
+                    border: OutlineInputBorder(),
+                    isDense: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  ),
                 ),
                 const SizedBox(height: 60),
                 TextFormField(
