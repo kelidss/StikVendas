@@ -11,12 +11,18 @@ class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _PedidoPageState createState() => _PedidoPageState();
 }
 
 class _PedidoPageState extends State<PedidoPage> {
   int _currentIndex = 0;
   late PageController _pageController;
+  final List<bool> _freteCheckboxValues = [
+    false,
+    false,
+    false
+  ]; 
 
   @override
   void initState() {
@@ -237,15 +243,23 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                 ),
                 const SizedBox(height: 60),
-                TextFormField(
-                  controller: FreteController,
-                  decoration: const InputDecoration(
-                    labelText: 'Frete',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
+               TextFormField(
+                controller: FreteController,
+                decoration: const InputDecoration(
+                  labelText: 'Frete',
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
                 ),
+              ),
+              const SizedBox(height: 10),
+              Column(
+                children: [
+                  _buildCheckboxOption('Opção 1', 0),
+                  _buildCheckboxOption('Opção 2', 1),
+                  _buildCheckboxOption('Opção 3', 2),
+                ],
+              ),
                 const SizedBox(height: 60),
                 TextFormField(
                   controller: ObservacaoController,
@@ -308,7 +322,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   value: _selectedArtigo,
                   onChanged: (newValue) {
                     setState(() {
-                      _selectedTipoDocumento = newValue;
+                      _selectedArtigo = newValue;
                     });
                   },
                   items: const [
@@ -333,7 +347,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   value: _selectedDetalheDoArtigo,
                   onChanged: (newValue) {
                     setState(() {
-                      _selectedTipoDocumento = newValue;
+                      _selectedDetalheDoArtigo = newValue;
                     });
                   },
                   items: const [
@@ -536,6 +550,28 @@ class _PedidoPageState extends State<PedidoPage> {
           }
         },
       ),
+      
     );
   }
+  Widget _buildCheckboxOption(String label, int index) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Row(
+      children: [
+        Checkbox(
+          value: _freteCheckboxValues[index],
+          onChanged: (value) {
+            setState(() {
+              _freteCheckboxValues[index] = value ?? false;
+            });
+          },
+        ),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 16.0),
+        ),
+      ],
+    ),
+  );
+}
 }
