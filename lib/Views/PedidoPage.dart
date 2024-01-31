@@ -112,9 +112,11 @@ class _PedidoPageState extends State<PedidoPage> {
         centerTitle: true,
         backgroundColor: const Color(0xFFD52B1E),
       ),
-      body: Padding(
+      body:
+       Padding(
         padding: const EdgeInsets.all(20.0),
-        child: PageView(
+        child:
+         PageView(
           controller: _pageController,
           children: [
             // pagina 1
