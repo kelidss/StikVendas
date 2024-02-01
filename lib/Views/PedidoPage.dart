@@ -6,6 +6,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
+import 'package:flutter/scheduler.dart';
 
 class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
@@ -17,12 +18,27 @@ class PedidoPage extends StatefulWidget {
 
 class _PedidoPageState extends State<PedidoPage> {
   int _currentIndex = 0;
+  bool value = false;
+  final checkboxes = [
+    CheckboxModel(title: 'Test 1', value: false),
+    CheckboxModel(title: 'Test 2', value: false),
+    CheckboxModel(title: 'Toggle Group', value: false),
+    CheckboxModel(title: 'Test 3', value: false, shouldToggle: false),
+    CheckboxModel(title: 'Test 4', value: false, shouldToggle: false),
+  ];
+  /* @override
+    Widget build(BuildContext context) {
+    TextStyle style = TextStyle(fontSize: 28, fontWeight: FontWeight.bold);
+    TextStyle style2 = TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
+    List<Widget> checkboxModels = buildCheckboxes(checkboxes);*/
+  /* List<Map> categories = [
+    {"name": "opcao1", "isChecked": false},
+    {"name": "opcao2", "isChecked": false},
+    {"name": "opcao3", "isChecked": false}
+  ];*/
   late PageController _pageController;
-  final List<bool> _freteCheckboxValues = [
-    false,
-    false,
-    false
-  ]; 
+
+  // final List<bool> _freteCheckboxValues = [false, false, false];
 
   @override
   void initState() {
@@ -42,11 +58,12 @@ class _PedidoPageState extends State<PedidoPage> {
     return DtPedidoController.text.isNotEmpty &&
         DtEntregaController.text.isNotEmpty &&
         VendedorController.text.isNotEmpty &&
-        ClienteController.text.isNotEmpty &&
-        TpDocumentoController.text.isNotEmpty &&
-        TipoCobracaController.text.isNotEmpty &&
-        FormaPgtoController.text.isNotEmpty &&
-        FreteController.text.isNotEmpty;
+        ClienteController.text.isNotEmpty;
+    // &&
+    // TpDocumentoController.text.isNotEmpty &&
+    //  TipoCobracaController.text.isNotEmpty &&
+    // FormaPgtoController.text.isNotEmpty &&
+    //  FreteController.text.isNotEmpty;
   }
 
   _avancarParaProximaPagina1() {
@@ -70,13 +87,14 @@ class _PedidoPageState extends State<PedidoPage> {
   }
 
   _todosCamposPreenchidos2() {
-    return ArtigoController.text.isNotEmpty &&
-        DetArtigoController.text.isNotEmpty &&
+    return
+        //ArtigoController.text.isNotEmpty &&
+        // DetArtigoController.text.isNotEmpty &&
         UndController.text.isNotEmpty &&
-        QtdController.text.isNotEmpty &&
-        VrBaseController.text.isNotEmpty &&
-        PrEfetivoController.text.isNotEmpty &&
-        VrBrutoController.text.isNotEmpty;
+            QtdController.text.isNotEmpty &&
+            VrBaseController.text.isNotEmpty &&
+            PrEfetivoController.text.isNotEmpty &&
+            VrBrutoController.text.isNotEmpty;
   }
 
   _avancarParaProximaPagina2() {
@@ -112,11 +130,10 @@ class _PedidoPageState extends State<PedidoPage> {
         centerTitle: true,
         backgroundColor: const Color(0xFFD52B1E),
       ),
-      body:
-       Padding(
+      body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child:
-         PageView(
+        child: PageView(
+          //   scrollDirection: Axis.vertical ,
           controller: _pageController,
           children: [
             // pagina 1
@@ -244,24 +261,117 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
+                //  Container(
+
+                //:
+
+                // transformar isso em um checkbox
+
                 const SizedBox(height: 60),
-               TextFormField(
-                controller: FreteController,
-                decoration: const InputDecoration(
-                  labelText: 'Frete',
-                  border: OutlineInputBorder(),
-                  isDense: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.auto,
+                /*Column(
+                  children: [
+                    checkboxModels[2],
+                    Container(
+                      margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      Decoration: BoxDecoration(
+                        Border(''
+                          Border.all(),
+                        )
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                         children:[
+                          Padding(padding:  const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text("Group 1", style: style2),
+                          ),
+                          ),
+                           checkboxModels[0],
+                           checkboxModels[1],
+                         ],
+                      ),
+                    )
+                  ],
+                 ),*/
+                TextFormField(
+                  controller: FreteController,
+                  decoration: const InputDecoration(
+                    labelText: 'Frete',
+                    border: OutlineInputBorder(),
+                    isDense: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Column(
-                children: [
-                  _buildCheckboxOption('Opção 1', 0),
-                  _buildCheckboxOption('Opção 2', 1),
-                  _buildCheckboxOption('Opção 3', 2),
-                ],
-              ),
+
+                /* Column(
+                    children: categories.map((escolha) {
+                  return CheckboxListTile(
+                      activeColor: Colors.deepPurpleAccent,
+                      checkboxShape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      value: escolha["isChecked"],
+                      title: Text(escolha["name"]),
+                      onChanged: (val) {
+                        setState(() {
+                          escolha["isChecked"] = val;
+                        });
+                      });
+                }).toList()),
+                //   TextFormField(
+                //  controller: FreteController,
+                // decoration: const InputDecoration(
+                //   labelText: 'Frete',
+                //   border: OutlineInputBorder(),
+                //   isDense: true,
+                //  floatingLabelBehavior: FloatingLabelBehavior.auto,
+                //  ),
+                //   ),
+                /*  const SizedBox(height: 10),
+                Column(
+                  children: [
+                    _buildCheckboxOption('Opção 1', 0),
+                    _buildCheckboxOption('Opção 2', 1),
+                    _buildCheckboxOption('Opção 3', 2),
+                  ],
+                ),*/
+                Wrap(
+                  children: categories.map((escolha) {
+                    if (escolha["isChecked"] == true) {
+                      return Card(
+                        elevation: 3,
+                        color: Colors.deepPurpleAccent,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                escolha["name"],
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    escolha["isChecked"] =
+                                        !escolha["isChecked"];
+                                  });
+                                },
+                                child: const Icon(
+                                  Icons.delete_forever_rounded,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                    return Container();
+                  }).toList(),
+                ),*/
                 const SizedBox(height: 60),
                 TextFormField(
                   controller: ObservacaoController,
@@ -315,6 +425,10 @@ class _PedidoPageState extends State<PedidoPage> {
               ],
             ),
             //pagina 2
+
+            // child: PageView(
+            //  scrollDirection: Axis.vertical ,
+            //controller: _pageController,
             Wrap(
               children: [
                 const SizedBox(
@@ -338,7 +452,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                   decoration: const InputDecoration(
-                    labelText: 'Tipo de Documento',
+                    labelText: 'Arquivo',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -363,7 +477,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                   decoration: const InputDecoration(
-                    labelText: 'Tipo de Documento',
+                    labelText: 'Detalhe do artigo',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -552,10 +666,10 @@ class _PedidoPageState extends State<PedidoPage> {
           }
         },
       ),
-      
     );
   }
-  Widget _buildCheckboxOption(String label, int index) {
+}
+  /*Widget _buildCheckboxOption(String label, int index) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8.0),
     child: Row(
@@ -576,4 +690,4 @@ class _PedidoPageState extends State<PedidoPage> {
     ),
   );
 }
-}
+}*/

@@ -151,7 +151,6 @@ class HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  // Adicione outros itens do GridView aqui
                 ],
               ),
             ),
