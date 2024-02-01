@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -6,6 +7,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
+import 'package:flutter/src/services/text_formatter.dart';
 
 class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
@@ -392,17 +394,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 55),
-                TextFormField(
-                  controller: OcClienteController,
-                  decoration: const InputDecoration(
-                    labelText: 'OC Cliente',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
-                ),
+
                 const SizedBox(height: 55),
                 Expanded(
                   child: Row(
@@ -445,7 +437,7 @@ class _PedidoPageState extends State<PedidoPage> {
             Wrap(
               children: [
                 const SizedBox(
-                  height: 60,
+                  height: 55,
                 ),
                 DropdownButtonFormField<String>(
                   value: _selectedArtigo,
@@ -496,7 +488,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 TextFormField(
                   controller: UndController,
                   decoration: const InputDecoration(
@@ -506,7 +498,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 TextFormField(
                   controller: QtdController,
                   decoration: const InputDecoration(
@@ -515,19 +507,37 @@ class _PedidoPageState extends State<PedidoPage> {
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
+                   keyboardType: TextInputType.number,
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 TextFormField(
-                  controller: VrBaseController,
+                  controller: OcClienteController,
                   decoration: const InputDecoration(
-                    hintText: '0,0',
-                    labelText: 'Valor Base',
+                    labelText: 'OC Cliente',
                     border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
+                TextFormField(
+                    controller: VrBaseController,
+                    decoration: const InputDecoration(
+                      hintText: '0,0',
+                      labelText: 'Valor Base',
+                      border: OutlineInputBorder(),
+                      isDense: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    ),
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  //  inputFormatters:[
+                     // FilteringTextInputFormatter.allow(RegExp(r'^d\+\\.?\d{0,1}'))
+                   // ],
+                    
+                  //    MaskTextInputFormatter(mask: '#,###0.00')],
+                    ),
+                const SizedBox(height: 55),
                 TextFormField(
                   controller: PrEfetivoController,
                   decoration: const InputDecoration(
@@ -537,9 +547,10 @@ class _PedidoPageState extends State<PedidoPage> {
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
-                  keyboardType: TextInputType.datetime,
+                  inputFormatters: [MaskTextInputFormatter(mask: '#,###0.00')],
+                  keyboardType: TextInputType.number,
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 TextFormField(
                   controller: VrBrutoController,
                   decoration: const InputDecoration(
@@ -549,9 +560,10 @@ class _PedidoPageState extends State<PedidoPage> {
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
+                  inputFormatters: [MaskTextInputFormatter(mask: '#,###0.00')],
                   keyboardType: TextInputType.datetime,
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -563,7 +575,7 @@ class _PedidoPageState extends State<PedidoPage> {
                               curve: Curves.easeInOut);
                         },
                         child: Container(
-                          width: 150,
+                          width: 100,
                           height: 50,
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
@@ -579,12 +591,16 @@ class _PedidoPageState extends State<PedidoPage> {
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        height: 55,
+                        width: 30,
+                      ),
                       InkWell(
                         onTap: () {
                           _avancarParaProximaPagina2();
                         },
                         child: Container(
-                          width: 150,
+                          width: 100,
                           height: 50,
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
