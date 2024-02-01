@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: '/', // Rota inicial
+      initialRoute: 
+      '/', // Rota inicial
       routes: {
         '/': (context) => const LoginPage(), // Página inicial
         '/feeds': (context) => FeedsPage(),

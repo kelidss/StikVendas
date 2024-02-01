@@ -6,7 +6,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
-import 'package:flutter/scheduler.dart';
 
 class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
@@ -119,6 +118,10 @@ class _PedidoPageState extends State<PedidoPage> {
 
   @override
   Widget build(BuildContext context) {
+    // return DefaultTabController(
+    //  length: 3,
+    //  child: build(
+    //   Builder(BuildContext context ){
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -130,17 +133,23 @@ class _PedidoPageState extends State<PedidoPage> {
         centerTitle: true,
         backgroundColor: const Color(0xFFD52B1E),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      //  )
+      //  )
+      body:
+          // SingleChildScrollView(
+          Padding(
+        padding: const EdgeInsets.all(8.0),
         child: PageView(
-          //   scrollDirection: Axis.vertical ,
+          physics: const NeverScrollableScrollPhysics(),
+          //scrollBehavior: const ScrollBehavior(),
+          // scrollDirection: Axis.horizontal,
           controller: _pageController,
           children: [
             // pagina 1
             Wrap(
               children: [
                 const SizedBox(
-                  height: 60,
+                  height: 55,
                 ),
                 TextFormField(
                   controller: DtPedidoController,
@@ -154,7 +163,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 TextFormField(
                   controller: DtEntregaController,
                   decoration: const InputDecoration(
@@ -166,7 +175,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 TextFormField(
                   controller: VendedorController,
                   decoration: const InputDecoration(
@@ -176,7 +185,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 TextFormField(
                   controller: ClienteController,
                   decoration: const InputDecoration(
@@ -186,7 +195,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedTipoDocumento,
                   onChanged: (newValue) {
@@ -211,7 +220,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedTipoCobranca,
                   onChanged: (newValue) {
@@ -236,7 +245,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedFormaPagamento,
                   onChanged: (newValue) {
@@ -261,13 +270,14 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
+
                 //  Container(
 
                 //:
 
                 // transformar isso em um checkbox
 
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 /*Column(
                   children: [
                     checkboxModels[2],
@@ -372,7 +382,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     return Container();
                   }).toList(),
                 ),*/
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 TextFormField(
                   controller: ObservacaoController,
                   decoration: const InputDecoration(
@@ -382,7 +392,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 TextFormField(
                   controller: OcClienteController,
                   decoration: const InputDecoration(
@@ -393,7 +403,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 55),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -403,8 +413,8 @@ class _PedidoPageState extends State<PedidoPage> {
                           _avancarParaProximaPagina1();
                         },
                         child: Container(
-                          width: 100,
-                          height: 50,
+                          width: 80,
+                          height: 45,
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(10),
@@ -424,11 +434,14 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ],
             ),
+
             //pagina 2
 
             // child: PageView(
             //  scrollDirection: Axis.vertical ,
             //controller: _pageController,
+
+            //PageView(
             Wrap(
               children: [
                 const SizedBox(
@@ -593,6 +606,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ],
             ),
+            //  ),
             // tentando adicionar um indicador para as pages
             /* SmoothPageIndicator(controller: _pageController, count: 3,
              effect: JumpingDotEffect(
@@ -641,6 +655,7 @@ class _PedidoPageState extends State<PedidoPage> {
           ],
         ),
       ),
+
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
         color: const Color(0xFFD52B1E),
@@ -669,6 +684,7 @@ class _PedidoPageState extends State<PedidoPage> {
     );
   }
 }
+
   /*Widget _buildCheckboxOption(String label, int index) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8.0),
