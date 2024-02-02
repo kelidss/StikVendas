@@ -4,6 +4,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
+import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 
 class PedidoPage extends StatefulWidget {
@@ -50,7 +51,6 @@ class _PedidoPageState extends State<PedidoPage> {
         curve: Curves.easeInOut,
       );
     } else {
-
       /* AwesomeDialog(
         context: context,
         dialogType: DialogType.warning,
@@ -110,14 +110,14 @@ class _PedidoPageState extends State<PedidoPage> {
         backgroundColor: const Color(0xFFD52B1E),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(20.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: [
             // pagina 1
             Wrap(
-              children  : [
+              children: [
                 const SizedBox(
                   height: 55,
                 ),
@@ -127,16 +127,16 @@ class _PedidoPageState extends State<PedidoPage> {
                     labelText: 'Data Pedido',
                     hintText: '00/00/0000',
                     border: OutlineInputBorder(),
-                     // borderSide: BorderSide()
-                      //  color: DtPedidoController.text.isEmpty
-                      //      ? Colors.red
-                       //     : Colors.grey,
-                 //   ),
+                    // borderSide: BorderSide()
+                    //  color: DtPedidoController.text.isEmpty
+                    //      ? Colors.red
+                    //     : Colors.grey,
+                    //   ),
                     //),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
-                //  validator: (DtPedidoController)=> DtPedidoController!.isEmpty ?,
+                  //  validator: (DtPedidoController)=> DtPedidoController!.isEmpty ?,
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
@@ -146,8 +146,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                       labelText: 'Data Entrega',
                       hintText: '00/00/0000',
-                      border: OutlineInputBorder(
-                    ),
+                      border: OutlineInputBorder(),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto),
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
@@ -217,8 +216,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   ],
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Cobrança',
-                    border: OutlineInputBorder(borderSide: BorderSide()
-                        ),
+                    border: OutlineInputBorder(borderSide: BorderSide()),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -281,14 +279,14 @@ class _PedidoPageState extends State<PedidoPage> {
                           width: 80,
                           height: 45,
                           decoration: BoxDecoration(
-                            color: Colors.grey[200],
+                            color: const Color(0xFFD52B1E),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
                             child: Text(
                               'Itens',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -403,7 +401,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   //  inputFormatters:[
                   // FilteringTextInputFormatter.allow(RegExp(r'^d\+\\.?\d{0,1}'))
                   // ],
-
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
@@ -428,7 +425,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
-                  inputFormatters: [MaskTextInputFormatter(mask: '#,###0.00')],
+                  inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
                   keyboardType: TextInputType.datetime,
                 ),
                 const SizedBox(height: 55),
@@ -438,22 +435,35 @@ class _PedidoPageState extends State<PedidoPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          _pageController.previousPage(
-                              duration: const Duration(milliseconds: 100),
-                              curve: Curves.easeInOut);
+                          // Limpando os campos ao clicar em "Voltar"
+                          /*    DtPedidoController.clear();
+                          DtEntregaController.clear();
+                          VendedorController.clear();
+                          ClienteController.clear();
+                          FreteController.clear();
+                          ObservacaoController.clear();
+                          UndController.clear();
+                          QtdController.clear();
+                          OcClienteController.clear();
+                          VrBaseController.clear();
+                          PrEfetivoController.clear();
+                          VrBrutoController.clear();*/
+
+                          // Navegação de volta para a HomePage
+                          Navigator.pop(context);
                         },
                         child: Container(
                           width: 100,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.grey[200],
+                            color: const Color(0xFFD52B1E),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
                             child: Text(
                               'Voltar',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -465,20 +475,48 @@ class _PedidoPageState extends State<PedidoPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          _avancarParaProximaPagina2();
+                          {
+                            // Limpar todos os campos antes de exibir o diálogo
+                            DtPedidoController.clear();
+                            DtEntregaController.clear();
+                            VendedorController.clear();
+                            ClienteController.clear();
+                            FreteController.clear();
+                            ObservacaoController.clear();
+                            UndController.clear();
+                            QtdController.clear();
+                            OcClienteController.clear();
+                            VrBaseController.clear();
+                            PrEfetivoController.clear();
+                            VrBrutoController.clear();
+                            //if (_avancarParaProximaPagina2()) {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.success,
+                              animType: AnimType.scale,
+                              title: 'Gravado com sucesso',
+                              btnOkOnPress: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PedidoPage()));
+                              },
+                            ).show();
+                          }
                         },
                         child: Container(
                           width: 100,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.grey[200],
+                            color: const Color(0xFFD52B1E),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
                             child: Text(
                               'Gravar',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -490,7 +528,10 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ],
             ),
-            Container(
+            //    ],
+            //   ),
+            // resumo do pedido
+            /*  Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(15),
               child: Column(
@@ -522,7 +563,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                 ],
               ),
-            ),
+            ),*/
           ],
         ),
       ),
@@ -535,18 +576,34 @@ class _PedidoPageState extends State<PedidoPage> {
           Icon(Icons.exit_to_app, color: Colors.white),
           Icon(Icons.feed, color: Colors.white),
         ],
-        onTap: (index) {
+        onTap: (index) async {
           setState(() {
             _currentIndex = index;
           });
-
-          if (_currentIndex == 0) {
-            Navigator.pop(context);
-          } else if (_currentIndex == 1) {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const LoginPage()));
-          } else if (_currentIndex == 2) {
+          await Future.delayed(const Duration(seconds: 1));
+          if (_currentIndex == 1) {
+            // ignore: use_build_context_synchronously
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.warning,
+              animType: AnimType.scale,
+              title: 'Confirmação',
+              desc: 'Tem certeza que deseja sair?',
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
+            ).show();
+          } else if (_currentIndex == 0) {
+            // ignore: use_build_context_synchronously
             Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          } else if (_currentIndex == 2) {
+            // ignore: use_build_context_synchronously
+            Navigator.push(
                 context, MaterialPageRoute(builder: (context) => FeedsPage()));
           }
         },
@@ -554,4 +611,3 @@ class _PedidoPageState extends State<PedidoPage> {
     );
   }
 }
-

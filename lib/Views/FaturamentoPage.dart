@@ -1,7 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-//import 'package:d_chart/commons/data_model.dart';
-//import 'package:d_chart/ordinal/bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stik_vendas/Controllers/Controller_Faturamento.dart';

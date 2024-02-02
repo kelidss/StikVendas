@@ -181,7 +181,6 @@ class HomePageState extends State<HomePage> {
                 lineWidth: 20,
                 percent: 0.40,
                 progressColor: Colors.green,
-                // backgroundColor: Colors.amber,
                 backgroundColor: Colors.grey,
                 circularStrokeCap: CircularStrokeCap.round,
                 center: const Text(
