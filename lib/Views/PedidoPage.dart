@@ -73,7 +73,7 @@ class _PedidoPageState extends State<PedidoPage> {
         curve: Curves.easeInOut,
       );
     } else {
-      AwesomeDialog(
+      /* AwesomeDialog(
         context: context,
         dialogType: DialogType.warning,
         animType: AnimType.scale,
@@ -82,7 +82,7 @@ class _PedidoPageState extends State<PedidoPage> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const PedidoPage()));
         },
-      ).show();
+      ).show();*/
     }
   }
 
@@ -105,16 +105,16 @@ class _PedidoPageState extends State<PedidoPage> {
         curve: Curves.easeInOut,
       );
     } else {
-      AwesomeDialog(
-        context: context,
+      /* AwesomeDialog(
+       context: context,
         dialogType: DialogType.warning,
-        animType: AnimType.scale,
+       animType: AnimType.scale,
         title: 'Preencha todos os campos',
         btnOkOnPress: () {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const PedidoPage()));
         },
-      ).show();
+      ).show();*/
     }
   }
 
@@ -150,17 +150,22 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
                 TextFormField(
                   controller: DtPedidoController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Data Pedido',
                     hintText: '00/00/0000',
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: DtPedidoController.text.isEmpty
+                            ? Colors.red
+                            : Colors.grey,
+                      ),
+                    ),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
-
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: DtEntregaController,
@@ -173,7 +178,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
-
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: VendedorController,
@@ -193,7 +197,6 @@ class _PedidoPageState extends State<PedidoPage> {
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
                     )),
-
                 const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedTipoDocumento,
@@ -239,7 +242,10 @@ class _PedidoPageState extends State<PedidoPage> {
                   ],
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Cobrança',
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(borderSide: BorderSide()
+                        //color:
+                        //  TipoCobracaController.text.isEmpty ? Colors.red: Colors.grey)
+                        ),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -269,13 +275,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-
-                //  Container(
-
-                //:
-
-                // transformar isso em um checkbox
-
                 const SizedBox(height: 55),
                 /*Column(
                   children: [
@@ -391,7 +390,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-
                 const SizedBox(height: 55),
                 Expanded(
                   child: Row(
