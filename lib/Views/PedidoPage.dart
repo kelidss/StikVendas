@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-//import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
@@ -11,34 +10,12 @@ class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _PedidoPageState createState() => _PedidoPageState();
 }
 
 class _PedidoPageState extends State<PedidoPage> {
   int _currentIndex = 0;
-//  bool value = false;
-  /*final checkboxes = [
-    CheckboxModel(title: 'Test 1', value: false),
-    CheckboxModel(title: 'Test 2', value: false),
-    CheckboxModel(title: 'Toggle Group', value: false),
-    CheckboxModel(title: 'Test 3', value: false, shouldToggle: false),
-    CheckboxModel(title: 'Test 4', value: false, shouldToggle: false),
-  ]; */
-
-  /* @override
-    Widget build(BuildContext context) {
-    TextStyle style = TextStyle(fontSize: 28, fontWeight: FontWeight.bold);
-    TextStyle style2 = TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
-    List<Widget> checkboxModels = buildCheckboxes(checkboxes);*/
-  /* List<Map> categories = [
-    {"name": "opcao1", "isChecked": false},
-    {"name": "opcao2", "isChecked": false},
-    {"name": "opcao3", "isChecked": false}
-  ];*/
   late PageController _pageController;
-
-  // final List<bool> _freteCheckboxValues = [false, false, false];
 
   @override
   void initState() {
@@ -73,6 +50,7 @@ class _PedidoPageState extends State<PedidoPage> {
         curve: Curves.easeInOut,
       );
     } else {
+
       /* AwesomeDialog(
         context: context,
         dialogType: DialogType.warning,
@@ -120,10 +98,6 @@ class _PedidoPageState extends State<PedidoPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return DefaultTabController(
-    //  length: 3,
-    //  child: build(
-    //   Builder(BuildContext context ){
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -139,30 +113,30 @@ class _PedidoPageState extends State<PedidoPage> {
         padding: const EdgeInsets.all(12.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
-          // scrollDirection: Axis.horizontal,
           controller: _pageController,
           children: [
             // pagina 1
             Wrap(
-              children: [
+              children  : [
                 const SizedBox(
                   height: 55,
                 ),
                 TextFormField(
                   controller: DtPedidoController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Data Pedido',
                     hintText: '00/00/0000',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: DtPedidoController.text.isEmpty
-                            ? Colors.red
-                            : Colors.grey,
-                      ),
-                    ),
+                    border: OutlineInputBorder(),
+                     // borderSide: BorderSide()
+                      //  color: DtPedidoController.text.isEmpty
+                      //      ? Colors.red
+                       //     : Colors.grey,
+                 //   ),
+                    //),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
+                //  validator: (DtPedidoController)=> DtPedidoController!.isEmpty ?,
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
@@ -172,7 +146,8 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                       labelText: 'Data Entrega',
                       hintText: '00/00/0000',
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                    ),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto),
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
@@ -243,8 +218,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Cobrança',
                     border: OutlineInputBorder(borderSide: BorderSide()
-                        //color:
-                        //  TipoCobracaController.text.isEmpty ? Colors.red: Colors.grey)
                         ),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -276,31 +249,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                 ),
                 const SizedBox(height: 55),
-                /*Column(
-                  children: [
-                    checkboxModels[2],
-                    Container(
-                      margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
-                      Decoration: BoxDecoration(
-                        Border(''
-                          Border.all(),
-                        )
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                         children:[
-                          Padding(padding:  const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text("Group 1", style: style2),
-                          ),
-                          ),
-                           checkboxModels[0],
-                           checkboxModels[1],
-                         ],
-                      ),
-                    )
-                  ],
-                 ),*/
                 TextFormField(
                   controller: FreteController,
                   decoration: const InputDecoration(
@@ -310,76 +258,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
                 ),
-
-                /* Column(
-                    children: categories.map((escolha) {
-                  return CheckboxListTile(
-                      activeColor: Colors.deepPurpleAccent,
-                      checkboxShape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                      value: escolha["isChecked"],
-                      title: Text(escolha["name"]),
-                      onChanged: (val) {
-                        setState(() {
-                          escolha["isChecked"] = val;
-                        });
-                      });
-                }).toList()),
-                //   TextFormField(
-                //  controller: FreteController,
-                // decoration: const InputDecoration(
-                //   labelText: 'Frete',
-                //   border: OutlineInputBorder(),
-                //   isDense: true,
-                //  floatingLabelBehavior: FloatingLabelBehavior.auto,
-                //  ),
-                //   ),
-                /*  const SizedBox(height: 10),
-                Column(
-                  children: [
-                    _buildCheckboxOption('Opção 1', 0),
-                    _buildCheckboxOption('Opção 2', 1),
-                    _buildCheckboxOption('Opção 3', 2),
-                  ],
-                ),*/
-                Wrap(
-                  children: categories.map((escolha) {
-                    if (escolha["isChecked"] == true) {
-                      return Card(
-                        elevation: 3,
-                        color: Colors.deepPurpleAccent,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                escolha["name"],
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    escolha["isChecked"] =
-                                        !escolha["isChecked"];
-                                  });
-                                },
-                                child: const Icon(
-                                  Icons.delete_forever_rounded,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                    return Container();
-                  }).toList(),
-                ),*/
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: ObservacaoController,
@@ -421,14 +299,6 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ],
             ),
-
-            //pagina 2
-
-            // child: PageView(
-            //  scrollDirection: Axis.vertical ,
-            //controller: _pageController,
-
-            //PageView(
             Wrap(
               children: [
                 const SizedBox(
@@ -534,7 +404,6 @@ class _PedidoPageState extends State<PedidoPage> {
                   // FilteringTextInputFormatter.allow(RegExp(r'^d\+\\.?\d{0,1}'))
                   // ],
 
-                  //    MaskTextInputFormatter(mask: '#,###0.00')],
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
@@ -621,19 +490,6 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ],
             ),
-            //  ),
-            // tentando adicionar um indicador para as pages
-            /* SmoothPageIndicator(controller: _pageController, count: 3,
-             effect: JumpingDotEffect(
-              activeDotColor: Colors.deepPurple,
-              dotColor: Colors.deepPurple.shade100,
-              dotHeight: 30,
-              dotWidth: 30,
-              spacing: 16,
-              //verticalOffset: 50,
-              jumpScale: 3,
-            ),
-            ),*/
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(15),
@@ -699,25 +555,3 @@ class _PedidoPageState extends State<PedidoPage> {
   }
 }
 
-  /*Widget _buildCheckboxOption(String label, int index) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0),
-    child: Row(
-      children: [
-        Checkbox(
-          value: _freteCheckboxValues[index],
-          onChanged: (value) {
-            setState(() {
-              _freteCheckboxValues[index] = value ?? false;
-            });
-          },
-        ),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 16.0),
-        ),
-      ],
-    ),
-  );
-}
-}*/
