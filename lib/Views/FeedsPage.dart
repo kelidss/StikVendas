@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 
@@ -13,6 +14,15 @@ class FeedsPage extends StatefulWidget {
   State<FeedsPage> createState() => FeedsPageState();
   final TextEditingController usuarioController = TextEditingController();
 }
+
+//late PageController _pageController;
+//   @override
+//   void initState() {
+//   super.initState();
+//  textEditingController = textEditingController;
+
+// _pageController = PageController();
+// }
 
 class FeedsPageState extends State<FeedsPage> {
   int currentIndex = 2;
@@ -37,56 +47,38 @@ class FeedsPageState extends State<FeedsPage> {
         // },
         //  ),
       ),
-      body: Wrap(
-        children: [
-          const SizedBox(height: 30),
-          CarouselSlider(
-            options: CarouselOptions(
-              scrollDirection: Axis.horizontal,
-              height: 200.0,
-              enableInfiniteScroll: true,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 3),
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
+      body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            DataTable(
+              columns: const [
+                DataColumn(label: Text('Campo')),
+                DataColumn(label: Text('Valor')),
+              ],
+              rows: [
+                DataRow(cells: [
+                  const DataCell(Text('DtPedido')),
+                  DataCell(Text(DtPedidoController.text)),
+                ]),
+                DataRow(cells: [
+                  const DataCell(Text('Cliente')),
+                  DataCell(Text(ClienteController.text)),
+                ]),
+                DataRow(cells: [
+                  const DataCell(Text('Artigo')),
+                  DataCell(Text(ArtigoController.text)),
+                ]),
+                DataRow(cells: [
+                  const DataCell(Text('Detalhe do Artigo')),
+                  DataCell(Text(DetArtigoController.text)),
+                ]),
+              ],
             ),
-            items: [
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 168, 168, 168),
-                  borderRadius: BorderRadius.circular(13),
-                ),
-                width: 300,
-                child: const Center(
-                  child: Text('Mensagem de sms'),
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 168, 168, 168),
-                  borderRadius: BorderRadius.circular(13),
-                ),
-                width: 300,
-                child: const Center(
-                  child: Text('Mensagem 2'),
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 168, 168, 168),
-                  borderRadius: BorderRadius.circular(13),
-                ),
-                width: 300,
-                child: const Center(
-                  child: Text(
-                    'Mensagem 3',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,

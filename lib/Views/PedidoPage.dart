@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -7,7 +6,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
-import 'package:flutter/src/services/text_formatter.dart';
 
 class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
@@ -19,14 +17,15 @@ class PedidoPage extends StatefulWidget {
 
 class _PedidoPageState extends State<PedidoPage> {
   int _currentIndex = 0;
-  bool value = false;
-  final checkboxes = [
+//  bool value = false;
+  /*final checkboxes = [
     CheckboxModel(title: 'Test 1', value: false),
     CheckboxModel(title: 'Test 2', value: false),
     CheckboxModel(title: 'Toggle Group', value: false),
     CheckboxModel(title: 'Test 3', value: false, shouldToggle: false),
     CheckboxModel(title: 'Test 4', value: false, shouldToggle: false),
-  ];
+  ]; */
+
   /* @override
     Widget build(BuildContext context) {
     TextStyle style = TextStyle(fontSize: 28, fontWeight: FontWeight.bold);
@@ -91,6 +90,7 @@ class _PedidoPageState extends State<PedidoPage> {
     return
         //ArtigoController.text.isNotEmpty &&
         // DetArtigoController.text.isNotEmpty &&
+
         UndController.text.isNotEmpty &&
             QtdController.text.isNotEmpty &&
             VrBaseController.text.isNotEmpty &&
@@ -135,15 +135,10 @@ class _PedidoPageState extends State<PedidoPage> {
         centerTitle: true,
         backgroundColor: const Color(0xFFD52B1E),
       ),
-      //  )
-      //  )
-      body:
-          // SingleChildScrollView(
-          Padding(
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
-          //scrollBehavior: const ScrollBehavior(),
           // scrollDirection: Axis.horizontal,
           controller: _pageController,
           children: [
@@ -177,6 +172,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
+
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: VendedorController,
@@ -189,14 +185,14 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
-                  controller: ClienteController,
-                  decoration: const InputDecoration(
-                    labelText: 'Cliente',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
-                ),
+                    controller: ClienteController,
+                    decoration: const InputDecoration(
+                      labelText: 'Cliente',
+                      border: OutlineInputBorder(),
+                      isDense: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    )),
+
                 const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedTipoDocumento,
@@ -440,11 +436,11 @@ class _PedidoPageState extends State<PedidoPage> {
                   height: 55,
                 ),
                 DropdownButtonFormField<String>(
-                  value: _selectedArtigo,
-                  onChanged: (newValue) {
-                    setState(() {
-                      _selectedArtigo = newValue;
-                    });
+                  //value: _selectedArtigo,
+                  onChanged: (value) {
+                    // setState(() {
+                    //   _selectedArtigo = value;
+                    //  });
                   },
                   items: const [
                     DropdownMenuItem(
@@ -457,7 +453,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                   decoration: const InputDecoration(
-                    labelText: 'Arquivo',
+                    labelText: 'Artigo',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -507,7 +503,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
-                   keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
@@ -522,21 +518,25 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
-                    controller: VrBaseController,
-                    decoration: const InputDecoration(
-                      hintText: '0,0',
-                      labelText: 'Valor Base',
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    ),
-                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  controller: VrBaseController,
+                  decoration: const InputDecoration(
+                    hintText: '0,0',
+                    labelText: 'Valor Base',
+                    border: OutlineInputBorder(),
+                    isDense: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  ),
+
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                    signed: false,
+                  ),
                   //  inputFormatters:[
-                     // FilteringTextInputFormatter.allow(RegExp(r'^d\+\\.?\d{0,1}'))
-                   // ],
-                    
+                  // FilteringTextInputFormatter.allow(RegExp(r'^d\+\\.?\d{0,1}'))
+                  // ],
+
                   //    MaskTextInputFormatter(mask: '#,###0.00')],
-                    ),
+                ),
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: PrEfetivoController,
@@ -597,7 +597,12 @@ class _PedidoPageState extends State<PedidoPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          _avancarParaProximaPagina2();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FeedsPage()),
+                          );
+                          //  _avancarParaProximaPagina2();
                         },
                         child: Container(
                           width: 100,
@@ -608,7 +613,7 @@ class _PedidoPageState extends State<PedidoPage> {
                           ),
                           child: const Center(
                             child: Text(
-                              'Resumo',
+                              'Ver Pedidos',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
@@ -635,43 +640,9 @@ class _PedidoPageState extends State<PedidoPage> {
               jumpScale: 3,
             ),
             ),*/
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DataTable(
-                    columns: const [
-                      DataColumn(label: Text('Campo')),
-                      DataColumn(label: Text('Valor')),
-                    ],
-                    rows: [
-                      DataRow(cells: [
-                        const DataCell(Text('DtPedido')),
-                        DataCell(Text(DtPedidoController.text)),
-                      ]),
-                      DataRow(cells: [
-                        const DataCell(Text('Cliente')),
-                        DataCell(Text(ClienteController.text)),
-                      ]),
-                      DataRow(cells: [
-                        const DataCell(Text('Artigo')),
-                        DataCell(Text(ArtigoController.text)),
-                      ]),
-                      DataRow(cells: [
-                        const DataCell(Text('Detalhe do Artigo')),
-                        DataCell(Text(DetArtigoController.text)),
-                      ]),
-                    ],
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
-
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
         color: const Color(0xFFD52B1E),
