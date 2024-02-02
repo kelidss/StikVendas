@@ -136,7 +136,7 @@ class _PedidoPageState extends State<PedidoPage> {
         backgroundColor: const Color(0xFFD52B1E),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
           // scrollDirection: Axis.horizontal,
@@ -152,7 +152,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   controller: DtPedidoController,
                   decoration: const InputDecoration(
                     labelText: 'Data Pedido',
-                    hintText: '**/**/****',
+                    hintText: '00/00/0000',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -160,12 +160,13 @@ class _PedidoPageState extends State<PedidoPage> {
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
                 ),
+
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: DtEntregaController,
                   decoration: const InputDecoration(
                       labelText: 'Data Entrega',
-                      hintText: '**/**/****',
+                      hintText: '00/00/0000',
                       border: OutlineInputBorder(),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.auto),
@@ -436,11 +437,11 @@ class _PedidoPageState extends State<PedidoPage> {
                   height: 55,
                 ),
                 DropdownButtonFormField<String>(
-                  //value: _selectedArtigo,
+                  value: _selectedArtigo,
                   onChanged: (value) {
-                    // setState(() {
-                    //   _selectedArtigo = value;
-                    //  });
+                    setState(() {
+                      _selectedArtigo = value;
+                    });
                   },
                   items: const [
                     DropdownMenuItem(
@@ -597,12 +598,7 @@ class _PedidoPageState extends State<PedidoPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FeedsPage()),
-                          );
-                          //  _avancarParaProximaPagina2();
+                          _avancarParaProximaPagina2();
                         },
                         child: Container(
                           width: 100,
@@ -613,7 +609,7 @@ class _PedidoPageState extends State<PedidoPage> {
                           ),
                           child: const Center(
                             child: Text(
-                              'Ver Pedidos',
+                              'Gravar',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
@@ -640,6 +636,39 @@ class _PedidoPageState extends State<PedidoPage> {
               jumpScale: 3,
             ),
             ),*/
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  DataTable(
+                    columns: const [
+                      DataColumn(label: Text('Campo')),
+                      DataColumn(label: Text('Valor')),
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        const DataCell(Text('DtPedido')),
+                        DataCell(Text(DtPedidoController.text)),
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Cliente')),
+                        DataCell(Text(ClienteController.text)),
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Artigo')),
+                        DataCell(Text(ArtigoController.text)),
+                      ]),
+                      DataRow(cells: [
+                        const DataCell(Text('Detalhe do Artigo')),
+                        DataCell(Text(DetArtigoController.text)),
+                      ]),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
