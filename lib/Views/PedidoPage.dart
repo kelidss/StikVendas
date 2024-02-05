@@ -124,21 +124,25 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: DtPedidoController,
                   decoration: const InputDecoration(
-                    labelText: 'Data Pedido',
                     hintText: '00/00/0000',
                     border: OutlineInputBorder(),
-                    // borderSide: BorderSide()
-                    //  color: DtPedidoController.text.isEmpty
-                    //      ? Colors.red
-                    //     : Colors.grey,
-                    //   ),
-                    //),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    labelText: 'Data Pedido',
                   ),
-                  //  validator: (DtPedidoController)=> DtPedidoController!.isEmpty ?,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error ?? Colors.orange,
+                    letterSpacing: 5,
+                  ),
                   inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
                   keyboardType: TextInputType.datetime,
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return 'Campo obrigatório';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
@@ -192,6 +196,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     labelText: 'Tipo de Documento',
                     border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
@@ -409,6 +414,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     hintText: '0,0',
                     labelText: 'Preço Efetivo',
                     border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                   ),
