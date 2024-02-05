@@ -37,11 +37,10 @@ class _PedidoPageState extends State<PedidoPage> {
         DtEntregaController.text.isNotEmpty &&
         VendedorController.text.isNotEmpty &&
         ClienteController.text.isNotEmpty;
-    // &&
-    // TpDocumentoController.text.isNotEmpty &&
-    //  TipoCobracaController.text.isNotEmpty &&
-    // FormaPgtoController.text.isNotEmpty &&
-    //  FreteController.text.isNotEmpty;
+    //&&
+    //  TpDocumentoController.text.isNotEmpty &&
+    // TipoCobracaController.text.isNotEmpty &&
+    //  FormaPgtoController.text.isNotEmpty;
   }
 
   _avancarParaProximaPagina1() {
@@ -51,7 +50,7 @@ class _PedidoPageState extends State<PedidoPage> {
         curve: Curves.easeInOut,
       );
     } else {
-      /* AwesomeDialog(
+      AwesomeDialog(
         context: context,
         dialogType: DialogType.warning,
         animType: AnimType.scale,
@@ -60,15 +59,13 @@ class _PedidoPageState extends State<PedidoPage> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const PedidoPage()));
         },
-      ).show();*/
+      ).show();
     }
   }
 
   _todosCamposPreenchidos2() {
-    return
-        //ArtigoController.text.isNotEmpty &&
-        // DetArtigoController.text.isNotEmpty &&
-
+    return //ArtigoController.text.isNotEmpty &&
+        //   DetArtigoController.text.isNotEmpty &&
         UndController.text.isNotEmpty &&
             QtdController.text.isNotEmpty &&
             VrBaseController.text.isNotEmpty &&
@@ -83,22 +80,26 @@ class _PedidoPageState extends State<PedidoPage> {
         curve: Curves.easeInOut,
       );
     } else {
-      /* AwesomeDialog(
-       context: context,
+      AwesomeDialog(
+        context: context,
         dialogType: DialogType.warning,
-       animType: AnimType.scale,
+        animType: AnimType.scale,
         title: 'Preencha todos os campos',
         btnOkOnPress: () {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const PedidoPage()));
         },
-      ).show();*/
+      ).show();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // floatingActionButton: FloatingActionButton(
+      // backgroundColor: Colors.green,
+      // onPressed: () {},
+      //    ),
       appBar: AppBar(
         // appBar: PreferredSize(
         // preferredSize: Size.fromHeight(80),
@@ -113,7 +114,7 @@ class _PedidoPageState extends State<PedidoPage> {
         backgroundColor: const Color(0xFFD52B1E),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(20.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
@@ -130,26 +131,29 @@ class _PedidoPageState extends State<PedidoPage> {
                       child: TextFormField(
                         controller: DtPedidoController,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.calendar_month),
-                          hintText: '00/00/0000',
-                          border: const OutlineInputBorder(),
-                          isDense: true,
-                        labelText: 'Data Pedido',
-                 //       errorText: DtPedidoController.text.isEmpty ? 'campo obrigatorio' : null, 
-                    //    errorBorder: OutlineInputBorder(
-                         // borderSide: BorderSide(color: Colors.red)
-                        //)
+                            prefixIcon: const Icon(Icons.calendar_month),
+                            hintText: '00/00/0000',
+                            border: const OutlineInputBorder(),
+                            isDense: false,
+                            labelText: 'Data Pedido',
+
+                            //       errorText: DtPedidoController.text.isEmpty ? 'campo obrigatorio' : null,
+                            //    errorBorder: OutlineInputBorder(
+                            // borderSide: BorderSide(color: Colors.red)
+                            //)
                             floatingLabelStyle:
-                              MaterialStateTextStyle.resolveWith(
-                            (Set<MaterialState> states) {
-                              final Color color =
-                                  states.contains(MaterialState.error)
-                                      ? Theme.of(context).colorScheme.error
-                                      : Colors.green;
-                              return TextStyle(color: color, letterSpacing: 1);
-                            },
-                          ),
-                        ),
+                                MaterialStateTextStyle.resolveWith(
+                              (Set<MaterialState> states) {
+                                final Color color =
+                                    states.contains(MaterialState.error)
+                                        ? Theme.of(context).colorScheme.error
+                                        : Colors.green;
+                                return TextStyle(
+                                    color: color, letterSpacing: 1);
+                              },
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20)),
                         inputFormatters: [
                           MaskTextInputFormatter(mask: '##/##/####')
                         ],
@@ -158,33 +162,35 @@ class _PedidoPageState extends State<PedidoPage> {
                           if (value == null || value == '') {
                             return '';
                           }
-                          return null;
+                          //  return null;
                         },
                         autovalidateMode: AutovalidateMode.always,
                       ),
                     ),
-                
-                    const SizedBox(width: 20), // Espaçamento entre os campos
+
+                    const SizedBox(width: 8), // Espaçamento entre os campos
                     Expanded(
                       child: TextFormField(
                         controller: DtEntregaController,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.calendar_month),
-                          hintText: '00/00/0000',
-                          border: const OutlineInputBorder(),
-                          isDense: true,
-                          labelText: 'Data Entrega',
-                          floatingLabelStyle:
-                              MaterialStateTextStyle.resolveWith(
-                            (Set<MaterialState> states) {
-                              final Color color =
-                                  states.contains(MaterialState.error)
-                                      ? Theme.of(context).colorScheme.error
-                                      : Colors.green;
-                              return TextStyle(color: color, letterSpacing: 1);
-                            },
-                          ),
-                        ),
+                            prefixIcon: const Icon(Icons.calendar_month),
+                            hintText: '00/00/0000',
+                            border: const OutlineInputBorder(),
+                            isDense: false,
+                            labelText: 'Data Entrega',
+                            floatingLabelStyle:
+                                MaterialStateTextStyle.resolveWith(
+                              (Set<MaterialState> states) {
+                                final Color color =
+                                    states.contains(MaterialState.error)
+                                        ? Theme.of(context).colorScheme.error
+                                        : Colors.green;
+                                return TextStyle(
+                                    color: color, letterSpacing: 1);
+                              },
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20)),
                         inputFormatters: [
                           MaskTextInputFormatter(mask: '##/##/####')
                         ],
@@ -193,7 +199,7 @@ class _PedidoPageState extends State<PedidoPage> {
                           if (value == null || value == '') {
                             return '';
                           }
-                       //   return null;
+                          //   return null;
                         },
                         autovalidateMode: AutovalidateMode.always,
                       ),
@@ -206,7 +212,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.people),
                       border: const OutlineInputBorder(),
-                      isDense: true,
+                      isDense: false,
                       labelText: 'Vendedor',
                       floatingLabelStyle: MaterialStateTextStyle.resolveWith(
                           (Set<MaterialState> states) {
@@ -214,12 +220,14 @@ class _PedidoPageState extends State<PedidoPage> {
                             ? Theme.of(context).colorScheme.error
                             : Colors.green;
                         return TextStyle(color: color, letterSpacing: 1);
-                      })),
+                      }),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   validator: (String? value) {
                     if (value == null || value == '') {
                       return '';
                     }
-                    return null;
+                    //  return null;
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
@@ -227,19 +235,21 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: ClienteController,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.people),
-                    border: const OutlineInputBorder(),
-                    isDense: true,
-                    labelText: 'Cliente',
-                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                      (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      },
-                    ),
-                  ),
+                      prefixIcon: const Icon(Icons.people),
+                      border: const OutlineInputBorder(),
+                      isDense: false,
+                      labelText: 'Cliente',
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                        (Set<MaterialState> states) {
+                          final Color color =
+                              states.contains(MaterialState.error)
+                                  ? Theme.of(context).colorScheme.error
+                                  : Colors.green;
+                          return TextStyle(color: color, letterSpacing: 1);
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   validator: (String? value) {
                     if (value == null || value == '') {
                       return '';
@@ -267,21 +277,23 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.list),
-                    border: const OutlineInputBorder(),
-                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
-                    isDense: true,
-                    // floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    labelText: 'Tipo de Documento',
-                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                      (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      },
-                    ),
-                  ),
+                      prefixIcon: const Icon(Icons.list),
+                      border: const OutlineInputBorder(),
+                      //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                      isDense: false,
+                      // floatingLabelBehavior: FloatingLabelBehavior.auto,
+                      labelText: 'Tipo de Documento',
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                        (Set<MaterialState> states) {
+                          final Color color =
+                              states.contains(MaterialState.error)
+                                  ? Theme.of(context).colorScheme.error
+                                  : Colors.green;
+                          return TextStyle(color: color, letterSpacing: 1);
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   validator: (String? value) {
                     if (value == null || value == '') {
                       return '';
@@ -312,7 +324,7 @@ class _PedidoPageState extends State<PedidoPage> {
                       prefixIcon: const Icon(Icons.list),
                       border:
                           const OutlineInputBorder(borderSide: BorderSide()),
-                      isDense: true,
+                      isDense: false,
                       labelText: 'Tipo de Cobrança',
                       floatingLabelStyle: MaterialStateTextStyle.resolveWith(
                           (Set<MaterialState> states) {
@@ -320,7 +332,9 @@ class _PedidoPageState extends State<PedidoPage> {
                             ? Theme.of(context).colorScheme.error
                             : Colors.green;
                         return TextStyle(color: color, letterSpacing: 1);
-                      })),
+                      }),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   validator: (String? value) {
                     if (value == null || value == '') {
                       return '';
@@ -350,7 +364,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.monetization_on),
                       border: const OutlineInputBorder(),
-                      isDense: true,
+                      isDense: false,
                       labelText: 'Forma de pagamento',
                       floatingLabelStyle: MaterialStateTextStyle.resolveWith(
                           (Set<MaterialState> states) {
@@ -358,7 +372,9 @@ class _PedidoPageState extends State<PedidoPage> {
                             ? Theme.of(context).colorScheme.error
                             : Colors.green;
                         return TextStyle(color: color, letterSpacing: 1);
-                      })),
+                      }),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   validator: (String? value) {
                     if (value == null || value == '') {
                       return '';
@@ -371,25 +387,27 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: FreteController,
                   decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.delivery_dining),
-                    labelText: 'Frete',
-                    hintText: 'não obrigatório',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
+                      prefixIcon: Icon(Icons.delivery_dining),
+                      labelText: 'Frete',
+                      hintText: 'não obrigatório',
+                      border: OutlineInputBorder(),
+                      isDense: false,
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 50)),
                 ),
-                const SizedBox(height: 55),
+                const SizedBox(height: 70),
                 TextFormField(
                   controller: ObservacaoController,
                   decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.pageview),
-                    labelText: 'Observação',
-                    hintText: 'não obrigatório',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
+                      prefixIcon: Icon(Icons.pageview),
+                      labelText: 'Observação',
+                      hintText: 'não obrigatório',
+                      border: OutlineInputBorder(),
+                      isDense: false,
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
                 ),
                 const SizedBox(height: 55),
                 Expanded(
@@ -446,7 +464,9 @@ class _PedidoPageState extends State<PedidoPage> {
                             ? Theme.of(context).colorScheme.error
                             : Colors.green;
                         return TextStyle(color: color, letterSpacing: 1);
-                      })),
+                      }),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   validator: (String? value) {
                     if (value == null || value == '') {
                       return '';
@@ -484,7 +504,9 @@ class _PedidoPageState extends State<PedidoPage> {
                             ? Theme.of(context).colorScheme.error
                             : Colors.green;
                         return TextStyle(color: color, letterSpacing: 1);
-                      })),
+                      }),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   validator: (String? value) {
                     if (value == null || value == '') {
                       return '';
@@ -507,7 +529,9 @@ class _PedidoPageState extends State<PedidoPage> {
                             ? Theme.of(context).colorScheme.error
                             : Colors.green;
                         return TextStyle(color: color, letterSpacing: 1);
-                      })),
+                      }),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
                     if (value == null || value == '') {
@@ -521,19 +545,21 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: QtdController,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.list_alt),
-                    labelText: 'Quantidade',
-                    border: const OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                      (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      },
-                    ),
-                  ),
+                      prefixIcon: const Icon(Icons.list_alt),
+                      labelText: 'Quantidade',
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                        (Set<MaterialState> states) {
+                          final Color color =
+                              states.contains(MaterialState.error)
+                                  ? Theme.of(context).colorScheme.error
+                                  : Colors.green;
+                          return TextStyle(color: color, letterSpacing: 1);
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
@@ -551,7 +577,6 @@ class _PedidoPageState extends State<PedidoPage> {
                       prefixIcon: const Icon(Icons.shopping_bag),
                       labelText: 'OC Cliente',
                       border: const OutlineInputBorder(),
-                      contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 10),
                       isDense: true,
                       floatingLabelStyle: MaterialStateTextStyle.resolveWith(
                           (Set<MaterialState> states) {
@@ -559,7 +584,9 @@ class _PedidoPageState extends State<PedidoPage> {
                             ? Theme.of(context).colorScheme.error
                             : Colors.green;
                         return TextStyle(color: color, letterSpacing: 1);
-                      })),
+                      }),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   validator: (String? value) {
                     if (value == null || value == '') {
                       return '';
@@ -572,20 +599,22 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: VrBaseController,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.monetization_on),
-                    hintText: '0,0',
-                    labelText: 'Valor Base',
-                    border: const OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                      (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      },
-                    ),
-                  ),
+                      prefixIcon: const Icon(Icons.monetization_on),
+                      hintText: '0,0',
+                      labelText: 'Valor Base',
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                        (Set<MaterialState> states) {
+                          final Color color =
+                              states.contains(MaterialState.error)
+                                  ? Theme.of(context).colorScheme.error
+                                  : Colors.green;
+                          return TextStyle(color: color, letterSpacing: 1);
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
@@ -600,21 +629,22 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: PrEfetivoController,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.monetization_on),
-                    hintText: '0,0',
-                    labelText: 'Preço Efetivo',
-                    border: const OutlineInputBorder(),
-                    contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 10),
-                    isDense: true,
-                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                      (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      },
-                    ),
-                  ),
+                      prefixIcon: const Icon(Icons.monetization_on),
+                      hintText: '0,0',
+                      labelText: 'Preço Efetivo',
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                        (Set<MaterialState> states) {
+                          final Color color =
+                              states.contains(MaterialState.error)
+                                  ? Theme.of(context).colorScheme.error
+                                  : Colors.green;
+                          return TextStyle(color: color, letterSpacing: 1);
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
@@ -629,20 +659,22 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: VrBrutoController,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.monetization_on),
-                    hintText: '0,0',
-                    border: const OutlineInputBorder(),
-                    isDense: true,
-                    labelText: 'Valor Bruto',
-                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                      (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      },
-                    ),
-                  ),
+                      prefixIcon: const Icon(Icons.monetization_on),
+                      hintText: '0,0',
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      labelText: 'Valor Bruto',
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                        (Set<MaterialState> states) {
+                          final Color color =
+                              states.contains(MaterialState.error)
+                                  ? Theme.of(context).colorScheme.error
+                                  : Colors.green;
+                          return TextStyle(color: color, letterSpacing: 1);
+                        },
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
                   inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
