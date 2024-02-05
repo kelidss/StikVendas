@@ -100,6 +100,9 @@ class _PedidoPageState extends State<PedidoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // appBar: PreferredSize(
+        // preferredSize: Size.fromHeight(80),
+        //  child: AppBar,
         title: const Text(
           'Pedido',
           style: TextStyle(
@@ -110,7 +113,7 @@ class _PedidoPageState extends State<PedidoPage> {
         backgroundColor: const Color(0xFFD52B1E),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(15.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
@@ -119,57 +122,99 @@ class _PedidoPageState extends State<PedidoPage> {
             Wrap(
               children: [
                 const SizedBox(
-                  height: 55,
+                  height: 20,
                 ),
-                TextFormField(
-                  controller: DtPedidoController,
-                  decoration: const InputDecoration(
-                    hintText: '00/00/0000',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    labelText: 'Data Pedido',
-                  ),
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.error ?? Colors.orange,
-                    letterSpacing: 5,
-                  ),
-                  inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
-                  keyboardType: TextInputType.datetime,
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return 'Campo obrigatório';
-                    }
-                    return null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
-                ),
-                const SizedBox(height: 55),
-                TextFormField(
-                  controller: DtEntregaController,
-                  decoration: const InputDecoration(
-                      labelText: 'Data Entrega',
-                      hintText: '00/00/0000',
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto),
-                  inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
-                  keyboardType: TextInputType.datetime,
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: DtPedidoController,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.calendar_month),
+                          hintText: '00/00/0000',
+                          border: const OutlineInputBorder(),
+                          isDense: true,
+                          labelText: 'Data Pedido',
+                          floatingLabelStyle:
+                              MaterialStateTextStyle.resolveWith(
+                            (Set<MaterialState> states) {
+                              final Color color =
+                                  states.contains(MaterialState.error)
+                                      ? Theme.of(context).colorScheme.error
+                                      : Colors.green;
+                              return TextStyle(color: color, letterSpacing: 1);
+                            },
+                          ),
+                        ),
+                        inputFormatters: [
+                          MaskTextInputFormatter(mask: '##/##/####')
+                        ],
+                        keyboardType: TextInputType.datetime,
+                        validator: (String? value) {
+                          if (value == null || value == '') {
+                            return '';
+                          }
+                          return null;
+                        },
+                        autovalidateMode: AutovalidateMode.always,
+                      ),
+                    ),
+                    const SizedBox(width: 20), // Espaçamento entre os campos
+                    Expanded(
+                      child: TextFormField(
+                        controller: DtEntregaController,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.calendar_month),
+                          hintText: '00/00/0000',
+                          border: const OutlineInputBorder(),
+                          isDense: true,
+                          labelText: 'Data Entrega',
+                          floatingLabelStyle:
+                              MaterialStateTextStyle.resolveWith(
+                            (Set<MaterialState> states) {
+                              final Color color =
+                                  states.contains(MaterialState.error)
+                                      ? Theme.of(context).colorScheme.error
+                                      : Colors.green;
+                              return TextStyle(color: color, letterSpacing: 1);
+                            },
+                          ),
+                        ),
+                        inputFormatters: [
+                          MaskTextInputFormatter(mask: '##/##/####')
+                        ],
+                        keyboardType: TextInputType.datetime,
+                        validator: (String? value) {
+                          if (value == null || value == '') {
+                            return '';
+                          }
+                          return null;
+                        },
+                        autovalidateMode: AutovalidateMode.always,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: VendedorController,
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.people),
                     labelText: 'Vendedor',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  ),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error ?? Colors.orange,
+                    letterSpacing: 1,
                   ),
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
                     controller: ClienteController,
                     decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.people),
                       labelText: 'Cliente',
                       border: OutlineInputBorder(),
                       isDense: true,
@@ -194,6 +239,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.edit_document),
                     labelText: 'Tipo de Documento',
                     border: OutlineInputBorder(),
                     contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
@@ -220,6 +266,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.charging_station_rounded),
                     labelText: 'Tipo de Cobrança',
                     border: OutlineInputBorder(borderSide: BorderSide()),
                     isDense: true,
@@ -245,6 +292,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.monetization_on),
                     labelText: 'Forma de pagamento',
                     border: OutlineInputBorder(),
                     isDense: true,
@@ -255,6 +303,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: FreteController,
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.delivery_dining),
                     labelText: 'Frete',
                     border: OutlineInputBorder(),
                     isDense: true,
@@ -265,6 +314,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: ObservacaoController,
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.pageview),
                     labelText: 'Observação',
                     border: OutlineInputBorder(),
                     isDense: true,
@@ -280,20 +330,15 @@ class _PedidoPageState extends State<PedidoPage> {
                         onTap: () {
                           _avancarParaProximaPagina1();
                         },
-                        child: Container(
+                        child: const SizedBox(
                           width: 80,
                           height: 45,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFD52B1E),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'Itens',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
+                          // decoration: BoxDecoration(
+                          //color: const Color(0xFFD52B1E),
+                          // borderRadius: BorderRadius.circular(10),
+                          // ),
+                          child: Center(
+                            child: Icon((Icons.navigate_next)),
                           ),
                         ),
                       ),
@@ -370,6 +415,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: QtdController,
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.shopping_cart_checkout),
                     labelText: 'Quantidade',
                     border: OutlineInputBorder(),
                     isDense: true,
@@ -381,6 +427,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: OcClienteController,
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.shopping_bag),
                     labelText: 'OC Cliente',
                     border: OutlineInputBorder(),
                     contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
@@ -392,6 +439,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: VrBaseController,
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.monetization_on),
                     hintText: '0,0',
                     labelText: 'Valor Base',
                     border: OutlineInputBorder(),
@@ -411,6 +459,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: PrEfetivoController,
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.monetization_on),
                     hintText: '0,0',
                     labelText: 'Preço Efetivo',
                     border: OutlineInputBorder(),
@@ -425,6 +474,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 TextFormField(
                   controller: VrBrutoController,
                   decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.monetization_on),
                     hintText: '0,0',
                     labelText: 'Valor Bruto',
                     border: OutlineInputBorder(),
@@ -442,7 +492,7 @@ class _PedidoPageState extends State<PedidoPage> {
                       InkWell(
                         onTap: () {
                           // Limpando os campos ao clicar em "Voltar"
-                          /*    DtPedidoController.clear();
+                          DtPedidoController.clear();
                           DtEntregaController.clear();
                           VendedorController.clear();
                           ClienteController.clear();
@@ -453,25 +503,16 @@ class _PedidoPageState extends State<PedidoPage> {
                           OcClienteController.clear();
                           VrBaseController.clear();
                           PrEfetivoController.clear();
-                          VrBrutoController.clear();*/
+                          VrBrutoController.clear();
 
                           // Navegação de volta para a HomePage
                           Navigator.pop(context);
                         },
-                        child: Container(
+                        child: const SizedBox(
                           width: 100,
                           height: 50,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFD52B1E),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'Voltar',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
+                          child: Center(
+                            child: Icon(Icons.navigate_before),
                           ),
                         ),
                       ),
@@ -511,21 +552,10 @@ class _PedidoPageState extends State<PedidoPage> {
                             ).show();
                           }
                         },
-                        child: Container(
+                        child: const SizedBox(
                           width: 100,
                           height: 50,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFD52B1E),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'Gravar',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          child: Center(child: Icon(Icons.navigate_next)),
                         ),
                       ),
                       const SizedBox(width: 10),
