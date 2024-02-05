@@ -130,12 +130,16 @@ class _PedidoPageState extends State<PedidoPage> {
                       child: TextFormField(
                         controller: DtPedidoController,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.calendar_month),
+                          prefixIcon: Icon(Icons.calendar_month),
                           hintText: '00/00/0000',
                           border: const OutlineInputBorder(),
                           isDense: true,
-                          labelText: 'Data Pedido',
-                          floatingLabelStyle:
+                        labelText: 'Data Pedido',
+                 //       errorText: DtPedidoController.text.isEmpty ? 'campo obrigatorio' : null, 
+                    //    errorBorder: OutlineInputBorder(
+                         // borderSide: BorderSide(color: Colors.red)
+                        //)
+                            floatingLabelStyle:
                               MaterialStateTextStyle.resolveWith(
                             (Set<MaterialState> states) {
                               final Color color =
@@ -159,6 +163,7 @@ class _PedidoPageState extends State<PedidoPage> {
                         autovalidateMode: AutovalidateMode.always,
                       ),
                     ),
+                
                     const SizedBox(width: 20), // Espaçamento entre os campos
                     Expanded(
                       child: TextFormField(
@@ -188,7 +193,7 @@ class _PedidoPageState extends State<PedidoPage> {
                           if (value == null || value == '') {
                             return '';
                           }
-                          return null;
+                       //   return null;
                         },
                         autovalidateMode: AutovalidateMode.always,
                       ),
@@ -198,28 +203,51 @@ class _PedidoPageState extends State<PedidoPage> {
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: VendedorController,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.people),
-                    labelText: 'Vendedor',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.error ?? Colors.orange,
-                    letterSpacing: 1,
-                  ),
+                  decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.people),
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      labelText: 'Vendedor',
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                          (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      })),
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
-                    controller: ClienteController,
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.people),
-                      labelText: 'Cliente',
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    )),
+                  controller: ClienteController,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.people),
+                    border: const OutlineInputBorder(),
+                    isDense: true,
+                    labelText: 'Cliente',
+                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                      (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      },
+                    ),
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
+                ),
                 const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedTipoDocumento,
@@ -238,14 +266,29 @@ class _PedidoPageState extends State<PedidoPage> {
                       child: Text('CPF'),
                     ),
                   ],
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.edit_document),
-                    labelText: 'Tipo de Documento',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.list),
+                    border: const OutlineInputBorder(),
+                    //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    // floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    labelText: 'Tipo de Documento',
+                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                      (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      },
+                    ),
                   ),
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
@@ -265,13 +308,26 @@ class _PedidoPageState extends State<PedidoPage> {
                       child: Text('Opção 2'),
                     ),
                   ],
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.charging_station_rounded),
-                    labelText: 'Tipo de Cobrança',
-                    border: OutlineInputBorder(borderSide: BorderSide()),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
+                  decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.list),
+                      border:
+                          const OutlineInputBorder(borderSide: BorderSide()),
+                      isDense: true,
+                      labelText: 'Tipo de Cobrança',
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                          (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      })),
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
@@ -291,13 +347,25 @@ class _PedidoPageState extends State<PedidoPage> {
                       child: Text('PIX'),
                     ),
                   ],
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.monetization_on),
-                    labelText: 'Forma de pagamento',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
+                  decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.monetization_on),
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      labelText: 'Forma de pagamento',
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                          (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      })),
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
@@ -305,6 +373,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.delivery_dining),
                     labelText: 'Frete',
+                    hintText: 'não obrigatório',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -316,6 +385,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.pageview),
                     labelText: 'Observação',
+                    hintText: 'não obrigatório',
                     border: OutlineInputBorder(),
                     isDense: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -333,10 +403,6 @@ class _PedidoPageState extends State<PedidoPage> {
                         child: const SizedBox(
                           width: 80,
                           height: 45,
-                          // decoration: BoxDecoration(
-                          //color: const Color(0xFFD52B1E),
-                          // borderRadius: BorderRadius.circular(10),
-                          // ),
                           child: Center(
                             child: Icon((Icons.navigate_next)),
                           ),
@@ -369,12 +435,25 @@ class _PedidoPageState extends State<PedidoPage> {
                       child: Text('teste2'),
                     ),
                   ],
-                  decoration: const InputDecoration(
-                    labelText: 'Artigo',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
+                  decoration: InputDecoration(
+                      labelText: 'Artigo',
+                      prefixIcon: const Icon(Icons.note),
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                          (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      })),
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 10),
                 DropdownButtonFormField<String>(
@@ -394,95 +473,185 @@ class _PedidoPageState extends State<PedidoPage> {
                       child: Text('teste4'),
                     ),
                   ],
-                  decoration: const InputDecoration(
-                    labelText: 'Detalhe do artigo',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
+                  decoration: InputDecoration(
+                      labelText: 'Detalhe do artigo',
+                      prefixIcon: const Icon(Icons.note),
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                          (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      })),
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: UndController,
-                  decoration: const InputDecoration(
-                    labelText: 'Unidade',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
+                  decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.list_alt),
+                      labelText: 'Unidade',
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                          (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      })),
+                  keyboardType: TextInputType.number,
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: QtdController,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.shopping_cart_checkout),
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.list_alt),
                     labelText: 'Quantidade',
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                      (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      },
+                    ),
                   ),
+                  inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
                   keyboardType: TextInputType.number,
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: OcClienteController,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.shopping_bag),
-                    labelText: 'OC Cliente',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
-                    isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  ),
+                  decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.shopping_bag),
+                      labelText: 'OC Cliente',
+                      border: const OutlineInputBorder(),
+                      contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 10),
+                      isDense: true,
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                          (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      })),
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: VrBaseController,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.monetization_on),
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.monetization_on),
                     hintText: '0,0',
                     labelText: 'Valor Base',
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                      (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      },
+                    ),
                   ),
-
-                  keyboardType: const TextInputType.numberWithOptions(
-                    decimal: true,
-                    signed: false,
-                  ),
-                  //  inputFormatters:[
-                  // FilteringTextInputFormatter.allow(RegExp(r'^d\+\\.?\d{0,1}'))
-                  // ],
+                  inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
+                  keyboardType: TextInputType.number,
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: PrEfetivoController,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.monetization_on),
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.monetization_on),
                     hintText: '0,0',
                     labelText: 'Preço Efetivo',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
+                    border: const OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.fromLTRB(12, 20, 12, 10),
                     isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                      (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      },
+                    ),
                   ),
-                  inputFormatters: [MaskTextInputFormatter(mask: '#,###0.00')],
+                  inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
                   keyboardType: TextInputType.number,
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: VrBrutoController,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.monetization_on),
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.monetization_on),
                     hintText: '0,0',
-                    labelText: 'Valor Bruto',
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     isDense: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    labelText: 'Valor Bruto',
+                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                      (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      },
+                    ),
                   ),
                   inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.number,
+                  validator: (String? value) {
+                    if (value == null || value == '') {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 Expanded(
@@ -546,8 +715,7 @@ class _PedidoPageState extends State<PedidoPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PedidoPage()));
+                                        builder: (context) => HomePage()));
                               },
                             ).show();
                           }
@@ -567,39 +735,7 @@ class _PedidoPageState extends State<PedidoPage> {
             //    ],
             //   ),
             // resumo do pedido
-            /*  Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DataTable(
-                    columns: const [
-                      DataColumn(label: Text('Campo')),
-                      DataColumn(label: Text('Valor')),
-                    ],
-                    rows: [
-                      DataRow(cells: [
-                        const DataCell(Text('DtPedido')),
-                        DataCell(Text(DtPedidoController.text)),
-                      ]),
-                      DataRow(cells: [
-                        const DataCell(Text('Cliente')),
-                        DataCell(Text(ClienteController.text)),
-                      ]),
-                      DataRow(cells: [
-                        const DataCell(Text('Artigo')),
-                        DataCell(Text(ArtigoController.text)),
-                      ]),
-                      DataRow(cells: [
-                        const DataCell(Text('Detalhe do Artigo')),
-                        DataCell(Text(DetArtigoController.text)),
-                      ]),
-                    ],
-                  ),
-                ],
-              ),
-            ),*/
+            /*  */
           ],
         ),
       ),
