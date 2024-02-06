@@ -23,12 +23,12 @@ class MyApp extends StatelessWidget {
       initialRoute: 
       '/', // Rota inicial
       routes: {
-        '/': (context) => HomePage(), // Página inicial
+        '/': (context) => const LoginPage(), // Página inicial
         '/feeds': (context) => FeedsPage(),
         '/estoque': (context) => const EstoquePage(),
         '/faturamento': (context) => const FaturamentoPage(),
         // '/login': (context) => LoginPage(),
-        //'/home': (context) => HomePage(),
+        '/home': (context) => HomePage(),
       },
     );
   }

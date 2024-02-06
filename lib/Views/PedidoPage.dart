@@ -114,7 +114,7 @@ class _PedidoPageState extends State<PedidoPage> {
         backgroundColor: const Color(0xFFD52B1E),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
@@ -122,8 +122,15 @@ class _PedidoPageState extends State<PedidoPage> {
             // pagina 1
             Wrap(
               children: [
+                const Text(
+                  'Boas Vendas',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 0.5,
+                  ),
+                ),
                 const SizedBox(
-                  height: 20,
+                  height: 4,
                 ),
                 Row(
                   children: [
@@ -135,8 +142,8 @@ class _PedidoPageState extends State<PedidoPage> {
                             hintText: '00/00/0000',
                             border: const OutlineInputBorder(),
                             isDense: false,
+                            //    enabled: true,
                             labelText: 'Data Pedido',
-
                             //       errorText: DtPedidoController.text.isEmpty ? 'campo obrigatorio' : null,
                             //    errorBorder: OutlineInputBorder(
                             // borderSide: BorderSide(color: Colors.red)
@@ -227,7 +234,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     if (value == null || value == '') {
                       return '';
                     }
-                    //  return null;
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
@@ -322,8 +328,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   ],
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.list),
-                      border:
-                          const OutlineInputBorder(borderSide: BorderSide()),
+                      border: OutlineInputBorder(borderSide: BorderSide()),
                       isDense: false,
                       labelText: 'Tipo de Cobrança',
                       floatingLabelStyle: MaterialStateTextStyle.resolveWith(
@@ -339,7 +344,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     if (value == null || value == '') {
                       return '';
                     }
-                    return null;
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
@@ -379,7 +383,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     if (value == null || value == '') {
                       return '';
                     }
-                    return null;
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
@@ -421,11 +424,15 @@ class _PedidoPageState extends State<PedidoPage> {
                         child: const SizedBox(
                           width: 80,
                           height: 45,
-                          child: Center(
-                            child: Icon((Icons.navigate_next)),
-                          ),
-                        ),
-                      ),
+                          child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [Icon(Icons.navigate_next,
+                      // size:18
+                       ),SizedBox(height:1), 
+                      Text('Avançar')]))),
+                        ///  ),
+                       // ),
+                     // ),
                     ],
                   ),
                 ),
@@ -433,9 +440,17 @@ class _PedidoPageState extends State<PedidoPage> {
             ),
             Wrap(
               children: [
-                const SizedBox(
-                  height: 55,
+                const Text(
+                  'Boas Vendas',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 0.5,
+                  ),
                 ),
+                const SizedBox(
+                  height: 4,
+                ),
+                const SizedBox(height: 1),
                 DropdownButtonFormField<String>(
                   value: _selectedArtigo,
                   onChanged: (value) {
@@ -475,7 +490,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedDetalheDoArtigo,
                   onChanged: (newValue) {
@@ -651,7 +666,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     if (value == null || value == '') {
                       return '';
                     }
-                    return null;
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
@@ -681,7 +695,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     if (value == null || value == '') {
                       return '';
                     }
-                    return null;
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
@@ -712,8 +725,12 @@ class _PedidoPageState extends State<PedidoPage> {
                         child: const SizedBox(
                           width: 100,
                           height: 50,
-                          child: Center(
-                            child: Icon(Icons.navigate_before),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [Icon(Icons.navigate_before),
+                            SizedBox(height: 1,),
+                            Text('Voltar')
+                            ],
                           ),
                         ),
                       ),
@@ -755,9 +772,14 @@ class _PedidoPageState extends State<PedidoPage> {
                         child: const SizedBox(
                           width: 100,
                           height: 50,
-                          child: Center(child: Icon(Icons.navigate_next)),
-                        ),
-                      ),
+                         child: Column(
+                 //     mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Icon(Icons.navigate_next,
+                      // size:18
+                       ),SizedBox(height:1), 
+                      Text('Gravar')]))),
+                     //   ),
+                    //  ),
                       const SizedBox(width: 10),
                     ],
                   ),
