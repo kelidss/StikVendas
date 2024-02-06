@@ -1,14 +1,12 @@
 import 'dart:math';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
-
 class EstoquePage extends StatefulWidget {
   const EstoquePage({Key? key}) : super(key: key);
-
   @override
   State<EstoquePage> createState() => _EstoquePageState();
 }
@@ -23,7 +21,31 @@ class _EstoquePageState extends State<EstoquePage> {
       'quantidade estoque': Random().nextInt(100000),
     },
   );
-
+  
+  final TextEditingController _searchController = TextEditingController();
+  
+  //Inicializa Função vazia
+  List<Map<String, dynamic>> _filteredData = [];
+  @override
+  void initState() {
+  super.initState();
+  _filteredData = List.from(_data);
+}
+  //Função para filtrar os dados com base no texto digitado
+  void _filterData(String searchTerm) {
+    searchTerm = searchTerm.toLowerCase();
+    setState(() {
+      _filteredData = _data
+          .where((item) =>
+              item['ID'].toString().toLowerCase().contains(searchTerm) ||
+              item['Title'].toString().toLowerCase().contains(searchTerm) ||
+              item['quantidade estoque']
+                  .toString()
+                  .toLowerCase()
+                  .contains(searchTerm))
+          .toList();
+    });
+  }
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -44,29 +66,22 @@ class _EstoquePageState extends State<EstoquePage> {
         ),
         body: ListView(
           children: [
+            TextField(
+              controller: _searchController,
+              onChanged: _filterData,
+              decoration: const InputDecoration(
+                labelText: 'Procurar...',
+                suffixIcon: Icon(Icons.search),
+              ),
+            ),
             PaginatedDataTable(
-              source: _EstoqueDataSource(_data),
+              source: _EstoqueDataSource(_filteredData),
               columns: const [
                 DataColumn(label: Text('COD')),
                 DataColumn(label: Text('Descrição')),
                 DataColumn(label: Text('Estoque')),
               ],
-              header: const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Procurar...', suffixIcon: Icon(Icons.search),
-                  //  hintText: ('teste')
-                ),
-              ),
-              // Center(
-              // child: Text(
-              //   'Posição de estoque',
-              // style: TextStyle(
-              //  fontWeight: FontWeight.bold,
-              //   color: Colors.black87,
-              //    fontSize: 18,
-              //   ),
-              //  ),
-              //   ),
+              header: const Text('Posição de Estoque'),
               columnSpacing: 30,
               horizontalMargin: 10,
               rowsPerPage: 10,
@@ -116,7 +131,6 @@ class _EstoquePageState extends State<EstoquePage> {
         ),
       );
 }
-
 class _EstoqueDataSource extends DataTableSource {
   final List<Map<String, dynamic>> _data;
 

@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -50,60 +51,116 @@ class _PedidoPageState extends State<PedidoPage> {
         curve: Curves.easeInOut,
       );
     } else {
-      AwesomeDialog(
+      showDialog( 
         context: context,
-        dialogType: DialogType.warning,
-        animType: AnimType.scale,
-        title: 'Preencha todos os campos',
-        btnOkOnPress: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PedidoPage()));
+        builder: (BuildContext context) { 
+          // retorna um objeto do tipo Dialog
+          return AlertDialog(
+            title: const Text("Atenção"),
+            content: 
+              Text("Campos obigatórios vazios", textAlign: TextAlign.center,),
+            shadowColor: Colors.red,
+            icon: (Icon(Icons.error)),
+            actions: <Widget>[
+              InkWell(
+                child: 
+                Text("Fechar"),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
         },
-      ).show();
+      );
+      //  AwesomeDialog(
+      //   context: context,
+      //  dialogType: DialogType.warning,
+      //  animType: AnimType.scale,
+      //  title: 'Preencha todos os campos',
+      // btnOkOnPress: () {
+      //   Navigator.push(context,
+      //    MaterialPageRoute(builder: (context) => const PedidoPage()));
+      // },
+      // ).show();
     }
   }
 
-  _todosCamposPreenchidos2() {
+  todosCamposPreenchidos2() {
     return //ArtigoController.text.isNotEmpty &&
         //   DetArtigoController.text.isNotEmpty &&
-        UndController.text.isNotEmpty &&
+            UndController.text.isNotEmpty &&
             QtdController.text.isNotEmpty &&
             VrBaseController.text.isNotEmpty &&
             PrEfetivoController.text.isNotEmpty &&
             VrBrutoController.text.isNotEmpty;
   }
 
-  _avancarParaProximaPagina2() {
-    if (_todosCamposPreenchidos2()) {
+      avancarParaProximaPagina2() {
+    if (todosCamposPreenchidos2()) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 100),
         curve: Curves.easeInOut,
       );
     } else {
-      AwesomeDialog(
+      showDialog( 
         context: context,
-        dialogType: DialogType.warning,
-        animType: AnimType.scale,
-        title: 'Preencha todos os campos',
-        btnOkOnPress: () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const PedidoPage()));
+        builder: (BuildContext context) { 
+          // retorna um objeto do tipo Dialog
+          return AlertDialog(
+            title: const Text("Atenção"),
+            content: 
+              Text("Campos obigatórios vazios", textAlign: TextAlign.center,),
+            shadowColor: Colors.red,
+            icon: (Icon(Icons.error)),
+            actions: <Widget>[
+              InkWell(
+                child: 
+                Text("Fechar"),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
         },
-      ).show();
+      );
+      //  showDialog(
+      //context: context,
+      //  builder: (BuildContext context) {
+      // retorna um objeto do tipo Dialog
+      //  return AlertDialog(
+      // title: new Text("teste"),
+      //   content: new Text("teste teste"),
+      //actions: <Widget>[
+      // define os botões na base do dialogo
+      // InkWell(
+      //child: new Text("Fechar"),
+      //onPressed: () {
+      //    Navigator.of(context).pop();
+      //  },
+      //  ),
+      //  ],
+      // );
+      //},
+      //);
+      //  AwesomeDialog(
+      //  context: context,
+      // dialogType: DialogType.warning,
+      // animType: AnimType.scale,
+      // title: 'Preencha todos os campos',
+      // btnOkOnPress: () {
+      //  Navigator.pushReplacement(context,
+      //    MaterialPageRoute(builder: (context) => const PedidoPage()));
+      // },
+      //  ).show();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      // backgroundColor: Colors.green,
-      // onPressed: () {},
-      //    ),
       appBar: AppBar(
-        // appBar: PreferredSize(
-        // preferredSize: Size.fromHeight(80),
-        //  child: AppBar,
         title: const Text(
           'Pedido',
           style: TextStyle(
@@ -142,12 +199,7 @@ class _PedidoPageState extends State<PedidoPage> {
                             hintText: '00/00/0000',
                             border: const OutlineInputBorder(),
                             isDense: false,
-                            //    enabled: true,
                             labelText: 'Data Pedido',
-                            //       errorText: DtPedidoController.text.isEmpty ? 'campo obrigatorio' : null,
-                            //    errorBorder: OutlineInputBorder(
-                            // borderSide: BorderSide(color: Colors.red)
-                            //)
                             floatingLabelStyle:
                                 MaterialStateTextStyle.resolveWith(
                               (Set<MaterialState> states) {
@@ -169,13 +221,11 @@ class _PedidoPageState extends State<PedidoPage> {
                           if (value == null || value == '') {
                             return '';
                           }
-                          //  return null;
                         },
                         autovalidateMode: AutovalidateMode.always,
                       ),
                     ),
-
-                    const SizedBox(width: 8), // Espaçamento entre os campos
+                    const SizedBox(width: 8),
                     Expanded(
                       child: TextFormField(
                         controller: DtEntregaController,
@@ -206,7 +256,6 @@ class _PedidoPageState extends State<PedidoPage> {
                           if (value == null || value == '') {
                             return '';
                           }
-                          //   return null;
                         },
                         autovalidateMode: AutovalidateMode.always,
                       ),
@@ -285,9 +334,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.list),
                       border: const OutlineInputBorder(),
-                      //  contentPadding: EdgeInsets.fromLTRB(12, 20, 12, 10),
                       isDense: false,
-                      // floatingLabelBehavior: FloatingLabelBehavior.auto,
                       labelText: 'Tipo de Documento',
                       floatingLabelStyle: MaterialStateTextStyle.resolveWith(
                         (Set<MaterialState> states) {
@@ -418,21 +465,22 @@ class _PedidoPageState extends State<PedidoPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       InkWell(
-                        onTap: () {
-                          _avancarParaProximaPagina1();
-                        },
-                        child: const SizedBox(
-                          width: 80,
-                          height: 45,
-                          child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [Icon(Icons.navigate_next,
-                      // size:18
-                       ),SizedBox(height:1), 
-                      Text('Avançar')]))),
-                        ///  ),
-                       // ),
-                     // ),
+                          onTap: () {
+                            _avancarParaProximaPagina1();
+                          },
+                          child: const SizedBox(
+                              width: 80,
+                              height: 45,
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.navigate_next,
+                                      // size:18
+                                    ),
+                                    SizedBox(height: 1),
+                                    Text('Avançar')
+                                  ]))),
                     ],
                   ),
                 ),
@@ -630,13 +678,12 @@ class _PedidoPageState extends State<PedidoPage> {
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20)),
-                  inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
+                  inputFormatters: [MaskTextInputFormatter(mask: '#.####,##')],
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
                     if (value == null || value == '') {
                       return '';
                     }
-                    return null;
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
@@ -660,7 +707,7 @@ class _PedidoPageState extends State<PedidoPage> {
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20)),
-                  inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
+                  inputFormatters: [MaskTextInputFormatter(mask: '#.####,##')],
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
                     if (value == null || value == '') {
@@ -689,7 +736,7 @@ class _PedidoPageState extends State<PedidoPage> {
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20)),
-                  inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
+                  inputFormatters: [MaskTextInputFormatter(mask: '#.####,##')],
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
                     if (value == null || value == '') {
@@ -718,7 +765,6 @@ class _PedidoPageState extends State<PedidoPage> {
                           VrBaseController.clear();
                           PrEfetivoController.clear();
                           VrBrutoController.clear();
-
                           // Navegação de volta para a HomePage
                           Navigator.pop(context);
                         },
@@ -727,59 +773,54 @@ class _PedidoPageState extends State<PedidoPage> {
                           height: 50,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [Icon(Icons.navigate_before),
-                            SizedBox(height: 1,),
-                            Text('Voltar')
+                            children: [
+                              Icon(Icons.navigate_before),
+                              SizedBox(height: 1),
+                              Text('Voltar')
                             ],
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 55,
-                        width: 30,
-                      ),
+                      const SizedBox(height: 55, width: 30),
                       InkWell(
-                        onTap: () {
-                          {
-                            // Limpar todos os campos antes de exibir o diálogo
-                            DtPedidoController.clear();
-                            DtEntregaController.clear();
-                            VendedorController.clear();
-                            ClienteController.clear();
-                            FreteController.clear();
-                            ObservacaoController.clear();
-                            UndController.clear();
-                            QtdController.clear();
-                            OcClienteController.clear();
-                            VrBaseController.clear();
-                            PrEfetivoController.clear();
-                            VrBrutoController.clear();
-                            //if (_avancarParaProximaPagina2()) {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.success,
-                              animType: AnimType.scale,
-                              title: 'Gravado com sucesso',
-                              btnOkOnPress: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()));
-                              },
-                            ).show();
-                          }
-                        },
-                        child: const SizedBox(
-                          width: 100,
-                          height: 50,
-                         child: Column(
-                 //     mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Icon(Icons.navigate_next,
-                      // size:18
-                       ),SizedBox(height:1), 
-                      Text('Gravar')]))),
-                     //   ),
-                    //  ),
+                          onTap: () {
+                            {
+                              // Limpar todos os campos antes de exibir o diálogo
+                              DtPedidoController.clear();
+                              DtEntregaController.clear();
+                              VendedorController.clear();
+                              ClienteController.clear();
+                              FreteController.clear();
+                              ObservacaoController.clear();
+                              UndController.clear();
+                              QtdController.clear();
+                              OcClienteController.clear();
+                              VrBaseController.clear();
+                              PrEfetivoController.clear();
+                              VrBrutoController.clear();
+
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.success,
+                                animType: AnimType.scale,
+                                title: 'Gravado com sucesso',
+                                btnOkOnPress: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PedidoPage()));
+                                },
+                              ).show();
+                            }
+                          },
+                          child: const SizedBox(
+                              width: 100,
+                              height: 50,
+                              child: Column(children: [
+                                Icon(Icons.navigate_next),
+                                SizedBox(height: 1),
+                                Text('Gravar')
+                              ]))),
                       const SizedBox(width: 10),
                     ],
                   ),
@@ -808,7 +849,6 @@ class _PedidoPageState extends State<PedidoPage> {
           });
           await Future.delayed(const Duration(seconds: 1));
           if (_currentIndex == 1) {
-            // ignore: use_build_context_synchronously
             AwesomeDialog(
               context: context,
               dialogType: DialogType.warning,
@@ -824,11 +864,9 @@ class _PedidoPageState extends State<PedidoPage> {
               },
             ).show();
           } else if (_currentIndex == 0) {
-            // ignore: use_build_context_synchronously
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => HomePage()));
           } else if (_currentIndex == 2) {
-            // ignore: use_build_context_synchronously
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => FeedsPage()));
           }
