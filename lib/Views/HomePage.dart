@@ -126,7 +126,7 @@ class HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const FaturamentoPage()),
+                            builder: (context) => FaturamentoPage()),
                       );
                     },
                     child: Container(

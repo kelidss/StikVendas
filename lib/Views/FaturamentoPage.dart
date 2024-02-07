@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,25 @@ class FaturamentoPage extends StatefulWidget {
 class _FaturamentoPageState extends State<FaturamentoPage> {
   int currentIndex = 0;
   final FaturamentoController _controller = FaturamentoController();
-  
+  late List<Faturamento> _filteredData;
+
+  @override
+  void initState() {
+    super.initState();
+    _filteredData = _controller.getFaturamentoData();
+  }
+
+  void _filterData(String searchTerm) {
+    setState(() {
+      _filteredData = _controller
+          .getFaturamentoData()
+          .where((faturamento) => faturamento.descricao
+              .toLowerCase()
+              .contains(searchTerm.toLowerCase()))
+          .toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -31,43 +51,29 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
           centerTitle: true,
           backgroundColor: const Color(0xFFD52B1E),
         ),
-        
-        body: 
-        ListView(
+        body: ListView(
           children: [
-             InkWell(onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FeedsPage()),
-                      );
-             },
-              child: PaginatedDataTable(
-                columns: const [
-                  DataColumn(
-                      label: Text(
-                    'Emissão',
-                  )),
-                  DataColumn(label: Text('Descrição')),
-                  DataColumn(label: Text('Valor')),
-                ],
-                header: const TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Procurar...',
-                    suffixIcon: Icon(Icons.search),
-                  ),
+            PaginatedDataTable(
+              columns: const [
+                DataColumn(label: Text('Emissão')),
+                DataColumn(label: Text('Descrição')),
+                DataColumn(label: Text('Valor')),
+              ],
+              header: TextField(
+                onChanged: _filterData,
+                decoration: const InputDecoration(
+                  labelText: 'Procurar...',
+                  suffixIcon: Icon(Icons.search),
                 ),
-                source:
-                    _FaturamentoDataSource(_controller.getFaturamentoData()),
-                rowsPerPage: 10,
               ),
+              source: _FaturamentoDataSource(_filteredData),
+              rowsPerPage: 10,
+              columnSpacing: 30,
+              showFirstLastButtons: true,
+              horizontalMargin: 20,
             ),
-            
           ],
-          
         ),
-        
-        
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.white,
           color: const Color(0xFFD52B1E),
@@ -83,7 +89,6 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
             });
             await Future.delayed(const Duration(seconds: 1));
             if (currentIndex == 1) {
-              // ignore: use_build_context_synchronously
               AwesomeDialog(
                 context: context,
                 dialogType: DialogType.warning,
@@ -99,11 +104,9 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
                 },
               ).show();
             } else if (currentIndex == 0) {
-              // ignore: use_build_context_synchronously
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => HomePage()));
             } else if (currentIndex == 2) {
-              // ignore: use_build_context_synchronously
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => FeedsPage()));
             }
