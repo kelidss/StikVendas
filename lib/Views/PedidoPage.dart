@@ -32,6 +32,7 @@ class _PedidoPageState extends State<PedidoPage> {
   String? _selectedFormaPagamento;
   String? _selectedArtigo;
   String? _selectedDetalheDoArtigo;
+  String _selectedOption = '';
 
   _todosCamposPreenchidos1() {
     return DtPedidoController.text.isNotEmpty &&
@@ -370,19 +371,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     },
                     autovalidateMode: AutovalidateMode.always,
                   ),
-                  const SizedBox(height: 55),
-                  TextFormField(
-                    controller: FreteController,
-                    decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.delivery_dining),
-                        labelText: 'Frete',
-                        hintText: 'não obrigatório',
-                        border: OutlineInputBorder(),
-                        isDense: false,
-                        floatingLabelBehavior: FloatingLabelBehavior.auto,
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 50)),
-                  ),
                   const SizedBox(height: 70),
                   TextFormField(
                     controller: ObservacaoController,
@@ -395,6 +383,44 @@ class _PedidoPageState extends State<PedidoPage> {
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                         contentPadding:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
+                  ),
+                  const SizedBox(height: 70),
+                  Icon(Icons.delivery_dining),
+                  SizedBox(height: 1),
+                  Text('Frete: escolha uma opção'),
+                  Row(
+                    children: <Widget>[
+                    const Text('Opção A'),
+                Radio<String>(
+                  value: 'Opção A',
+                  groupValue: _selectedOption,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedOption = value!;
+                    });
+                  },
+                ),
+                const Text('Opção B'),
+                Radio<String>(
+                  value: 'Opção B',
+                  groupValue: _selectedOption,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedOption = value!;
+                    });
+                  },
+                ),
+                const Text('Opção C'),
+                Radio<String>(
+                  value: 'Opção C',
+                  groupValue: _selectedOption,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedOption = value!;
+                   });
+                  },
+               ),
+                    ],
                   ),
                   const SizedBox(height: 55),
                   Expanded(
@@ -805,7 +831,10 @@ class _PedidoPageState extends State<PedidoPage> {
                 ],
               )
             ],
-          )),
+          ),
+         //   ],
+         // ),
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
         color: const Color(0xFFD52B1E),
