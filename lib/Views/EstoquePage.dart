@@ -115,24 +115,9 @@ class _EstoquePageState extends State<EstoquePage> {
           ),
           centerTitle: true,
           backgroundColor: const Color(0xFFD52B1E),
-          leading: IconButton(
-            icon: const Icon(Icons.keyboard_backspace_sharp),
-            onPressed: () {},
-          ),
         ),
         body: ListView(
           children: [
-            TextField(
-              controller: _searchController,
-              onChanged: _filterData,
-              decoration: const InputDecoration(
-                labelText: '  Procurar...',
-                suffixIcon: Icon(Icons.search),
-              ),
-            ),
-            const SizedBox(
-              height: 3,
-            ),
             PaginatedDataTable(
               source: _EstoqueDataSource(_filteredData, _containsItems),
               showFirstLastButtons: true,
@@ -142,6 +127,16 @@ class _EstoquePageState extends State<EstoquePage> {
                     label: Text('Descrição', textAlign: TextAlign.center)),
                 DataColumn(label: Text('Estoque')),
               ],
+              header: TextField(
+                onChanged: _filterData,
+                decoration: const InputDecoration(
+                  labelText: 'Procurar...',
+                  suffixIcon: Icon(Icons.search),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 3,
             ),
           ],
         ),
