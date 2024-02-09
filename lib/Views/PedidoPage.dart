@@ -38,7 +38,7 @@ class _PedidoPageState extends State<PedidoPage> {
   _todosCamposPreenchidos1() {
     return DtPedidoController.text.isNotEmpty &&
         DtEntregaController.text.isNotEmpty &&
-        VendedorController.text.isNotEmpty &&
+        //  VendedorController.text.isNotEmpty &&
         ClienteController.text.isNotEmpty;
     //&&
     //  TpDocumentoController.text.isNotEmpty &&
@@ -92,9 +92,10 @@ class _PedidoPageState extends State<PedidoPage> {
         backgroundColor: const Color(0xFFD52B1E),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(3.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
+          //scrollDirection: Axis.horizontal,
           controller: _pageController,
           children: [
             // pagina 1
@@ -183,7 +184,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 55),
+                /*     const SizedBox(height: 55),
                 TextFormField(
                   controller: VendedorController,
                   decoration: InputDecoration(
@@ -206,7 +207,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     }
                   },
                   autovalidateMode: AutovalidateMode.always,
-                ),
+                ),*/
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: ClienteController,
@@ -276,7 +277,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                const SizedBox(height: 55),
+                SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedTipoCobranca,
                   onChanged: (newValue) {
@@ -315,7 +316,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                const SizedBox(height: 55),
+                SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedFormaPagamento,
                   onChanged: (newValue) {
@@ -325,18 +326,34 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   items: const [
                     DropdownMenuItem(
-                      value: 'BOLETO',
-                      child: Text('BOLETO'),
+                      value: '30 DIAS',
+                      child: Text('30 DIAS'),
                     ),
                     DropdownMenuItem(
-                      value: 'PIX',
-                      child: Text('PIX'),
+                      value: '60 DIAS',
+                      child: Text('60 DIAS'),
+                    ),
+                    DropdownMenuItem(
+                      value: '90 DIAS',
+                      child: Text('90 DIAS'),
+                    ),
+                    DropdownMenuItem(
+                      value: '51 DIAS',
+                      child: Text('51 DIAS'),
+                    ),
+                    DropdownMenuItem(
+                      value: '71 DIAS',
+                      child: Text('71 DIAS'),
+                    ),
+                    DropdownMenuItem(
+                      value: '111 DIAS',
+                      child: Text('111 DIAS'),
                     ),
                   ],
                   decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.monetization_on),
                       border: const OutlineInputBorder(),
-                      isDense: false,
+                      isDense: true,
                       labelText: 'Forma de pagamento',
                       floatingLabelStyle: MaterialStateTextStyle.resolveWith(
                           (Set<MaterialState> states) {
@@ -351,10 +368,54 @@ class _PedidoPageState extends State<PedidoPage> {
                     if (value == null || value == '') {
                       return '';
                     }
+                    return null; // Retorna null se o valor for válido.
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                const SizedBox(height: 70),
+                
+                /*
+                */
+
+                /**/
+                /*  */
+                const SizedBox(height: 50),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            _avancarParaProximaPagina1();
+                          },
+                          child: const SizedBox(
+                              width: 80,
+                              height: 45,
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.navigate_next,
+                                      // size:18
+                                    ),
+                                    SizedBox(height: 0),
+                                    Text('Avançar')
+                                  ]))),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            // pagina 2
+            Wrap(
+              children: [
+                const Text(
+                  'Boas Vendas',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 0.5,
+                  ),
+                ),
+                const SizedBox(height: 10),
                 TextFormField(
                   controller: ObservacaoController,
                   decoration: const InputDecoration(
@@ -369,7 +430,23 @@ class _PedidoPageState extends State<PedidoPage> {
                         horizontal: 20,
                       )),
                 ),
-                Padding(
+                SizedBox(height: 55),
+                TextFormField(
+                  controller: OcClienteController,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.pageview),
+                    labelText: 'OC Cliente',
+                    border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 20,
+                    ),
+                    isDense: false,
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  ),
+                  autovalidateMode: AutovalidateMode.always,
+                ),
+                     Padding(
                   padding: EdgeInsets.only(bottom: 65),
                 ),
                 const SizedBox(
@@ -418,34 +495,147 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 55),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       InkWell(
-                          onTap: () {
-                            _avancarParaProximaPagina1();
-                          },
-                          child: const SizedBox(
-                              width: 80,
-                              height: 45,
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.navigate_next,
-                                      // size:18
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PedidoPage()));
+                        },
+                        child: const SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.navigate_before),
+                              SizedBox(
+                                height: 1,
+                              ),
+                              Text('Voltar')
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                                onTap: () {
+                                  _avancarParaProximaPagina1();
+                                },
+                                child: const SizedBox(
+                                    width: 80,
+                                    height: 45,
+                                    child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Icons.navigate_next,
+                                            // size:18
+                                          ),
+                                          SizedBox(height: 0),
+                                          Text('Avançar')
+                                        ]))),
+                          ],
+                        ),
+                      ),
+
+                      /*   const SizedBox(height: 55, width: 30),
+                      InkWell(
+                        child: const SizedBox(
+                            width: 100,
+                            height: 50,
+                            child: Column(children: [
+                              Icon(Icons.navigate_next),
+                              SizedBox(height: 1),
+                              Text('Gravar')
+                            ])),
+                        onTap: () {
+                          if (UndController.text.isNotEmpty &&
+                              QtdController.text.isNotEmpty &&
+                              VrBaseController.text.isNotEmpty &&
+                              PrEfetivoController.text.isNotEmpty &&
+                              VrBrutoController.text.isNotEmpty) {
+                            // Todos os campos estão preenchidos, então você pode gravar os dados
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Pedido feito!'),
+                                  content: Text('Gravado com sucesso',
+                                      textAlign: TextAlign.center),
+                                  shadowColor: Colors.red,
+                                  icon: (Icon(Icons.verified)),
+                                  actions: <Widget>[
+                                    InkWell(
+                                      child: Text("Fechar"),
+                                      onTap: () {
+                                        // Limpa os campos antes de voltar para a página de pedidos
+                                        DtPedidoController.clear();
+                                        DtEntregaController.clear();
+                                        VendedorController.clear();
+                                        ClienteController.clear();
+                                        FreteController.clear();
+                                        ObservacaoController.clear();
+                                        UndController.clear();
+                                        QtdController.clear();
+                                        OcClienteController.clear();
+                                        VrBaseController.clear();
+                                        PrEfetivoController.clear();
+                                        VrBrutoController.clear();
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PedidoPage()));
+                                      },
                                     ),
-                                    SizedBox(height: 0),
-                                    Text('Avançar')
-                                  ]))),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text("Atenção"),
+                                  content: Text(
+                                    "Campos obrigatórios vazios",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  shadowColor: Colors.red,
+                                  icon: Icon(Icons.error),
+                                  actions: <Widget>[
+                                    InkWell(
+                                      child: Text("Fechar"),
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        },
+                      )*/
                     ],
                   ),
-                ),
+                )
               ],
             ),
-            Wrap(
+            //pagina 3
+         Wrap(
               children: [
                 const Text(
                   'Boas Vendas',
@@ -454,50 +644,50 @@ class _PedidoPageState extends State<PedidoPage> {
                     fontSize: 0.5,
                   ),
                 ),
-                const SizedBox(
-                  height: 4,
+                const SizedBox(height: 10),
+            DropdownButtonFormField<String>(
+              value: _selectedArtigo,
+              onChanged: (value) {
+                setState(() {
+                  _selectedArtigo = value;
+                });
+              },
+              items: const [
+                DropdownMenuItem(
+                  value: 'teste',
+                  child: Text('teste'),
                 ),
-                const SizedBox(height: 1),
-                DropdownButtonFormField<String>(
-                  value: _selectedArtigo,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedArtigo = value;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'teste',
-                      child: Text('teste'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'teste2',
-                      child: Text('teste2'),
-                    ),
-                  ],
-                  decoration: InputDecoration(
-                      labelText: 'Artigo',
-                      prefixIcon: const Icon(Icons.note),
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                          (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      }),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                    return null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
+                DropdownMenuItem(
+                  value: 'teste2',
+                  child: Text('teste2'),
                 ),
-                const SizedBox(height: 55),
+              ],
+              decoration: InputDecoration(
+                labelText: 'Artigo',
+                prefixIcon: const Icon(Icons.note),
+                border: const OutlineInputBorder(),
+                isDense: true,
+                floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                  (Set<MaterialState> states) {
+                    final Color color = states.contains(MaterialState.error)
+                        ? Theme.of(context).colorScheme.error
+                        : Colors.green;
+                    return TextStyle(color: color, letterSpacing: 1);
+                  }
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 10, horizontal: 20
+                )
+              ),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return '';
+                }
+                return null;
+              },
+              autovalidateMode: AutovalidateMode.always,
+          ),
+          const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedDetalheDoArtigo,
                   onChanged: (newValue) {
@@ -537,61 +727,75 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                const SizedBox(height: 55),
-                TextFormField(
-                  controller: UndController,
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.list_alt),
-                      labelText: 'Unidade',
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                          (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      }),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  keyboardType: TextInputType.number,
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                    return null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
-                ),
-                const SizedBox(height: 55),
-                TextFormField(
-                  controller: QtdController,
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.list_alt),
-                      labelText: 'Quantidade',
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                        (Set<MaterialState> states) {
-                          final Color color =
-                              states.contains(MaterialState.error)
-                                  ? Theme.of(context).colorScheme.error
-                                  : Colors.green;
-                          return TextStyle(color: color, letterSpacing: 1);
+                Row(
+                  children: [
+                    SizedBox(height: 55),
+                    Expanded(
+                      child: TextFormField(
+                        controller: UndController,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.list_alt),
+                          labelText: 'Unidade',
+                          border: const OutlineInputBorder(),
+                          isDense: true,
+                          floatingLabelStyle:
+                              MaterialStateTextStyle.resolveWith(
+                            (Set<MaterialState> states) {
+                              final Color color =
+                                  states.contains(MaterialState.error)
+                                      ? Theme.of(context).colorScheme.error
+                                      : Colors.green;
+                              return TextStyle(color: color, letterSpacing: 1);
+                            },
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                        ),
+                        keyboardType: TextInputType.number,
+                        validator: (String? value) {
+                          if (value == null || value == '') {
+                            return '';
+                          }
+                          return null;
                         },
+                        autovalidateMode: AutovalidateMode.always,
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  keyboardType: TextInputType.number,
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                    return null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
+                    ),
+                    SizedBox(width: 10), // Espaçamento entre os TextFormField
+                    Expanded(
+                      child: TextFormField(
+                        controller: QtdController,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.list_alt),
+                          labelText: 'Quantidade',
+                          border: const OutlineInputBorder(),
+                          isDense: true,
+                          floatingLabelStyle:
+                              MaterialStateTextStyle.resolveWith(
+                            (Set<MaterialState> states) {
+                              final Color color =
+                                  states.contains(MaterialState.error)
+                                      ? Theme.of(context).colorScheme.error
+                                      : Colors.green;
+                              return TextStyle(color: color, letterSpacing: 1);
+                            },
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                        ),
+                        keyboardType: TextInputType.number,
+                        validator: (String? value) {
+                          if (value == null || value == '') {
+                            return '';
+                          }
+                          return null;
+                        },
+                        autovalidateMode: AutovalidateMode.always,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 55),
+                 const SizedBox(height: 55),
                 TextFormField(
                   controller: VrBaseController,
                   decoration: InputDecoration(
@@ -686,121 +890,12 @@ class _PedidoPageState extends State<PedidoPage> {
                       }
                     },
                     autovalidateMode: AutovalidateMode.always),
-                const SizedBox(height: 55),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PedidoPage()));
-                        },
-                        child: const SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(Icons.navigate_before),
-                              SizedBox(
-                                height: 1,
-                              ),
-                              Text('Voltar')
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 55, width: 30),
-                      InkWell(
-                        child: const SizedBox(
-                            width: 100,
-                            height: 50,
-                            child: Column(children: [
-                              Icon(Icons.navigate_next),
-                              SizedBox(height: 1),
-                              Text('Gravar')
-                            ])),
-                        onTap: () {
-                          if (UndController.text.isNotEmpty &&
-                              QtdController.text.isNotEmpty &&
-                              VrBaseController.text.isNotEmpty &&
-                              PrEfetivoController.text.isNotEmpty &&
-                              VrBrutoController.text.isNotEmpty) {
-                            // Todos os campos estão preenchidos, então você pode gravar os dados
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text('Pedido feito!'),
-                                  content: Text('Gravado com sucesso',
-                                      textAlign: TextAlign.center),
-                                  shadowColor: Colors.red,
-                                  icon: (Icon(Icons.verified)),
-                                  actions: <Widget>[
-                                    InkWell(
-                                      child: Text("Fechar"),
-                                      onTap: () {
-                                        // Limpa os campos antes de voltar para a página de pedidos
-                                        DtPedidoController.clear();
-                                        DtEntregaController.clear();
-                                        VendedorController.clear();
-                                        ClienteController.clear();
-                                        FreteController.clear();
-                                        ObservacaoController.clear();
-                                        UndController.clear();
-                                        QtdController.clear();
-                                        OcClienteController.clear();
-                                        VrBaseController.clear();
-                                        PrEfetivoController.clear();
-                                        VrBrutoController.clear();
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PedidoPage()));
-                                      },
-                                    )
-                                  ],
-                                );
-                              },
-                            );
-                          } else {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text("Atenção"),
-                                  content: Text(
-                                    "Campos obrigatórios vazios",
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  shadowColor: Colors.red,
-                                  icon: Icon(Icons.error),
-                                  actions: <Widget>[
-                                    InkWell(
-                                      child: Text("Fechar"),
-                                      onTap: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                        },
-                      )
-                    ],
-                  ),
-                )
-              ],
-            )
           ],
         ),
-      ),
+                  ]
+                ),
+              ),
+    
       bottomNavigationBar: CurvedNavigationBar(
         animationCurve: Curves.easeInOut,
         backgroundColor: Colors.white,
@@ -823,8 +918,7 @@ class _PedidoPageState extends State<PedidoPage> {
               animType: AnimType.scale,
               title: 'Confirmação',
               desc: 'Tem certeza que deseja sair?',
-              btnCancelOnPress: () {
-              },
+              btnCancelOnPress: () {},
               btnOkOnPress: () {
                 DtPedidoController.clear();
                 DtEntregaController.clear();
@@ -838,7 +932,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 VrBaseController.clear();
                 PrEfetivoController.clear();
                 VrBrutoController.clear();
-                
+
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),

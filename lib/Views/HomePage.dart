@@ -27,6 +27,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFFD52B1E),
         centerTitle: true,
         title: const Text(
@@ -65,7 +66,8 @@ class HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const PedidoPage()),
+                          builder: (context) => const PedidoPage(),
+                        ),
                       );
                     },
                     child: Container(
@@ -127,7 +129,7 @@ class HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => FaturamentoPage()),
+                            builder: (context) => const FaturamentoPage()),
                       );
                     },
                     child: Container(
@@ -229,7 +231,7 @@ class HomePageState extends State<HomePage> {
                 VrBaseController.clear();
                 PrEfetivoController.clear();
                 VrBrutoController.clear();
-                
+
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const LoginPage()));
                 //   );
