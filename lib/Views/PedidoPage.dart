@@ -25,7 +25,6 @@ class _PedidoPageState extends State<PedidoPage> {
   void initState() {
     super.initState();
     textEditingController = textEditingController;
-
     _pageController = PageController();
   }
 
@@ -76,23 +75,8 @@ class _PedidoPageState extends State<PedidoPage> {
           );
         },
       );
-      //  AwesomeDialog(
-      //   context: context,
-      //  dialogType: DialogType.warning,
-      //  animType: AnimType.scale,
-      //  title: 'Preencha todos os campos',
-      // btnOkOnPress: () {
-      //   Navigator.push(context,
-      //    MaterialPageRoute(builder: (context) => const PedidoPage()));
-      // },
-      // ).show();
     }
   }
-
-  //  },
-  // );
-  //  }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -598,7 +582,6 @@ class _PedidoPageState extends State<PedidoPage> {
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20)),
-                  inputFormatters: [MaskTextInputFormatter(mask: '#,####.##')],
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
                     if (value == null || value == '') {
@@ -632,7 +615,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     FilteringTextInputFormatter.digitsOnly,
                     CurrencyPtBrInputFormatter()
                   ],
-                  //   inputFormatters: [MaskTextInputFormatter(mask: '#.####,##')],
                   keyboardType: TextInputType.number,
                   validator: (String? value) {
                     if (value == null || value == '') {
@@ -731,11 +713,7 @@ class _PedidoPageState extends State<PedidoPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 55,
-                        width: 30,
-                      ),
-
+                      const SizedBox(height: 55, width: 30),
                       InkWell(
                         child: const SizedBox(
                             width: 100,
@@ -752,7 +730,6 @@ class _PedidoPageState extends State<PedidoPage> {
                               PrEfetivoController.text.isNotEmpty &&
                               VrBrutoController.text.isNotEmpty) {
                             // Todos os campos estão preenchidos, então você pode gravar os dados
-                            // Aqui você colocaria a lógica para gravar os dados
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -766,10 +743,6 @@ class _PedidoPageState extends State<PedidoPage> {
                                     InkWell(
                                       child: Text("Fechar"),
                                       onTap: () {
-                                        //  dialogType: DialogType.success,
-                                        //   animType: AnimType.scale,
-                                        //title: 'Gravado com sucesso',
-                                        //  btnOkOnPress: () {
                                         // Limpa os campos antes de voltar para a página de pedidos
                                         DtPedidoController.clear();
                                         DtEntregaController.clear();
@@ -783,7 +756,6 @@ class _PedidoPageState extends State<PedidoPage> {
                                         VrBaseController.clear();
                                         PrEfetivoController.clear();
                                         VrBrutoController.clear();
-
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -795,10 +767,6 @@ class _PedidoPageState extends State<PedidoPage> {
                                 );
                               },
                             );
-
-                            //   );
-                            // },
-                            //  ).show();
                           } else {
                             showDialog(
                               context: context,
@@ -825,10 +793,6 @@ class _PedidoPageState extends State<PedidoPage> {
                           }
                         },
                       )
-                      //    ],
-                      //   ),
-                      // resumo do pedido
-                      /*  */
                     ],
                   ),
                 )
@@ -836,10 +800,9 @@ class _PedidoPageState extends State<PedidoPage> {
             )
           ],
         ),
-        //   ],
-        // ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
+        animationCurve: Curves.easeInOut,
         backgroundColor: Colors.white,
         color: const Color(0xFFD52B1E),
         animationDuration: const Duration(milliseconds: 300),
@@ -860,8 +823,22 @@ class _PedidoPageState extends State<PedidoPage> {
               animType: AnimType.scale,
               title: 'Confirmação',
               desc: 'Tem certeza que deseja sair?',
-              btnCancelOnPress: () {},
+              btnCancelOnPress: () {
+              },
               btnOkOnPress: () {
+                DtPedidoController.clear();
+                DtEntregaController.clear();
+                VendedorController.clear();
+                ClienteController.clear();
+                FreteController.clear();
+                ObservacaoController.clear();
+                UndController.clear();
+                QtdController.clear();
+                OcClienteController.clear();
+                VrBaseController.clear();
+                PrEfetivoController.clear();
+                VrBrutoController.clear();
+                
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -889,11 +866,11 @@ class CurrencyPtBrInputFormatter extends TextInputFormatter {
     }
 
     double value = double.parse(newValue.text);
-    final formatter = new NumberFormat("#,##0.00", "pt_BR");
-    String newText = "R\$ " + formatter.format(value / 100);
+    final formatter = NumberFormat("#,##0.00", "pt_BR");
+    String newText = "R\$ ${formatter.format(value / 100)}";
 
     return newValue.copyWith(
         text: newText,
-        selection: new TextSelection.collapsed(offset: newText.length));
+        selection: TextSelection.collapsed(offset: newText.length));
   }
 }

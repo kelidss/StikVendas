@@ -5,6 +5,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stik_vendas/Controllers/Controller_Faturamento.dart';
+import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Models/Model_Faturamento.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
 import 'package:stik_vendas/Views/HomePage.dart';
@@ -97,11 +98,24 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
                 desc: 'Tem certeza que deseja sair?',
                 btnCancelOnPress: () {},
                 btnOkOnPress: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
-                },
+                DtPedidoController.clear();
+                DtEntregaController.clear();
+                VendedorController.clear();
+                ClienteController.clear();
+                FreteController.clear();
+                ObservacaoController.clear();
+                UndController.clear();
+                QtdController.clear();
+                OcClienteController.clear();
+                VrBaseController.clear();
+                PrEfetivoController.clear();
+                VrBrutoController.clear();
+                
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
               ).show();
             } else if (currentIndex == 0) {
               Navigator.pushReplacement(

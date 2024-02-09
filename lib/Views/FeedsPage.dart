@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 
@@ -104,6 +105,7 @@ class FeedsPageState extends State<FeedsPage> {
           });
           await Future.delayed(const Duration(seconds: 1));
           if (currentIndex == 1) {
+            // ignore: use_build_context_synchronously
             AwesomeDialog(
               context: context,
               dialogType: DialogType.warning,
@@ -112,6 +114,19 @@ class FeedsPageState extends State<FeedsPage> {
               desc: 'Tem certeza que deseja sair?',
               btnCancelOnPress: () {},
               btnOkOnPress: () {
+                DtPedidoController.clear();
+                DtEntregaController.clear();
+                VendedorController.clear();
+                ClienteController.clear();
+                FreteController.clear();
+                ObservacaoController.clear();
+                UndController.clear();
+                QtdController.clear();
+                OcClienteController.clear();
+                VrBaseController.clear();
+                PrEfetivoController.clear();
+                VrBrutoController.clear();
+                
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => LoginPage()),

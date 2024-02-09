@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 import 'package:stik_vendas/Views/FeedsPage.dart';
@@ -163,11 +164,24 @@ class _EstoquePageState extends State<EstoquePage> {
                 desc: 'Tem certeza que deseja sair?',
                 btnCancelOnPress: () {},
                 btnOkOnPress: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
-                },
+                DtPedidoController.clear();
+                DtEntregaController.clear();
+                VendedorController.clear();
+                ClienteController.clear();
+                FreteController.clear();
+                ObservacaoController.clear();
+                UndController.clear();
+                QtdController.clear();
+                OcClienteController.clear();
+                VrBaseController.clear();
+                PrEfetivoController.clear();
+                VrBrutoController.clear();
+                
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
               ).show();
             } else if (currentIndex == 0) {
               Navigator.pushReplacement(
@@ -197,7 +211,7 @@ class _EstoqueDataSource extends DataTableSource {
         DataCell(Text(description)),
         DataCell(Text(item['quantidade estoque'].toString())),
       ],
-      selected: _containsItems(description), // Set selected if contains items
+      selected: _containsItems(description),
     );
   }
 

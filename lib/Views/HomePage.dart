@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
 import 'package:stik_vendas/Models/Model_Login.dart';
 import 'package:stik_vendas/Views/EstoquePage.dart';
 import 'package:stik_vendas/Views/FaturamentoPage.dart';
@@ -216,6 +217,19 @@ class HomePageState extends State<HomePage> {
               desc: 'Tem certeza que deseja sair?',
               btnCancelOnPress: () {},
               btnOkOnPress: () {
+                DtPedidoController.clear();
+                DtEntregaController.clear();
+                VendedorController.clear();
+                ClienteController.clear();
+                FreteController.clear();
+                ObservacaoController.clear();
+                UndController.clear();
+                QtdController.clear();
+                OcClienteController.clear();
+                VrBaseController.clear();
+                PrEfetivoController.clear();
+                VrBrutoController.clear();
+                
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const LoginPage()));
                 //   );
