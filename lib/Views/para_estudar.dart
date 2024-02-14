@@ -10,7 +10,6 @@ import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 import 'package:intl/intl.dart';
 
-
 class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
 
@@ -223,7 +222,7 @@ class _PedidoPageState extends State<PedidoPage> {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFD52B1E),
+                  backgroundColor: const Color(0xFFD52B1E),
                   minimumSize: const Size(150, 50),
                 ),
                 child: const Text(
@@ -273,6 +272,7 @@ class _PedidoPageState extends State<PedidoPage> {
 
   // Método para construir os campos de data
   Widget _buildDateFields() {
+    const SizedBox(height: 4);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -280,6 +280,7 @@ class _PedidoPageState extends State<PedidoPage> {
           child: _buildTextFormField(
             'Data do pedido',
             controller: DtPedidoController,
+            
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Por favor, informe a data do pedido.';

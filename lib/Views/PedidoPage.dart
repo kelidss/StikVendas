@@ -39,10 +39,6 @@ class _PedidoPageState extends State<PedidoPage> {
     return DtPedidoController.text.isNotEmpty &&
         DtEntregaController.text.isNotEmpty &&
         ClienteController.text.isNotEmpty;
-    //&&
-    //  TpDocumentoController.text.isNotEmpty &&
-    // TipoCobracaController.text.isNotEmpty &&
-    //  FormaPgtoController.text.isNotEmpty;
   }
 
   _avancarParaProximaPagina1() {
@@ -79,6 +75,265 @@ class _PedidoPageState extends State<PedidoPage> {
 
   @override
   Widget build(BuildContext context) {
+    var wrap = Wrap(
+      children: [
+        const Text(
+          'Boas Vendas',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 0.5,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: DtPedidoController,
+                decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.calendar_month),
+                    hintText: '00/00/0000',
+                    border: const OutlineInputBorder(),
+                    isDense: false,
+                    labelText: 'Data Pedido',
+                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                      (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      },
+                    ),
+                    contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10)),
+                inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
+                keyboardType: TextInputType.datetime,
+                validator: (String? value) {
+                  if (value == null || value == '') {
+                    return '';
+                  }
+                },
+                autovalidateMode: AutovalidateMode.always,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: TextFormField(
+                controller: DtEntregaController,
+                decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.calendar_month),
+                    hintText: '00/00/0000',
+                    border: const OutlineInputBorder(),
+                    isDense: false,
+                    labelText: 'Data Entrega',
+                    floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                      (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      },
+                    ),
+                    contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10)),
+                inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
+                keyboardType: TextInputType.datetime,
+                validator: (String? value) {
+                  if (value == null || value == '') {
+                    return '';
+                  }
+                },
+                autovalidateMode: AutovalidateMode.always,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 70),
+        TextFormField(
+          controller: ClienteController,
+          decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.people),
+              border: const OutlineInputBorder(),
+              isDense: false,
+              labelText: 'Cliente',
+              floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                (Set<MaterialState> states) {
+                  final Color color = states.contains(MaterialState.error)
+                      ? Theme.of(context).colorScheme.error
+                      : Colors.green;
+                  return TextStyle(color: color, letterSpacing: 1);
+                },
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
+          validator: (String? value) {
+            if (value == null || value == '') {
+              return '';
+            }
+          },
+          autovalidateMode: AutovalidateMode.always,
+        ),
+        const SizedBox(height: 70),
+        DropdownButtonFormField<String>(
+          value: _selectedTipoDocumento,
+          onChanged: (newValue) {
+            setState(() {
+              _selectedTipoDocumento = newValue;
+            });
+          },
+          items: const [
+            DropdownMenuItem(
+              value: 'RG',
+              child: Text('RG'),
+            ),
+            DropdownMenuItem(
+              value: 'CPF',
+              child: Text('CPF'),
+            ),
+          ],
+          decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.list),
+              border: const OutlineInputBorder(),
+              isDense: false,
+              labelText: 'Tipo de Documento',
+              floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                (Set<MaterialState> states) {
+                  final Color color = states.contains(MaterialState.error)
+                      ? Theme.of(context).colorScheme.error
+                      : Colors.green;
+                  return TextStyle(color: color, letterSpacing: 1);
+                },
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
+          validator: (String? value) {
+            if (value == null || value == '') {
+              return '';
+            }
+            return null;
+          },
+          autovalidateMode: AutovalidateMode.always,
+        ),
+        SizedBox(height: 70),
+        DropdownButtonFormField<String>(
+          value: _selectedTipoCobranca,
+          onChanged: (newValue) {
+            setState(() {
+              _selectedTipoCobranca = newValue;
+            });
+          },
+          items: const [
+            DropdownMenuItem(
+              value: 'Opção 1',
+              child: Text('Opção 1'),
+            ),
+            DropdownMenuItem(
+              value: 'Opção 2',
+              child: Text('Opção 2'),
+            ),
+          ],
+          decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.list),
+              border: OutlineInputBorder(borderSide: BorderSide()),
+              isDense: false,
+              labelText: 'Tipo de Cobrança',
+              floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                  (Set<MaterialState> states) {
+                final Color color = states.contains(MaterialState.error)
+                    ? Theme.of(context).colorScheme.error
+                    : Colors.green;
+                return TextStyle(color: color, letterSpacing: 1);
+              }),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
+          validator: (String? value) {
+            if (value == null || value == '') {
+              return '';
+            }
+          },
+          autovalidateMode: AutovalidateMode.always,
+        ),
+        SizedBox(height: 70),
+        DropdownButtonFormField<String>(
+          value: _selectedFormaPagamento,
+          onChanged: (newValue) {
+            setState(() {
+              _selectedFormaPagamento = newValue;
+            });
+          },
+          items: const [
+            DropdownMenuItem(
+              value: '30 DIAS',
+              child: Text('30 DIAS'),
+            ),
+            DropdownMenuItem(
+              value: '60 DIAS',
+              child: Text('60 DIAS'),
+            ),
+            DropdownMenuItem(
+              value: '90 DIAS',
+              child: Text('90 DIAS'),
+            ),
+            DropdownMenuItem(
+              value: '51 DIAS',
+              child: Text('51 DIAS'),
+            ),
+            DropdownMenuItem(
+              value: '71 DIAS',
+              child: Text('71 DIAS'),
+            ),
+            DropdownMenuItem(
+              value: '111 DIAS',
+              child: Text('111 DIAS'),
+            ),
+          ],
+          decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.monetization_on),
+              border: const OutlineInputBorder(),
+              isDense: true,
+              labelText: 'Forma de pagamento',
+              floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                  (Set<MaterialState> states) {
+                final Color color = states.contains(MaterialState.error)
+                    ? Theme.of(context).colorScheme.error
+                    : Colors.green;
+                return TextStyle(color: color, letterSpacing: 1);
+              }),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
+          validator: (String? value) {
+            if (value == null || value == '') {
+              return '';
+            }
+            return null;
+          },
+          autovalidateMode: AutovalidateMode.always,
+        ),
+        const SizedBox(height: 50),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(
+                  onTap: () {
+                    _avancarParaProximaPagina1();
+                  },
+                  child: const SizedBox(
+                      width: 80,
+                      height: 45,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(
+                              Icons.navigate_next,
+                              // size:18
+                            ),
+                            SizedBox(height: 0),
+                            Text('Avançar')
+                          ]))),
+            ],
+          ),
+        ),
+      ],
+    );
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -98,279 +353,7 @@ class _PedidoPageState extends State<PedidoPage> {
           controller: _pageController,
           children: [
             // pagina 1
-            Wrap(
-              children: [
-                const Text(
-                  'Boas Vendas',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 0.5,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: DtPedidoController,
-                        decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.calendar_month),
-                            hintText: '00/00/0000',
-                            border: const OutlineInputBorder(),
-                            isDense: false,
-                            labelText: 'Data Pedido',
-                            floatingLabelStyle:
-                                MaterialStateTextStyle.resolveWith(
-                              (Set<MaterialState> states) {
-                                final Color color =
-                                    states.contains(MaterialState.error)
-                                        ? Theme.of(context).colorScheme.error
-                                        : Colors.green;
-                                return TextStyle(
-                                    color: color, letterSpacing: 1);
-                              },
-                            ),
-                            contentPadding:
-                                EdgeInsets.fromLTRB(20, 10, 20, 10)),
-                        inputFormatters: [
-                          MaskTextInputFormatter(mask: '##/##/####')
-                        ],
-                        keyboardType: TextInputType.datetime,
-                        validator: (String? value) {
-                          if (value == null || value == '') {
-                            return '';
-                          }
-                        },
-                        autovalidateMode: AutovalidateMode.always,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: TextFormField(
-                        controller: DtEntregaController,
-                        decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.calendar_month),
-                            hintText: '00/00/0000',
-                            border: const OutlineInputBorder(),
-                            isDense: false,
-                            labelText: 'Data Entrega',
-                            floatingLabelStyle:
-                                MaterialStateTextStyle.resolveWith(
-                              (Set<MaterialState> states) {
-                                final Color color =
-                                    states.contains(MaterialState.error)
-                                        ? Theme.of(context).colorScheme.error
-                                        : Colors.green;
-                                return TextStyle(
-                                    color: color, letterSpacing: 1);
-                              },
-                            ),
-                            contentPadding:
-                                EdgeInsets.fromLTRB(20, 10, 20, 10)),
-                        inputFormatters: [
-                          MaskTextInputFormatter(mask: '##/##/####')
-                        ],
-                        keyboardType: TextInputType.datetime,
-                        validator: (String? value) {
-                          if (value == null || value == '') {
-                            return '';
-                          }
-                        },
-                        autovalidateMode: AutovalidateMode.always,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 70),
-                TextFormField(
-                  controller: ClienteController,
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.people),
-                      border: const OutlineInputBorder(),
-                      isDense: false,
-                      labelText: 'Cliente',
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                        (Set<MaterialState> states) {
-                          final Color color =
-                              states.contains(MaterialState.error)
-                                  ? Theme.of(context).colorScheme.error
-                                  : Colors.green;
-                          return TextStyle(color: color, letterSpacing: 1);
-                        },
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                  },
-                  autovalidateMode: AutovalidateMode.always,
-                ),
-                const SizedBox(height: 70),
-                DropdownButtonFormField<String>(
-                  value: _selectedTipoDocumento,
-                  onChanged: (newValue) {
-                    setState(() {
-                      _selectedTipoDocumento = newValue;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'RG',
-                      child: Text('RG'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'CPF',
-                      child: Text('CPF'),
-                    ),
-                  ],
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.list),
-                      border: const OutlineInputBorder(),
-                      isDense: false,
-                      labelText: 'Tipo de Documento',
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                        (Set<MaterialState> states) {
-                          final Color color =
-                              states.contains(MaterialState.error)
-                                  ? Theme.of(context).colorScheme.error
-                                  : Colors.green;
-                          return TextStyle(color: color, letterSpacing: 1);
-                        },
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                    return null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
-                ),
-                SizedBox(height: 70),
-                DropdownButtonFormField<String>(
-                  value: _selectedTipoCobranca,
-                  onChanged: (newValue) {
-                    setState(() {
-                      _selectedTipoCobranca = newValue;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'Opção 1',
-                      child: Text('Opção 1'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Opção 2',
-                      child: Text('Opção 2'),
-                    ),
-                  ],
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.list),
-                      border: OutlineInputBorder(borderSide: BorderSide()),
-                      isDense: false,
-                      labelText: 'Tipo de Cobrança',
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                          (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      }),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                  },
-                  autovalidateMode: AutovalidateMode.always,
-                ),
-                SizedBox(height: 70),
-                DropdownButtonFormField<String>(
-                  value: _selectedFormaPagamento,
-                  onChanged: (newValue) {
-                    setState(() {
-                      _selectedFormaPagamento = newValue;
-                    });
-                  },
-                  items: const [
-                    DropdownMenuItem(
-                      value: '30 DIAS',
-                      child: Text('30 DIAS'),
-                    ),
-                    DropdownMenuItem(
-                      value: '60 DIAS',
-                      child: Text('60 DIAS'),
-                    ),
-                    DropdownMenuItem(
-                      value: '90 DIAS',
-                      child: Text('90 DIAS'),
-                    ),
-                    DropdownMenuItem(
-                      value: '51 DIAS',
-                      child: Text('51 DIAS'),
-                    ),
-                    DropdownMenuItem(
-                      value: '71 DIAS',
-                      child: Text('71 DIAS'),
-                    ),
-                    DropdownMenuItem(
-                      value: '111 DIAS',
-                      child: Text('111 DIAS'),
-                    ),
-                  ],
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.monetization_on),
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                      labelText: 'Forma de pagamento',
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                          (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      }),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                    return null;
-                  },
-                  autovalidateMode: AutovalidateMode.always,
-                ),
-                const SizedBox(height: 50),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                          onTap: () {
-                            _avancarParaProximaPagina1();
-                          },
-                          child: const SizedBox(
-                              width: 80,
-                              height: 45,
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.navigate_next,
-                                      // size:18
-                                    ),
-                                    SizedBox(height: 0),
-                                    Text('Avançar')
-                                  ]))),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            wrap,
 // pagina 2
             Wrap(
               children: [
@@ -434,7 +417,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   children: [
                     Row(
                       children: [
-                        SizedBox(width: 10),
+                        SizedBox(width: 35),
                         Checkbox(
                           value: _selectedOption == 'CIF',
                           onChanged: (value) {
@@ -471,7 +454,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                     Row(
                       children: [
-                        SizedBox(width: 10),
+                        SizedBox(width: 35),
                         Checkbox(
                           value: _selectedOption == 'Destinatário',
                           onChanged: (value) {
@@ -520,7 +503,7 @@ class _PedidoPageState extends State<PedidoPage> {
                         },
                       ),
                       const SizedBox(
-                        width: 150,
+                        width: 230,
                       ),
                       InkWell(
                           onTap: () {
@@ -821,10 +804,6 @@ class _PedidoPageState extends State<PedidoPage> {
                       InkWell(
                         onTap: () {
                           Navigator.pop(context);
-                          // Navigator.push(
-                          //    context,
-                          //  MaterialPageRoute(
-                          //   builder: (context) => PedidoPage()));
                         },
                         child: const SizedBox(
                           child: Column(
@@ -840,7 +819,7 @@ class _PedidoPageState extends State<PedidoPage> {
                         ),
                       ),
                       const SizedBox(
-                        width: 150,
+                        width: 240,
                       ),
                       InkWell(
                         child: const SizedBox(
@@ -851,13 +830,10 @@ class _PedidoPageState extends State<PedidoPage> {
                         ])),
                         onTap: () {
                           if (UndController.text.isNotEmpty &&
-                                  QtdController.text.isNotEmpty &&
-                                  VrBaseController.text.isNotEmpty &&
-                                  PrEfetivoController.text.isNotEmpty &&
-                                  VrBrutoController.text.isNotEmpty
-                              //  ArtigoController.text.isNotEmpty &&
-                              //  DetArtigoController.text.isNotEmpty
-                              ) {
+                              QtdController.text.isNotEmpty &&
+                              VrBaseController.text.isNotEmpty &&
+                              PrEfetivoController.text.isNotEmpty &&
+                              VrBrutoController.text.isNotEmpty) {
                             // Todos os campos estão preenchidos, então você pode gravar os dados
                             // Aqui você colocaria a lógica para gravar os dados
                             showDialog(
