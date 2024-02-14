@@ -100,7 +100,6 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
                 btnOkOnPress: () {
                 DtPedidoController.clear();
                 DtEntregaController.clear();
-                VendedorController.clear();
                 ClienteController.clear();
                 FreteController.clear();
                 ObservacaoController.clear();

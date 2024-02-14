@@ -116,7 +116,6 @@ class FeedsPageState extends State<FeedsPage> {
               btnOkOnPress: () {
                 DtPedidoController.clear();
                 DtEntregaController.clear();
-                VendedorController.clear();
                 ClienteController.clear();
                 FreteController.clear();
                 ObservacaoController.clear();

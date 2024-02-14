@@ -166,7 +166,6 @@ class _EstoquePageState extends State<EstoquePage> {
                 btnOkOnPress: () {
                 DtPedidoController.clear();
                 DtEntregaController.clear();
-                VendedorController.clear();
                 ClienteController.clear();
                 FreteController.clear();
                 ObservacaoController.clear();

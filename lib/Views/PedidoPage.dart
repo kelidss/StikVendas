@@ -38,7 +38,6 @@ class _PedidoPageState extends State<PedidoPage> {
   _todosCamposPreenchidos1() {
     return DtPedidoController.text.isNotEmpty &&
         DtEntregaController.text.isNotEmpty &&
-        //  VendedorController.text.isNotEmpty &&
         ClienteController.text.isNotEmpty;
     //&&
     //  TpDocumentoController.text.isNotEmpty &&
@@ -95,7 +94,6 @@ class _PedidoPageState extends State<PedidoPage> {
         padding: const EdgeInsets.all(10.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
-          //scrollDirection: Axis.horizontal,
           controller: _pageController,
           children: [
             // pagina 1
@@ -108,9 +106,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     fontSize: 0.5,
                   ),
                 ),
-                const SizedBox(
-                  height: 4,
-                ),
+                const SizedBox(height: 4),
                 Row(
                   children: [
                     Expanded(
@@ -184,7 +180,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 55),
+                const SizedBox(height: 70),
                 TextFormField(
                   controller: ClienteController,
                   decoration: InputDecoration(
@@ -210,7 +206,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                const SizedBox(height: 55),
+                const SizedBox(height: 70),
                 DropdownButtonFormField<String>(
                   value: _selectedTipoDocumento,
                   onChanged: (newValue) {
@@ -252,7 +248,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                SizedBox(height: 55),
+                SizedBox(height: 70),
                 DropdownButtonFormField<String>(
                   value: _selectedTipoCobranca,
                   onChanged: (newValue) {
@@ -291,7 +287,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                SizedBox(height: 55),
+                SizedBox(height: 70),
                 DropdownButtonFormField<String>(
                   value: _selectedFormaPagamento,
                   onChanged: (newValue) {
@@ -343,16 +339,10 @@ class _PedidoPageState extends State<PedidoPage> {
                     if (value == null || value == '') {
                       return '';
                     }
-                    return null; // Retorna null se o valor for válido.
+                    return null;
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-
-                /*
-                */
-
-                /**/
-                /*  */
                 const SizedBox(height: 50),
                 Expanded(
                   child: Row(
@@ -366,7 +356,7 @@ class _PedidoPageState extends State<PedidoPage> {
                               width: 80,
                               height: 45,
                               child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Icon(
                                       Icons.navigate_next,
@@ -380,7 +370,7 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ],
             ),
-            // pagina 2
+// pagina 2
             Wrap(
               children: [
                 const Text(
@@ -405,7 +395,7 @@ class _PedidoPageState extends State<PedidoPage> {
                         horizontal: 20,
                       )),
                 ),
-                SizedBox(height: 55),
+                SizedBox(height: 70),
                 TextFormField(
                   controller: OcClienteController,
                   decoration: const InputDecoration(
@@ -421,115 +411,137 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                   autovalidateMode: AutovalidateMode.always,
                 ),
+                SizedBox(height: 70),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 65),
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: Row(
+                    children: const [
+                      SizedBox(width: 20),
+                      Icon(Icons.delivery_dining),
+                      SizedBox(width: 10),
+                      Text(
+                        'Frete: escolha uma opção',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(
-                  width: 12,
-                ),
-                Icon(Icons.delivery_dining),
-                SizedBox(
-                  height: 0,
-                  width: 5,
-                ),
-                Text('Frete: escolha uma opção'),
-                Row(
-                  children: <Widget>[
-                    const SizedBox(
-                      width: 10,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(width: 10),
+                        Checkbox(
+                          value: _selectedOption == 'CIF',
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedOption = 'CIF';
+                            });
+                          },
+                          activeColor: Colors.red,
+                        ),
+                        Text('CIF'),
+                        SizedBox(width: 10),
+                        Checkbox(
+                          value: _selectedOption == 'FOB',
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedOption = 'FOB';
+                            });
+                          },
+                          activeColor: Colors.red,
+                        ),
+                        Text('FOB'),
+                        SizedBox(width: 10),
+                        Checkbox(
+                          value: _selectedOption == 'Terceiros',
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedOption = 'Terceiros';
+                            });
+                          },
+                          activeColor: Colors.red,
+                        ),
+                        Text('Terceiros'),
+                      ],
                     ),
-                    const Text('Opção A'),
-                    Radio<String>(
-                      value: 'Opção A',
-                      groupValue: _selectedOption,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedOption = value!;
-                        });
-                      },
+                    Row(
+                      children: [
+                        SizedBox(width: 10),
+                        Checkbox(
+                          value: _selectedOption == 'Destinatário',
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedOption = 'Destinatário';
+                            });
+                          },
+                          activeColor: Colors.red,
+                        ),
+                        Text('Destinatário'),
+                        SizedBox(width: 37),
+                        Checkbox(
+                          value: _selectedOption == 'Remetente',
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedOption = 'Remetente';
+                            });
+                          },
+                          activeColor: Colors.red,
+                        ),
+                        Text('Remetente'),
+                      ],
                     ),
-                    const Text('Opção B'),
-                    Radio<String>(
-                      value: 'Opção B',
-                      groupValue: _selectedOption,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedOption = value!;
-                        });
-                      },
-                    ),
-                    /*   const Text('Opção C'),
-                    Radio<String>(
-                      value: 'Opção C',
-                      groupValue: _selectedOption,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedOption = value!;
-                        });
-                      },
-                    ),*/
                   ],
                 ),
-                /*   const SizedBox(height: 55),
+                const SizedBox(height: 100),
                 Expanded(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
+                        child: const SizedBox(
+                          child: Column(
+                            children: [
+                              Icon(Icons.navigate_before),
+                              SizedBox(height: 1),
+                              Text('Voltar')
+                            ],
+                          ),
+                        ),
                         onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => PedidoPage()));
                         },
-                        child: const SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(Icons.navigate_before),
-                              SizedBox(
-                                height: 1,
-                              ),
-                              Text('Voltar')
-                            ],
-                          ),
-                        ),
-                      ),*/
-                const SizedBox(height: 50),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
+                      ),
+                      const SizedBox(
+                        width: 150,
+                      ),
                       InkWell(
                           onTap: () {
                             _avancarParaProximaPagina1();
                           },
                           child: const SizedBox(
-                              width: 80,
-                              height: 45,
                               child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      Icons.navigate_next,
-                                      // size:18
-                                    ),
-                                    SizedBox(height: 0),
-                                    Text('Avançar')
-                                  ]))),
+                                Icon(
+                                  Icons.navigate_next,
+                                  // size:18
+                                ),
+                                SizedBox(height: 1),
+                                Text('Avançar'),
+                              ]))),
                     ],
                   ),
                 ),
-
-                /*   */
               ],
             ),
-            //   )
-            //   ],
-            //   ),
-            //pagina 3
+//pagina 3
             Wrap(
               children: [
                 const Text(
@@ -579,7 +591,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                const SizedBox(height: 55),
+                const SizedBox(height: 70),
                 DropdownButtonFormField<String>(
                   value: _selectedDetalheDoArtigo,
                   onChanged: (newValue) {
@@ -619,10 +631,10 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                const SizedBox(height: 55),
+                const SizedBox(height: 60),
                 Row(
                   children: [
-                    SizedBox(height: 55),
+                    SizedBox(height: 60),
                     Expanded(
                       child: TextFormField(
                         controller: UndController,
@@ -649,12 +661,12 @@ class _PedidoPageState extends State<PedidoPage> {
                           if (value == null || value == '') {
                             return '';
                           }
-                          return null;
+                          //      return null;
                         },
                         autovalidateMode: AutovalidateMode.always,
                       ),
                     ),
-                    SizedBox(width: 10), // Espaçamento entre os TextFormField
+                    SizedBox(width: 10),
                     Expanded(
                       child: TextFormField(
                         controller: QtdController,
@@ -688,7 +700,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 55),
+                SizedBox(height: 70),
                 Row(
                   children: [
                     Expanded(
@@ -769,7 +781,7 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 55),
+                const SizedBox(height: 70),
                 TextFormField(
                     controller: VrBrutoController,
                     decoration: InputDecoration(
@@ -800,23 +812,22 @@ class _PedidoPageState extends State<PedidoPage> {
                       }
                     },
                     autovalidateMode: AutovalidateMode.always),
-                const SizedBox(height: 55),
+                const SizedBox(height: 60),
                 Expanded(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PedidoPage()));
+                          _avancarParaProximaPagina1();
+                          //   Navigator.push(
+                          //   context,
+                          // MaterialPageRoute(
+                          //   builder: (context) => PedidoPage()));
                         },
                         child: const SizedBox(
-                          //   width: 50,
-                          // height: 50,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(Icons.navigate_before),
                               SizedBox(
@@ -828,25 +839,24 @@ class _PedidoPageState extends State<PedidoPage> {
                         ),
                       ),
                       const SizedBox(
-                        //  height: 55,
-                        width: 200,
+                        width: 150,
                       ),
-
                       InkWell(
                         child: const SizedBox(
-                            //   width: ,
-                            height: 50,
                             child: Column(children: [
-                              Icon(Icons.navigate_next),
-                              SizedBox(height: 1),
-                              Text('Gravar')
-                            ])),
+                          Icon(Icons.navigate_next),
+                          SizedBox(height: 1),
+                          Text('Gravar')
+                        ])),
                         onTap: () {
                           if (UndController.text.isNotEmpty &&
-                              QtdController.text.isNotEmpty &&
-                              VrBaseController.text.isNotEmpty &&
-                              PrEfetivoController.text.isNotEmpty &&
-                              VrBrutoController.text.isNotEmpty) {
+                                  QtdController.text.isNotEmpty &&
+                                  VrBaseController.text.isNotEmpty &&
+                                  PrEfetivoController.text.isNotEmpty &&
+                                  VrBrutoController.text.isNotEmpty
+                              //  ArtigoController.text.isNotEmpty &&
+                              //  DetArtigoController.text.isNotEmpty
+                              ) {
                             // Todos os campos estão preenchidos, então você pode gravar os dados
                             // Aqui você colocaria a lógica para gravar os dados
                             showDialog(
@@ -862,14 +872,9 @@ class _PedidoPageState extends State<PedidoPage> {
                                     InkWell(
                                       child: Text("Fechar"),
                                       onTap: () {
-                                        //  dialogType: DialogType.success,
-                                        //   animType: AnimType.scale,
-                                        //title: 'Gravado com sucesso',
-                                        //  btnOkOnPress: () {
                                         // Limpa os campos antes de voltar para a página de pedidos
                                         DtPedidoController.clear();
                                         DtEntregaController.clear();
-                                        VendedorController.clear();
                                         ClienteController.clear();
                                         FreteController.clear();
                                         ObservacaoController.clear();
@@ -879,8 +884,10 @@ class _PedidoPageState extends State<PedidoPage> {
                                         VrBaseController.clear();
                                         PrEfetivoController.clear();
                                         VrBrutoController.clear();
+                                        ArtigoController.clear();
+                                        DetArtigoController.clear();
 
-                                        Navigator.pop(
+                                        Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
@@ -891,10 +898,6 @@ class _PedidoPageState extends State<PedidoPage> {
                                 );
                               },
                             );
-
-                            //   );
-                            // },
-                            //  ).show();
                           } else {
                             showDialog(
                               context: context,
@@ -921,10 +924,6 @@ class _PedidoPageState extends State<PedidoPage> {
                           }
                         },
                       )
-                      //    ],
-                      //   ),
-                      // resumo do pedido
-                      /*  */
                     ],
                   ),
                 )
@@ -932,8 +931,6 @@ class _PedidoPageState extends State<PedidoPage> {
             )
           ],
         ),
-        //   ],
-        // ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
         animationCurve: Curves.easeInOut,
@@ -961,7 +958,6 @@ class _PedidoPageState extends State<PedidoPage> {
               btnOkOnPress: () {
                 DtPedidoController.clear();
                 DtEntregaController.clear();
-                VendedorController.clear();
                 ClienteController.clear();
                 FreteController.clear();
                 ObservacaoController.clear();

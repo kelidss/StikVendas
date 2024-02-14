@@ -221,7 +221,6 @@ class HomePageState extends State<HomePage> {
               btnOkOnPress: () {
                 DtPedidoController.clear();
                 DtEntregaController.clear();
-                VendedorController.clear();
                 ClienteController.clear();
                 FreteController.clear();
                 ObservacaoController.clear();
