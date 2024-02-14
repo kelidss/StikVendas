@@ -81,6 +81,7 @@ class _PedidoPageState extends State<PedidoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Pedido',
           style: TextStyle(
@@ -819,10 +820,10 @@ class _PedidoPageState extends State<PedidoPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          _avancarParaProximaPagina1();
-                          //   Navigator.push(
-                          //   context,
-                          // MaterialPageRoute(
+                          Navigator.pop(context);
+                          // Navigator.push(
+                          //    context,
+                          //  MaterialPageRoute(
                           //   builder: (context) => PedidoPage()));
                         },
                         child: const SizedBox(
