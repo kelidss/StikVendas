@@ -92,7 +92,7 @@ class _PedidoPageState extends State<PedidoPage> {
         backgroundColor: const Color(0xFFD52B1E),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(10.0),
         child: PageView(
           physics: const NeverScrollableScrollPhysics(),
           //scrollDirection: Axis.horizontal,
@@ -133,8 +133,8 @@ class _PedidoPageState extends State<PedidoPage> {
                                     color: color, letterSpacing: 1);
                               },
                             ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20)),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(20, 10, 20, 10)),
                         inputFormatters: [
                           MaskTextInputFormatter(mask: '##/##/####')
                         ],
@@ -168,8 +168,8 @@ class _PedidoPageState extends State<PedidoPage> {
                                     color: color, letterSpacing: 1);
                               },
                             ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20)),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(20, 10, 20, 10)),
                         inputFormatters: [
                           MaskTextInputFormatter(mask: '##/##/####')
                         ],
@@ -184,30 +184,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                 ),
-                /*     const SizedBox(height: 55),
-                TextFormField(
-                  controller: VendedorController,
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.people),
-                      border: const OutlineInputBorder(),
-                      isDense: false,
-                      labelText: 'Vendedor',
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                          (Set<MaterialState> states) {
-                        final Color color = states.contains(MaterialState.error)
-                            ? Theme.of(context).colorScheme.error
-                            : Colors.green;
-                        return TextStyle(color: color, letterSpacing: 1);
-                      }),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                  },
-                  autovalidateMode: AutovalidateMode.always,
-                ),*/
                 const SizedBox(height: 55),
                 TextFormField(
                   controller: ClienteController,
@@ -231,7 +207,6 @@ class _PedidoPageState extends State<PedidoPage> {
                     if (value == null || value == '') {
                       return '';
                     }
-                    return null;
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
@@ -372,7 +347,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                
+
                 /*
                 */
 
@@ -446,7 +421,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                   autovalidateMode: AutovalidateMode.always,
                 ),
-                     Padding(
+                Padding(
                   padding: EdgeInsets.only(bottom: 65),
                 ),
                 const SizedBox(
@@ -483,7 +458,7 @@ class _PedidoPageState extends State<PedidoPage> {
                         });
                       },
                     ),
-                    const Text('Opção C'),
+                    /*   const Text('Opção C'),
                     Radio<String>(
                       value: 'Opção C',
                       groupValue: _selectedOption,
@@ -492,10 +467,10 @@ class _PedidoPageState extends State<PedidoPage> {
                           _selectedOption = value!;
                         });
                       },
-                    ),
+                    ),*/
                   ],
                 ),
-                const SizedBox(height: 55),
+                /*   const SizedBox(height: 55),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -521,121 +496,41 @@ class _PedidoPageState extends State<PedidoPage> {
                             ],
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 50),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  _avancarParaProximaPagina1();
-                                },
-                                child: const SizedBox(
-                                    width: 80,
-                                    height: 45,
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Icon(
-                                            Icons.navigate_next,
-                                            // size:18
-                                          ),
-                                          SizedBox(height: 0),
-                                          Text('Avançar')
-                                        ]))),
-                          ],
-                        ),
-                      ),
-
-                      /*   const SizedBox(height: 55, width: 30),
+                      ),*/
+                const SizedBox(height: 50),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
                       InkWell(
-                        child: const SizedBox(
-                            width: 100,
-                            height: 50,
-                            child: Column(children: [
-                              Icon(Icons.navigate_next),
-                              SizedBox(height: 1),
-                              Text('Gravar')
-                            ])),
-                        onTap: () {
-                          if (UndController.text.isNotEmpty &&
-                              QtdController.text.isNotEmpty &&
-                              VrBaseController.text.isNotEmpty &&
-                              PrEfetivoController.text.isNotEmpty &&
-                              VrBrutoController.text.isNotEmpty) {
-                            // Todos os campos estão preenchidos, então você pode gravar os dados
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text('Pedido feito!'),
-                                  content: Text('Gravado com sucesso',
-                                      textAlign: TextAlign.center),
-                                  shadowColor: Colors.red,
-                                  icon: (Icon(Icons.verified)),
-                                  actions: <Widget>[
-                                    InkWell(
-                                      child: Text("Fechar"),
-                                      onTap: () {
-                                        // Limpa os campos antes de voltar para a página de pedidos
-                                        DtPedidoController.clear();
-                                        DtEntregaController.clear();
-                                        VendedorController.clear();
-                                        ClienteController.clear();
-                                        FreteController.clear();
-                                        ObservacaoController.clear();
-                                        UndController.clear();
-                                        QtdController.clear();
-                                        OcClienteController.clear();
-                                        VrBaseController.clear();
-                                        PrEfetivoController.clear();
-                                        VrBrutoController.clear();
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PedidoPage()));
-                                      },
+                          onTap: () {
+                            _avancarParaProximaPagina1();
+                          },
+                          child: const SizedBox(
+                              width: 80,
+                              height: 45,
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.navigate_next,
+                                      // size:18
                                     ),
-                                  ],
-                                );
-                              },
-                            );
-                          } else {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text("Atenção"),
-                                  content: Text(
-                                    "Campos obrigatórios vazios",
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  shadowColor: Colors.red,
-                                  icon: Icon(Icons.error),
-                                  actions: <Widget>[
-                                    InkWell(
-                                      child: Text("Fechar"),
-                                      onTap: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                        },
-                      )*/
+                                    SizedBox(height: 0),
+                                    Text('Avançar')
+                                  ]))),
                     ],
                   ),
-                )
+                ),
+
+                /*   */
               ],
             ),
+            //   )
+            //   ],
+            //   ),
             //pagina 3
-         Wrap(
+            Wrap(
               children: [
                 const Text(
                   'Boas Vendas',
@@ -645,49 +540,46 @@ class _PedidoPageState extends State<PedidoPage> {
                   ),
                 ),
                 const SizedBox(height: 10),
-            DropdownButtonFormField<String>(
-              value: _selectedArtigo,
-              onChanged: (value) {
-                setState(() {
-                  _selectedArtigo = value;
-                });
-              },
-              items: const [
-                DropdownMenuItem(
-                  value: 'teste',
-                  child: Text('teste'),
+                DropdownButtonFormField<String>(
+                  value: _selectedArtigo,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedArtigo = value;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'teste',
+                      child: Text('teste'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'teste2',
+                      child: Text('teste2'),
+                    ),
+                  ],
+                  decoration: InputDecoration(
+                      labelText: 'Artigo',
+                      prefixIcon: const Icon(Icons.note),
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+                          (Set<MaterialState> states) {
+                        final Color color = states.contains(MaterialState.error)
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.green;
+                        return TextStyle(color: color, letterSpacing: 1);
+                      }),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20)),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return '';
+                    }
+                    return null;
+                  },
+                  autovalidateMode: AutovalidateMode.always,
                 ),
-                DropdownMenuItem(
-                  value: 'teste2',
-                  child: Text('teste2'),
-                ),
-              ],
-              decoration: InputDecoration(
-                labelText: 'Artigo',
-                prefixIcon: const Icon(Icons.note),
-                border: const OutlineInputBorder(),
-                isDense: true,
-                floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                  (Set<MaterialState> states) {
-                    final Color color = states.contains(MaterialState.error)
-                        ? Theme.of(context).colorScheme.error
-                        : Colors.green;
-                    return TextStyle(color: color, letterSpacing: 1);
-                  }
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 10, horizontal: 20
-                )
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return '';
-                }
-                return null;
-              },
-              autovalidateMode: AutovalidateMode.always,
-          ),
-          const SizedBox(height: 55),
+                const SizedBox(height: 55),
                 DropdownButtonFormField<String>(
                   value: _selectedDetalheDoArtigo,
                   onChanged: (newValue) {
@@ -727,6 +619,7 @@ class _PedidoPageState extends State<PedidoPage> {
                   },
                   autovalidateMode: AutovalidateMode.always,
                 ),
+                const SizedBox(height: 55),
                 Row(
                   children: [
                     SizedBox(height: 55),
@@ -795,69 +688,86 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                   ],
                 ),
-                 const SizedBox(height: 55),
-                TextFormField(
-                  controller: VrBaseController,
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.monetization_on),
-                      hintText: '0,0',
-                      labelText: 'Valor Base',
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                        (Set<MaterialState> states) {
-                          final Color color =
-                              states.contains(MaterialState.error)
-                                  ? Theme.of(context).colorScheme.error
-                                  : Colors.green;
-                          return TextStyle(color: color, letterSpacing: 1);
-                        },
+                SizedBox(height: 55),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: TextFormField(
+                          controller: VrBaseController,
+                          decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.monetization_on),
+                              hintText: '0,0',
+                              labelText: 'Valor Base',
+                              border: const OutlineInputBorder(),
+                              isDense: true,
+                              floatingLabelStyle:
+                                  MaterialStateTextStyle.resolveWith(
+                                (Set<MaterialState> states) {
+                                  final Color color =
+                                      states.contains(MaterialState.error)
+                                          ? Theme.of(context).colorScheme.error
+                                          : Colors.green;
+                                  return TextStyle(
+                                      color: color, letterSpacing: 1);
+                                },
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20)),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            CurrencyPtBrInputFormatter()
+                          ],
+                          keyboardType: TextInputType.number,
+                          validator: (String? value) {
+                            if (value == null || value == '') {
+                              return '';
+                            }
+                          },
+                          autovalidateMode: AutovalidateMode.always,
+                        ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    CurrencyPtBrInputFormatter()
-                  ],
-                  keyboardType: TextInputType.number,
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                  },
-                  autovalidateMode: AutovalidateMode.always,
-                ),
-                const SizedBox(height: 55),
-                TextFormField(
-                  controller: PrEfetivoController,
-                  decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.monetization_on),
-                      hintText: '0,0',
-                      labelText: 'Preço Efetivo',
-                      border: const OutlineInputBorder(),
-                      isDense: true,
-                      floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-                        (Set<MaterialState> states) {
-                          final Color color =
-                              states.contains(MaterialState.error)
-                                  ? Theme.of(context).colorScheme.error
-                                  : Colors.green;
-                          return TextStyle(color: color, letterSpacing: 1);
-                        },
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: TextFormField(
+                          controller: PrEfetivoController,
+                          decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.monetization_on),
+                              hintText: '0,0',
+                              labelText: 'Preço Efetivo',
+                              border: const OutlineInputBorder(),
+                              isDense: true,
+                              floatingLabelStyle:
+                                  MaterialStateTextStyle.resolveWith(
+                                (Set<MaterialState> states) {
+                                  final Color color =
+                                      states.contains(MaterialState.error)
+                                          ? Theme.of(context).colorScheme.error
+                                          : Colors.green;
+                                  return TextStyle(
+                                      color: color, letterSpacing: 1);
+                                },
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20)),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            CurrencyPtBrInputFormatter()
+                          ],
+                          keyboardType: TextInputType.number,
+                          validator: (String? value) {
+                            if (value == null || value == '') {
+                              return '';
+                            }
+                          },
+                          autovalidateMode: AutovalidateMode.always,
+                        ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20)),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    CurrencyPtBrInputFormatter()
+                    ),
                   ],
-                  keyboardType: TextInputType.number,
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return '';
-                    }
-                  },
-                  autovalidateMode: AutovalidateMode.always,
                 ),
                 const SizedBox(height: 55),
                 TextFormField(
@@ -890,12 +800,141 @@ class _PedidoPageState extends State<PedidoPage> {
                       }
                     },
                     autovalidateMode: AutovalidateMode.always),
+                const SizedBox(height: 55),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PedidoPage()));
+                        },
+                        child: const SizedBox(
+                          //   width: 50,
+                          // height: 50,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.navigate_before),
+                              SizedBox(
+                                height: 1,
+                              ),
+                              Text('Voltar')
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        //  height: 55,
+                        width: 200,
+                      ),
+
+                      InkWell(
+                        child: const SizedBox(
+                            //   width: ,
+                            height: 50,
+                            child: Column(children: [
+                              Icon(Icons.navigate_next),
+                              SizedBox(height: 1),
+                              Text('Gravar')
+                            ])),
+                        onTap: () {
+                          if (UndController.text.isNotEmpty &&
+                              QtdController.text.isNotEmpty &&
+                              VrBaseController.text.isNotEmpty &&
+                              PrEfetivoController.text.isNotEmpty &&
+                              VrBrutoController.text.isNotEmpty) {
+                            // Todos os campos estão preenchidos, então você pode gravar os dados
+                            // Aqui você colocaria a lógica para gravar os dados
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Pedido feito!'),
+                                  content: Text('Gravado com sucesso',
+                                      textAlign: TextAlign.center),
+                                  shadowColor: Colors.red,
+                                  icon: (Icon(Icons.verified)),
+                                  actions: <Widget>[
+                                    InkWell(
+                                      child: Text("Fechar"),
+                                      onTap: () {
+                                        //  dialogType: DialogType.success,
+                                        //   animType: AnimType.scale,
+                                        //title: 'Gravado com sucesso',
+                                        //  btnOkOnPress: () {
+                                        // Limpa os campos antes de voltar para a página de pedidos
+                                        DtPedidoController.clear();
+                                        DtEntregaController.clear();
+                                        VendedorController.clear();
+                                        ClienteController.clear();
+                                        FreteController.clear();
+                                        ObservacaoController.clear();
+                                        UndController.clear();
+                                        QtdController.clear();
+                                        OcClienteController.clear();
+                                        VrBaseController.clear();
+                                        PrEfetivoController.clear();
+                                        VrBrutoController.clear();
+
+                                        Navigator.pop(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PedidoPage()));
+                                      },
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+
+                            //   );
+                            // },
+                            //  ).show();
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text("Atenção"),
+                                  content: Text(
+                                    "Campos obrigatórios vazios",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  shadowColor: Colors.red,
+                                  icon: Icon(Icons.error),
+                                  actions: <Widget>[
+                                    InkWell(
+                                      child: Text("Fechar"),
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        },
+                      )
+                      //    ],
+                      //   ),
+                      // resumo do pedido
+                      /*  */
+                    ],
+                  ),
+                )
+              ],
+            )
           ],
         ),
-                  ]
-                ),
-              ),
-    
+        //   ],
+        // ),
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         animationCurve: Curves.easeInOut,
         backgroundColor: Colors.white,
