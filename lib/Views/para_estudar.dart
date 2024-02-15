@@ -12,9 +12,9 @@ import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 import 'package:intl/intl.dart';
 
-void main() {
-  runApp(MyApp());
-}
+//void main() {
+  //runApp(MyApp());
+//}
 
 class MyApp extends StatelessWidget {
   @override
@@ -39,13 +39,12 @@ class PedidoPage extends StatefulWidget {
 class _PedidoPageState extends State<PedidoPage> {
   int _currentIndex = 0;
   late PageController _pageController;
-   String? _selectedTipoDocumento;
+  String? _selectedTipoDocumento;
   String? _selectedTipoCobranca;
   String? _selectedFormaPagamento;
   String? _selectedArtigo;
   String? _selectedDetalheDoArtigo;
   String _selectedOption = '';
-
 
   @override
   void initState() {
@@ -78,7 +77,7 @@ class _PedidoPageState extends State<PedidoPage> {
           ],
         ),
       ),
-       bottomNavigationBar: CurvedNavigationBar(
+      bottomNavigationBar: CurvedNavigationBar(
         animationCurve: Curves.easeInOut,
         backgroundColor: Colors.white,
         color: const Color(0xFFD52B1E),
@@ -94,7 +93,6 @@ class _PedidoPageState extends State<PedidoPage> {
           });
           await Future.delayed(const Duration(seconds: 1));
           if (_currentIndex == 1) {
-            // ignore: use_build_context_synchronously
             AwesomeDialog(
               context: context,
               dialogType: DialogType.warning,
@@ -149,11 +147,21 @@ class _PedidoPageState extends State<PedidoPage> {
         const SizedBox(height: 70),
         _buildTextFormField('Cliente', controller: ClienteController),
         const SizedBox(height: 70),
-        _buildDropdownButtonFormField('Tipo de Documento', _selectedTipoDocumento, ['Pedido DC', 'Nota fiscal eletrônica']),
+        _buildDropdownButtonFormField('Tipo de Documento',
+            _selectedTipoDocumento, ['Pedido DC', 'Nota fiscal eletrônica']),
         const SizedBox(height: 70),
-        _buildDropdownButtonFormField('Tipo de Cobrança', _selectedTipoCobranca, ['Boleto', 'PIX']),
+        _buildDropdownButtonFormField(
+            'Tipo de Cobrança', _selectedTipoCobranca, ['Boleto', 'PIX']),
         const SizedBox(height: 70),
-        _buildDropdownButtonFormField('Forma de pagamento', _selectedFormaPagamento, ['30 DIAS', '60 DIAS', '90 DIAS', '51 DIAS', '71 DIAS', '111 DIAS']),
+        _buildDropdownButtonFormField(
+            'Forma de pagamento', _selectedFormaPagamento, [
+          '30 DIAS',
+          '60 DIAS',
+          '90 DIAS',
+          '51 DIAS',
+          '71 DIAS',
+          '111 DIAS'
+        ]),
         const SizedBox(height: 70),
         _buildNextButton(),
       ],
@@ -172,9 +180,11 @@ class _PedidoPageState extends State<PedidoPage> {
           ),
         ),
         const SizedBox(height: 10),
-        _buildTextFormField('Observação', controller: ObservacaoController, hintText: 'não obrigatório'),
+        _buildTextFormField('Observação',
+            controller: ObservacaoController, hintText: 'não obrigatório'),
         const SizedBox(height: 70),
-        _buildTextFormField('OC Cliente', controller: OcClienteController, hintText: 'não obrigatório'),
+        _buildTextFormField('OC Cliente',
+            controller: OcClienteController, hintText: 'não obrigatório'),
         const SizedBox(height: 70),
         _buildFreteSection(),
         const SizedBox(height: 50),
@@ -195,9 +205,11 @@ class _PedidoPageState extends State<PedidoPage> {
           ),
         ),
         const SizedBox(height: 10),
-        _buildDropdownButtonFormField('Artigo', _selectedArtigo, ['teste', 'teste2']),
+        _buildDropdownButtonFormField(
+            'Artigo', _selectedArtigo, ['teste', 'teste2']),
         const SizedBox(height: 70),
-        _buildDropdownButtonFormField('Detalhe do artigo', _selectedDetalheDoArtigo, ['teste3', 'teste4']),
+        _buildDropdownButtonFormField('Detalhe do artigo',
+            _selectedDetalheDoArtigo, ['teste3', 'teste4']),
         const SizedBox(height: 60),
         Row(
           children: [
@@ -206,7 +218,8 @@ class _PedidoPageState extends State<PedidoPage> {
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: _buildTextFormField('Quantidade', controller: QtdController),
+              child:
+                  _buildTextFormField('Quantidade', controller: QtdController),
             ),
           ],
         ),
@@ -216,13 +229,15 @@ class _PedidoPageState extends State<PedidoPage> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
-                child: _buildCurrencyTextFormField('Valor Base', controller: VrBaseController),
+                child: _buildCurrencyTextFormField('Valor Base',
+                    controller: VrBaseController),
               ),
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: _buildCurrencyTextFormField('Preço Efetivo', controller: PrEfetivoController),
+                child: _buildCurrencyTextFormField('Preço Efetivo',
+                    controller: PrEfetivoController),
               ),
             ),
           ],
@@ -235,13 +250,20 @@ class _PedidoPageState extends State<PedidoPage> {
             hintText: '0,0',
             border: const OutlineInputBorder(),
             labelText: 'Valor Bruto',
-            floatingLabelStyle: MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-              final Color color = states.contains(MaterialState.error) ? Theme.of(context).colorScheme.error : Colors.green;
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              final Color color = states.contains(MaterialState.error)
+                  ? Theme.of(context).colorScheme.error
+                  : Colors.green;
               return TextStyle(color: color, letterSpacing: 1);
             }),
-            contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           ),
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly, CurrencyPtBrInputFormatter()],
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            CurrencyPtBrInputFormatter()
+          ],
           keyboardType: TextInputType.number,
           validator: (String? value) {
             if (value == null || value == '') {
@@ -261,34 +283,43 @@ class _PedidoPageState extends State<PedidoPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildButton(Icons.navigate_before, 'Voltar', () {}),
+          _buildVoltarButton(),
           SizedBox(width: 200),
-          _buildButton(Icons.navigate_next, 'Gravar', () => _showDialog(context)),
+          _buildButton(Icons.done, () => _showDialog(context)),
         ],
       ),
     );
   }
 
-  Widget _buildButton(IconData icon, String label, Function() onTap) {
+  Widget _buildButton(IconData icon, Function() onTap) {
     return InkWell(
       onTap: onTap,
-      child: SizedBox(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Icon(icon), SizedBox(height: 1), Text(label)],
+      child: Container(
+         padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(0xFFD52B1E),
+        ),
+        child: const Icon(
+          Icons.navigate_next,
+          color: Colors.white,
+          size: 30,
         ),
       ),
     );
   }
 
   void _showDialog(BuildContext context) {
-    if (UndController.text.isNotEmpty && QtdController.text.isNotEmpty && VrBrutoController.text.isNotEmpty) {
+    if (UndController.text.isNotEmpty &&
+        QtdController.text.isNotEmpty &&
+        VrBrutoController.text.isNotEmpty) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Pedido feito!'),
-            content: const Text('Gravado com sucesso', textAlign: TextAlign.center),
+            content:
+                const Text('Gravado com sucesso', textAlign: TextAlign.center),
             shadowColor: Colors.red,
             icon: const Icon(Icons.verified),
             actions: <Widget>[
@@ -306,7 +337,8 @@ class _PedidoPageState extends State<PedidoPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text("Atenção"),
-            content: const Text("Campos obrigatórios vazios", textAlign: TextAlign.center),
+            content: const Text("Campos obrigatórios vazios",
+                textAlign: TextAlign.center),
             shadowColor: Colors.red,
             icon: const Icon(Icons.error),
             actions: <Widget>[
@@ -344,7 +376,8 @@ class _PedidoPageState extends State<PedidoPage> {
     );
   }
 
-  Widget _buildText(String text, {double fontSize = 0.2, required TextStyle style}) {
+  Widget _buildText(String text,
+      {double fontSize = 0.2, required TextStyle style}) {
     return Text(
       text,
       textAlign: TextAlign.center,
@@ -369,10 +402,14 @@ class _PedidoPageState extends State<PedidoPage> {
         border: const OutlineInputBorder(),
         floatingLabelStyle: MaterialStateTextStyle.resolveWith(
           (Set<MaterialState> states) {
-            final Color color = states.contains(MaterialState.error) ? Theme.of(context).colorScheme.error : Colors.green;
+            final Color color = states.contains(MaterialState.error)
+                ? Theme.of(context).colorScheme.error
+                : Colors.green;
             return TextStyle(color: color, letterSpacing: 1);
           },
         ),
+          contentPadding:
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       ),
       validator: (String? value) {
         if (value == null || value == '') {
@@ -390,13 +427,15 @@ class _PedidoPageState extends State<PedidoPage> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: _buildDateTextFormField('Data Pedido', controller: DtPedidoController),
+            child: _buildDateTextFormField('Data Pedido',
+                controller: DtPedidoController),
           ),
         ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: _buildDateTextFormField('Data Entrega', controller: DtEntregaController),
+            child: _buildDateTextFormField('Data Entrega',
+                controller: DtEntregaController),
           ),
         ),
       ],
@@ -417,7 +456,8 @@ class _PedidoPageState extends State<PedidoPage> {
         border: const OutlineInputBorder(),
         isDense: false,
         labelText: label,
-        floatingLabelStyle: const TextStyle(color: Colors.green, letterSpacing: 1),
+        floatingLabelStyle:
+            const TextStyle(color: Colors.green, letterSpacing: 1),
         contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       ),
       inputFormatters: [MaskTextInputFormatter(mask: '##/##/####')],
@@ -438,7 +478,8 @@ class _PedidoPageState extends State<PedidoPage> {
       decoration: InputDecoration(
         labelText: label,
         border: const OutlineInputBorder(),
-        floatingLabelStyle: const TextStyle(color: Colors.green, letterSpacing: 1),
+        floatingLabelStyle:
+            const TextStyle(color: Colors.green, letterSpacing: 1),
         contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       ),
       validator: (String? value) {
@@ -472,6 +513,7 @@ class _PedidoPageState extends State<PedidoPage> {
               _selectedOption = value!;
             });
           },
+          activeColor: Colors.red,
         ),
         Text(label),
       ],
@@ -510,14 +552,41 @@ class _PedidoPageState extends State<PedidoPage> {
     );
   }
 
+  Widget _buildVoltarButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        InkWell(
+          onTap: () {
+            if (_pageController.page == 0) {
+            } else {
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color(0xFFD52B1E),
+            ),
+            child: const Icon(
+              Icons.navigate_before,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   void _avancarParaProximaPagina1() {
     if (DtPedidoController.text.isNotEmpty &&
-        DtEntregaController.text.isNotEmpty &&
-        ClienteController.text.isNotEmpty
+            DtEntregaController.text.isNotEmpty &&
+            ClienteController.text.isNotEmpty
         // &&
-   //     _selectedTipoDocumento != null &&
-     //   _selectedTipoCobranca != null &&
-       // _selectedFormaPagamento != null
+        //     _selectedTipoDocumento != null &&
+        //   _selectedTipoCobranca != null &&
+        // _selectedFormaPagamento != null
         ) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -540,9 +609,18 @@ class _PedidoPageState extends State<PedidoPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(width: 20),
+        const Text('Frete:',
+            style: TextStyle(
+              fontSize: 16,
+            )),
+        SizedBox(height: 10),
         _buildRadio('CIF'),
         _buildRadio('FOB'),
-       _buildRadio('Sem frete'),
+        _buildRadio('Terceiros'),
+        _buildRadio('Remetente'),
+        _buildRadio('Destinatário'),
+        _buildRadio('Sem frete'),
         const SizedBox(height: 20),
       ],
     );
@@ -561,13 +639,20 @@ class _PedidoPageState extends State<PedidoPage> {
         hintText: hintText,
         border: const OutlineInputBorder(),
         labelText: label,
-        floatingLabelStyle: MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-          final Color color = states.contains(MaterialState.error) ? Theme.of(context).colorScheme.error : Colors.green;
+        floatingLabelStyle:
+            MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+          final Color color = states.contains(MaterialState.error)
+              ? Theme.of(context).colorScheme.error
+              : Colors.green;
           return TextStyle(color: color, letterSpacing: 1);
         }),
-        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       ),
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly, CurrencyPtBrInputFormatter()],
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        CurrencyPtBrInputFormatter()
+      ],
       keyboardType: TextInputType.number,
       validator: (String? value) {
         if (value == null || value == '') {
@@ -584,6 +669,7 @@ class _PedidoPageState extends State<PedidoPage> {
     super.dispose();
   }
 }
+
 class CurrencyPtBrInputFormatter extends TextInputFormatter {
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
