@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,21 +11,7 @@ import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 import 'package:intl/intl.dart';
 
-//void main() {
-  //runApp(MyApp());
-//}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pedido App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const PedidoPage(),
-    );
-  }
+void main() {
 }
 
 class PedidoPage extends StatefulWidget {
@@ -35,6 +20,7 @@ class PedidoPage extends StatefulWidget {
   @override
   _PedidoPageState createState() => _PedidoPageState();
 }
+
 
 class _PedidoPageState extends State<PedidoPage> {
   int _currentIndex = 0;
@@ -56,6 +42,7 @@ class _PedidoPageState extends State<PedidoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Pedido',
           style: TextStyle(
@@ -101,18 +88,7 @@ class _PedidoPageState extends State<PedidoPage> {
               desc: 'Tem certeza que deseja sair?',
               btnCancelOnPress: () {},
               btnOkOnPress: () {
-                DtPedidoController.clear();
-                DtEntregaController.clear();
-                ClienteController.clear();
-                FreteController.clear();
-                ObservacaoController.clear();
-                UndController.clear();
-                QtdController.clear();
-                OcClienteController.clear();
-                VrBaseController.clear();
-                PrEfetivoController.clear();
-                VrBrutoController.clear();
-
+                _clearFieldsAndNavigate(context);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -169,28 +145,26 @@ class _PedidoPageState extends State<PedidoPage> {
   }
 
   Widget _buildPage2() {
-    return Wrap(
-      children: [
-        _buildText(
-          'Boas Vendas',
+    return Wrap(children: [
+      _buildText(
+        'Boas Vendas',
+        fontSize: 0.5,
+        style: const TextStyle(
+          color: Colors.white,
           fontSize: 0.5,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 0.5,
-          ),
         ),
-        const SizedBox(height: 10),
-        _buildTextFormField('Observação',
-            controller: ObservacaoController, hintText: 'não obrigatório'),
-        const SizedBox(height: 70),
-        _buildTextFormField('OC Cliente',
-            controller: OcClienteController, hintText: 'não obrigatório'),
-        const SizedBox(height: 70),
-        _buildFreteSection(),
-        const SizedBox(height: 50),
-        _buildNextButton(),
-      ],
-    );
+      ),
+      const SizedBox(height: 10),
+      _buildTextFormField('Observação',
+          controller: ObservacaoController, hintText: 'não obrigatório'),
+      const SizedBox(height: 70),
+      _buildTextFormField('OC Cliente',
+          controller: OcClienteController, hintText: 'não obrigatório'),
+      const SizedBox(height: 70),
+      _buildFreteSection(),
+      //   const SizedBox(height: 70),
+      _buildButtonRow2()
+    ]);
   }
 
   Widget _buildPage3() {
@@ -291,11 +265,49 @@ class _PedidoPageState extends State<PedidoPage> {
     );
   }
 
+  Widget _buildButtonRow2() {
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildVoltarButton(),
+          SizedBox(width: 200),
+          _buildButton2(Icons.done, () => _showDialog(context)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildButton2(IconData icon, Function() onTap) {
+    return InkWell(
+      onTap: () {
+        if (_pageController.page! < 2) {
+          _pageController.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(0xFFD52B1E),
+        ),
+        child: const Icon(
+          Icons.navigate_next,
+          color: Colors.white,
+          size: 30,
+        ),
+      ),
+    );
+  }
+
   Widget _buildButton(IconData icon, Function() onTap) {
     return InkWell(
       onTap: onTap,
       child: Container(
-         padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: Color(0xFFD52B1E),
@@ -313,45 +325,15 @@ class _PedidoPageState extends State<PedidoPage> {
     if (UndController.text.isNotEmpty &&
         QtdController.text.isNotEmpty &&
         VrBrutoController.text.isNotEmpty) {
-      showDialog(
+      AwesomeDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Pedido feito!'),
-            content:
-                const Text('Gravado com sucesso', textAlign: TextAlign.center),
-            shadowColor: Colors.red,
-            icon: const Icon(Icons.verified),
-            actions: <Widget>[
-              InkWell(
-                child: const Text("Fechar"),
-                onTap: () => _clearFieldsAndNavigate(context),
-              )
-            ],
-          );
+        dialogType: DialogType.success,
+        animType: AnimType.scale,
+        title: 'Pedido feito!',
+        btnOkOnPress: () {
+          _clearFieldsAndNavigate(context);
         },
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text("Atenção"),
-            content: const Text("Campos obrigatórios vazios",
-                textAlign: TextAlign.center),
-            shadowColor: Colors.red,
-            icon: const Icon(Icons.error),
-            actions: <Widget>[
-              InkWell(
-                child: const Text("Fechar"),
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+      ).show();
     }
   }
 
@@ -408,7 +390,7 @@ class _PedidoPageState extends State<PedidoPage> {
             return TextStyle(color: color, letterSpacing: 1);
           },
         ),
-          contentPadding:
+        contentPadding:
             const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       ),
       validator: (String? value) {
@@ -558,8 +540,11 @@ class _PedidoPageState extends State<PedidoPage> {
       children: [
         InkWell(
           onTap: () {
-            if (_pageController.page == 0) {
-            } else {
+            if (_pageController.page! > 0) {
+              _pageController.previousPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              );
             }
           },
           child: Container(
@@ -582,8 +567,7 @@ class _PedidoPageState extends State<PedidoPage> {
   void _avancarParaProximaPagina1() {
     if (DtPedidoController.text.isNotEmpty &&
             DtEntregaController.text.isNotEmpty &&
-            ClienteController.text.isNotEmpty
-        // &&
+            ClienteController.text.isNotEmpty 
         //     _selectedTipoDocumento != null &&
         //   _selectedTipoCobranca != null &&
         // _selectedFormaPagamento != null
@@ -606,22 +590,38 @@ class _PedidoPageState extends State<PedidoPage> {
   }
 
   Widget _buildFreteSection() {
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(width: 20),
-        const Text('Frete:',
-            style: TextStyle(
-              fontSize: 16,
-            )),
-        SizedBox(height: 10),
-        _buildRadio('CIF'),
-        _buildRadio('FOB'),
-        _buildRadio('Terceiros'),
-        _buildRadio('Remetente'),
-        _buildRadio('Destinatário'),
-        _buildRadio('Sem frete'),
-        const SizedBox(height: 20),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Frete:',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _buildRadio('CIF'),
+              _buildRadio('FOB'),
+              _buildRadio('Terceiros'),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 30),
+              _buildRadio('Remetente'),
+              _buildRadio('Destinatário'),
+              _buildRadio('Sem frete'),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -667,22 +667,5 @@ class _PedidoPageState extends State<PedidoPage> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
-  }
-}
-
-class CurrencyPtBrInputFormatter extends TextInputFormatter {
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.selection.baseOffset == 0) {
-      return newValue;
-    }
-
-    double value = double.parse(newValue.text);
-    final formatter = NumberFormat("#,##0.00", "pt_BR");
-    String newText = "R\$ ${formatter.format(value / 100)}";
-
-    return newValue.copyWith(
-        text: newText,
-        selection: TextSelection.collapsed(offset: newText.length));
   }
 }

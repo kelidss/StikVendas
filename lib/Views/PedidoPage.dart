@@ -84,18 +84,7 @@ class _PedidoPageState extends State<PedidoPage> {
               desc: 'Tem certeza que deseja sair?',
               btnCancelOnPress: () {},
               btnOkOnPress: () {
-                DtPedidoController.clear();
-                DtEntregaController.clear();
-                ClienteController.clear();
-                FreteController.clear();
-                ObservacaoController.clear();
-                UndController.clear();
-                QtdController.clear();
-                OcClienteController.clear();
-                VrBaseController.clear();
-                PrEfetivoController.clear();
-                VrBrutoController.clear();
-
+                _clearFieldsAndNavigate(context);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -332,45 +321,25 @@ class _PedidoPageState extends State<PedidoPage> {
     if (UndController.text.isNotEmpty &&
         QtdController.text.isNotEmpty &&
         VrBrutoController.text.isNotEmpty) {
-      showDialog(
+      AwesomeDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Pedido feito!'),
-            content:
-                const Text('Gravado com sucesso', textAlign: TextAlign.center),
-            shadowColor: Colors.red,
-            icon: const Icon(Icons.verified),
-            actions: <Widget>[
-              InkWell(
-                child: const Text("Fechar"),
-                onTap: () => _clearFieldsAndNavigate(context),
-              )
-            ],
-          );
+        dialogType: DialogType.success,
+        animType: AnimType.scale,
+        title: 'Pedido feito!',
+        btnOkOnPress: () {
+          _clearFieldsAndNavigate(context);
         },
-      );
-    } else {
-      showDialog(
+      ).show();
+  } else {
+      AwesomeDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text("Atenção"),
-            content: const Text("Campos obrigatórios vazios",
-                textAlign: TextAlign.center),
-            shadowColor: Colors.red,
-            icon: const Icon(Icons.error),
-            actions: <Widget>[
-              InkWell(
-                child: const Text("Fechar"),
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+        dialogType: DialogType.warning,
+        animType: AnimType.scale,
+        title: 'Erro',
+        desc: 'Preencha todos os campos obrigatórios',
+        btnCancelOnPress: () {},
+        btnCancelText: 'Fechar',
+      ).show();
     }
   }
 
@@ -604,8 +573,7 @@ class _PedidoPageState extends State<PedidoPage> {
   void _avancarParaProximaPagina1() {
     if (DtPedidoController.text.isNotEmpty &&
             DtEntregaController.text.isNotEmpty &&
-            ClienteController.text.isNotEmpty
-        // &&
+            ClienteController.text.isNotEmpty 
         //     _selectedTipoDocumento != null &&
         //   _selectedTipoCobranca != null &&
         // _selectedFormaPagamento != null
@@ -699,28 +667,5 @@ class _PedidoPageState extends State<PedidoPage> {
       },
       autovalidateMode: AutovalidateMode.always,
     );
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-}
-
-class CurrencyPtBrInputFormatter extends TextInputFormatter {
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.selection.baseOffset == 0) {
-      return newValue;
-    }
-
-    double value = double.parse(newValue.text);
-    final formatter = NumberFormat("#,##0.00", "pt_BR");
-    String newText = "R\$ ${formatter.format(value / 100)}";
-
-    return newValue.copyWith(
-        text: newText,
-        selection: TextSelection.collapsed(offset: newText.length));
   }
 }
