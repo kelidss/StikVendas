@@ -4,12 +4,12 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:stik_vendas/Controllers/Controller_Faturamento.dart';
-import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
-import 'package:stik_vendas/Models/Model_Faturamento.dart';
-import 'package:stik_vendas/Views/FeedsPage.dart';
-import 'package:stik_vendas/Views/HomePage.dart';
-import 'package:stik_vendas/Views/LoginPage.dart';
+import 'package:stik_vendas/Controllers/FaturamentoController.dart';
+import 'package:stik_vendas/Controllers/PedidoController.dart';
+import 'package:stik_vendas/Models/FaturamentoModel.dart';
+import 'package:stik_vendas/Views/FeedsPageView.dart';
+import 'package:stik_vendas/Views/HomePageView.dart';
+import 'package:stik_vendas/Views/LoginPageView.dart';
 
 class FaturamentoPage extends StatefulWidget {
   const FaturamentoPage({Key? key}) : super(key: key);

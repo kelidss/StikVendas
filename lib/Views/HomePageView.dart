@@ -1,13 +1,13 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
-import 'package:stik_vendas/Models/Model_Login.dart';
-import 'package:stik_vendas/Views/EstoquePage.dart';
-import 'package:stik_vendas/Views/FaturamentoPage.dart';
-import 'package:stik_vendas/Views/FeedsPage.dart';
-import 'package:stik_vendas/Views/LoginPage.dart';
-import 'package:stik_vendas/Views/PedidoPage.dart';
+import 'package:stik_vendas/Controllers/PedidoController.dart';
+import 'package:stik_vendas/Models/LoginModel.dart';
+import 'package:stik_vendas/Views/EstoquePageView.dart';
+import 'package:stik_vendas/Views/FaturamentoPageView.dart';
+import 'package:stik_vendas/Views/FeedsPageView.dart';
+import 'package:stik_vendas/Views/LoginPageView.dart';
+import 'package:stik_vendas/Views/PedidoPageView.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class HomePage extends StatefulWidget {

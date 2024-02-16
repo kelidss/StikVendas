@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:stik_vendas/Models/Model_Estoque.dart';
+import 'package:stik_vendas/Models/EstoqueModel.dart';
 
 class EstoqueController {
   List<ItemEstoque> getEstoqueData() {

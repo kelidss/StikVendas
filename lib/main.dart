@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:stik_vendas/Views/EstoquePage.dart';
-import 'package:stik_vendas/Views/FaturamentoPage.dart';
-import 'package:stik_vendas/Views/FeedsPage.dart';
-import 'package:stik_vendas/Views/HomePage.dart';
-import 'package:stik_vendas/Views/LoginPage.dart';
+import 'package:stik_vendas/Views/EstoquePageView.dart';
+import 'package:stik_vendas/Views/FaturamentoPageView.dart';
+import 'package:stik_vendas/Views/FeedsPageView.dart';
+import 'package:stik_vendas/Views/HomePageView.dart';
+import 'package:stik_vendas/Views/LoginPageView.dart';
 
 void main() {
   runApp(const MyApp());

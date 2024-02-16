@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:stik_vendas/Models/Model_Login.dart';
-import 'HomePage.dart';
+import 'package:stik_vendas/Models/LoginModel.dart';
+import 'HomePageView.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

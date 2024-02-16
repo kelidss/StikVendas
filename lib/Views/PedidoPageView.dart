@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
-import 'package:stik_vendas/Views/FeedsPage.dart';
-import 'package:stik_vendas/Views/HomePage.dart';
-import 'package:stik_vendas/Views/LoginPage.dart';
+import 'package:stik_vendas/Controllers/PedidoController.dart';
+import 'package:stik_vendas/Views/FeedsPageView.dart';
+import 'package:stik_vendas/Views/HomePageView.dart';
+import 'package:stik_vendas/Views/LoginPageView.dart';
 import 'package:intl/intl.dart';
 
 class PedidoPage extends StatefulWidget {
@@ -167,7 +167,6 @@ class _PedidoPageState extends State<PedidoPage> {
           controller: OcClienteController, hintText: 'não obrigatório'),
       const SizedBox(height: 70),
       _buildFreteSection(),
-      //   const SizedBox(height: 70),
       _buildButtonRow2()
     ]);
   }
@@ -270,27 +269,10 @@ class _PedidoPageState extends State<PedidoPage> {
     );
   }
 
-  /* Widget _buildButtonRow2() {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _buildVoltarButton(),
-          SizedBox(width: 200),
-          _buildButton2(Icons.done, () => _showDialog(context)),
-        ],
-      ),
-    );
-  }
-*/
   Widget _buildButton2(IconData icon, Function() onTap) {
     return InkWell(
       onTap: () {
-        if (_selectedOption != null && _selectedFrete != null
-            //   FreteController.text.isNotEmpty &&
-            //  ObservacaoController.text.isNotEmpty &&
-            //   OcClienteController.text.isNotEmpty
-            ) {
+        if (_selectedOption != null && _selectedFrete != null){
           _pageController.nextPage(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
@@ -641,9 +623,6 @@ class _PedidoPageState extends State<PedidoPage> {
             _selectedTipoDocumento != null &&
             _selectedTipoCobranca != null &&
             _selectedFormaPagamento != null
-        //  &&
-        //   _selectedOption != null &&
-        //  _selectedFrete != null
         ) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -666,9 +645,6 @@ class _PedidoPageState extends State<PedidoPage> {
     if (_selectedOption != null &&
             _selectedFrete != null &&
             FreteController.text.isNotEmpty
-        //&&
-        //ObservacaoController.text.isNotEmpty &&
-        // OcClienteController.text.isNotEmpty
         ) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -693,9 +669,9 @@ class _PedidoPageState extends State<PedidoPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _buildVoltarButton(),
-          SizedBox(width: 200),
+          const SizedBox(width: 200),
           _buildButton2(
-              Icons.done, () => _avancarParaProximaPagina2()), // Alteração aqui
+              Icons.done, () => _avancarParaProximaPagina2()),
         ],
       ),
     );

@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:stik_vendas/Models/Model_Faturamento.dart';
+import 'package:stik_vendas/Models/FaturamentoModel.dart';
 
 class FaturamentoController {
   List<Faturamento> getFaturamentoData() {
@@ -25,6 +25,7 @@ class FaturamentoController {
       'Jacqueline Ferreira',
       'Alexandre Junior',
       'Tony Soares'
+      'Marcos Viniicius'
     ];
 
     return List.generate(

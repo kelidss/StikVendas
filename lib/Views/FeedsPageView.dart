@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:stik_vendas/Controllers/Controller_Pedido.dart';
-import 'package:stik_vendas/Views/HomePage.dart';
-import 'package:stik_vendas/Views/LoginPage.dart';
+import 'package:stik_vendas/Controllers/PedidoController.dart';
+import 'package:stik_vendas/Views/HomePageView.dart';
+import 'package:stik_vendas/Views/LoginPageView.dart';
 
 class FeedsPage extends StatefulWidget {
   final String? nomeUsuario;
