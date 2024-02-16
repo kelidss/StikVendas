@@ -11,16 +11,12 @@ import 'package:stik_vendas/Views/HomePage.dart';
 import 'package:stik_vendas/Views/LoginPage.dart';
 import 'package:intl/intl.dart';
 
-void main() {
-}
-
 class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
 
   @override
   _PedidoPageState createState() => _PedidoPageState();
 }
-
 
 class _PedidoPageState extends State<PedidoPage> {
   int _currentIndex = 0;
@@ -334,6 +330,16 @@ class _PedidoPageState extends State<PedidoPage> {
           _clearFieldsAndNavigate(context);
         },
       ).show();
+    } else {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.warning,
+        animType: AnimType.scale,
+        title: 'Erro',
+        desc: 'Preencha todos os campos obrigatórios',
+        btnCancelOnPress: () {},
+        btnCancelText: 'Fechar',
+      ).show();
     }
   }
 
@@ -567,7 +573,7 @@ class _PedidoPageState extends State<PedidoPage> {
   void _avancarParaProximaPagina1() {
     if (DtPedidoController.text.isNotEmpty &&
             DtEntregaController.text.isNotEmpty &&
-            ClienteController.text.isNotEmpty 
+            ClienteController.text.isNotEmpty
         //     _selectedTipoDocumento != null &&
         //   _selectedTipoCobranca != null &&
         // _selectedFormaPagamento != null
@@ -661,11 +667,5 @@ class _PedidoPageState extends State<PedidoPage> {
       },
       autovalidateMode: AutovalidateMode.always,
     );
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 }

@@ -26,7 +26,8 @@ class _PedidoPageState extends State<PedidoPage> {
   String? _selectedFormaPagamento;
   String? _selectedArtigo;
   String? _selectedDetalheDoArtigo;
-  String _selectedOption = '';
+  String? _selectedOption = '';
+  String? _selectedFrete;
 
   @override
   void initState() {
@@ -119,20 +120,28 @@ class _PedidoPageState extends State<PedidoPage> {
         const SizedBox(height: 70),
         _buildTextFormField('Cliente', controller: ClienteController),
         const SizedBox(height: 70),
-        _buildDropdownButtonFormField('Tipo de Documento',
-            _selectedTipoDocumento, ['Pedido DC', 'Nota fiscal eletrônica']),
-        const SizedBox(height: 70),
         _buildDropdownButtonFormField(
-            'Tipo de Cobrança', _selectedTipoCobranca, ['Boleto', 'PIX']),
+            'Tipo de Documento', _selectedTipoDocumento, [
+          'Pedido DC',
+          'Nota fiscal eletrônica',
+        ]),
+        const SizedBox(height: 70),
+        _buildDropdownButtonFormField('Tipo de Cobrança', _selectedTipoCobranca,
+            ['Boleto', 'PIX', 'Carteira']),
         const SizedBox(height: 70),
         _buildDropdownButtonFormField(
             'Forma de pagamento', _selectedFormaPagamento, [
-          '30 DIAS',
+          'Á vista',
+          '45 DIAS',
           '60 DIAS',
+          '65 DIAS',
           '90 DIAS',
-          '51 DIAS',
-          '71 DIAS',
-          '111 DIAS'
+          '20/40 DIAS',
+          '30/60/90 DIAS',
+          '45/60/75/80/100 DIAS',
+          '45/60/75/90 DIAS',
+          '45/60/75/90/105 DIAS',
+          '60/70 DIAS'
         ]),
         const SizedBox(height: 70),
         _buildNextButton(),
@@ -188,8 +197,8 @@ class _PedidoPageState extends State<PedidoPage> {
             ),
             const SizedBox(width: 8),
             Expanded(
-              child:
-                  _buildTextFormField('Quantidade', controller: QtdController),
+              child: _buildTextFormFieldQT('Quantidade',
+                  controller: QtdController),
             ),
           ],
         ),
@@ -261,7 +270,7 @@ class _PedidoPageState extends State<PedidoPage> {
     );
   }
 
-  Widget _buildButtonRow2() {
+  /* Widget _buildButtonRow2() {
     return Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -272,7 +281,7 @@ class _PedidoPageState extends State<PedidoPage> {
         ],
       ),
     );
-  }
+  }*/
 
   Widget _buildButton2(IconData icon, Function() onTap) {
     return InkWell(
@@ -330,7 +339,7 @@ class _PedidoPageState extends State<PedidoPage> {
           _clearFieldsAndNavigate(context);
         },
       ).show();
-  } else {
+    } else {
       AwesomeDialog(
         context: context,
         dialogType: DialogType.warning,
@@ -404,6 +413,39 @@ class _PedidoPageState extends State<PedidoPage> {
           return '';
         }
       },
+      autovalidateMode: AutovalidateMode.always,
+    );
+  }
+
+  Widget _buildTextFormFieldQT(
+    String label, {
+    TextEditingController? controller,
+    String? Function(String?)? validator,
+    String? hintText,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hintText,
+        border: const OutlineInputBorder(),
+        floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+          (Set<MaterialState> states) {
+            final Color color = states.contains(MaterialState.error)
+                ? Theme.of(context).colorScheme.error
+                : Colors.green;
+            return TextStyle(color: color, letterSpacing: 1);
+          },
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      ),
+      validator: (String? value) {
+        if (value == null || value == '') {
+          return '';
+        }
+      },
+      keyboardType: TextInputType.number,
       autovalidateMode: AutovalidateMode.always,
     );
   }
@@ -484,21 +526,29 @@ class _PedidoPageState extends State<PedidoPage> {
       }).toList(),
       onChanged: (newValue) {
         setState(() {
-          value = newValue;
+          if (label == 'Tipo de Documento') {
+            _selectedTipoDocumento = newValue;
+          } else if (label == 'Tipo de Cobrança') {
+            _selectedTipoCobranca = newValue;
+          } else if (label == 'Forma de pagamento') {
+            _selectedFormaPagamento = newValue;
+          }
         });
       },
+      icon: const Icon(Icons.arrow_drop_down,
+          color: Color.fromARGB(255, 153, 10, 0)),
     );
   }
 
-  Widget _buildRadio(String label) {
+  Widget _buildRadio(String label, String value) {
     return Row(
       children: [
         Radio<String>(
-          value: label,
-          groupValue: _selectedOption,
-          onChanged: (String? value) {
+          value: value,
+          groupValue: _selectedFrete,
+          onChanged: (String? newValue) {
             setState(() {
-              _selectedOption = value!;
+              _selectedFrete = newValue!;
             });
           },
           activeColor: Colors.red,
@@ -573,10 +623,13 @@ class _PedidoPageState extends State<PedidoPage> {
   void _avancarParaProximaPagina1() {
     if (DtPedidoController.text.isNotEmpty &&
             DtEntregaController.text.isNotEmpty &&
-            ClienteController.text.isNotEmpty 
-        //     _selectedTipoDocumento != null &&
-        //   _selectedTipoCobranca != null &&
-        // _selectedFormaPagamento != null
+            ClienteController.text.isNotEmpty &&
+            _selectedTipoDocumento != null &&
+            _selectedTipoCobranca != null &&
+            _selectedFormaPagamento != null
+        //  &&
+        //   _selectedOption != null &&
+        //  _selectedFrete != null
         ) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -595,6 +648,43 @@ class _PedidoPageState extends State<PedidoPage> {
     }
   }
 
+  void _avancarParaProximaPagina2() {
+    if (_selectedOption != null &&
+        _selectedFrete != null &&
+        FreteController.text.isNotEmpty &&
+        ObservacaoController.text.isNotEmpty &&
+        OcClienteController.text.isNotEmpty) {
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.warning,
+        animType: AnimType.scale,
+        title: 'Erro',
+        desc: 'Preencha todos os campos obrigatórios em BuildPage2',
+        btnCancelOnPress: () {},
+        btnCancelText: 'Fechar',
+      ).show();
+    }
+  }
+
+  Widget _buildButtonRow2() {
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildVoltarButton(),
+          SizedBox(width: 200),
+          _buildButton2(
+              Icons.done, () => _avancarParaProximaPagina2()), // Alteração aqui
+        ],
+      ),
+    );
+  }
+
   Widget _buildFreteSection() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -610,9 +700,9 @@ class _PedidoPageState extends State<PedidoPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              _buildRadio('CIF'),
-              _buildRadio('FOB'),
-              _buildRadio('Terceiros'),
+              _buildRadio('CIF', 'CIF'),
+              _buildRadio('FOB', 'FOB'),
+              _buildRadio('Terceiros', 'Terceiros'),
             ],
           ),
         ),
@@ -621,9 +711,9 @@ class _PedidoPageState extends State<PedidoPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 30),
-              _buildRadio('Remetente'),
-              _buildRadio('Destinatário'),
-              _buildRadio('Sem frete'),
+              _buildRadio('Remetente', 'Remetente'),
+              _buildRadio('Destinatário', 'Destinatário'),
+              _buildRadio('Sem frete', 'Sem frete'),
               const SizedBox(height: 20),
             ],
           ),
