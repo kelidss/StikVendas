@@ -281,16 +281,30 @@ class _PedidoPageState extends State<PedidoPage> {
         ],
       ),
     );
-  }*/
-
+  }
+*/
   Widget _buildButton2(IconData icon, Function() onTap) {
     return InkWell(
       onTap: () {
-        if (_pageController.page! < 2) {
+        if (_selectedOption != null && _selectedFrete != null
+            //   FreteController.text.isNotEmpty &&
+            //  ObservacaoController.text.isNotEmpty &&
+            //   OcClienteController.text.isNotEmpty
+            ) {
           _pageController.nextPage(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
           );
+        } else {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.warning,
+            animType: AnimType.scale,
+            title: 'Erro',
+            desc: 'Preencha todos os campos obrigatórios',
+            btnCancelOnPress: () {},
+            btnCancelText: 'Fechar',
+          ).show();
         }
       },
       child: Container(
@@ -650,10 +664,12 @@ class _PedidoPageState extends State<PedidoPage> {
 
   void _avancarParaProximaPagina2() {
     if (_selectedOption != null &&
-        _selectedFrete != null &&
-        FreteController.text.isNotEmpty &&
-        ObservacaoController.text.isNotEmpty &&
-        OcClienteController.text.isNotEmpty) {
+            _selectedFrete != null &&
+            FreteController.text.isNotEmpty
+        //&&
+        //ObservacaoController.text.isNotEmpty &&
+        // OcClienteController.text.isNotEmpty
+        ) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -664,7 +680,7 @@ class _PedidoPageState extends State<PedidoPage> {
         dialogType: DialogType.warning,
         animType: AnimType.scale,
         title: 'Erro',
-        desc: 'Preencha todos os campos obrigatórios em BuildPage2',
+        desc: 'Preencha todos os campos obrigatórios',
         btnCancelOnPress: () {},
         btnCancelText: 'Fechar',
       ).show();
