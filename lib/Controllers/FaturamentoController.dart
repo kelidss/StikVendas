@@ -6,7 +6,7 @@ class FaturamentoController {
     List<String> nomes = [
       'João Silva',
       'Maria Santos',
-      'Pedro Oliveira',
+     // 'Pedro Oliveira',
       'Ana Costa',
       'Luiz Pereira',
       'Juliana Souza',
@@ -24,8 +24,8 @@ class FaturamentoController {
       'Alexandre Junior',
       'Jacqueline Ferreira',
       'Alexandre Junior',
-      'Tony Soares'
-      'Marcos Viniicius'
+      'Tony Soares',
+      'Marcos Vinicius'
     ];
 
     return List.generate(

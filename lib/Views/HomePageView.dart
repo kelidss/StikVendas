@@ -217,6 +217,8 @@ class HomePageState extends State<HomePage> {
               animType: AnimType.scale,
               title: 'Confirmação',
               desc: 'Tem certeza que deseja sair?',
+              btnCancelText: 'Não',
+              btnOkText: 'Sim',
               btnCancelOnPress: () {},
               btnOkOnPress: () {
                 DtPedidoController.clear();

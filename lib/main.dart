@@ -20,14 +20,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: 
-      '/', // Rota inicial
+      initialRoute: '/', // Rota inicial
       routes: {
-        '/': (context) => const LoginPage(), // Página inicial
+        '/': (context) => const LoginPage(),
         '/feeds': (context) => FeedsPage(),
         '/estoque': (context) => const EstoquePage(),
         '/faturamento': (context) => const FaturamentoPage(),
-        // '/login': (context) => LoginPage(),
         '/home': (context) => HomePage(),
       },
     );

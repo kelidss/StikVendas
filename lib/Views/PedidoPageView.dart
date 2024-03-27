@@ -1,15 +1,11 @@
-// ignore_for_file: use_build_context_synchronously
-import 'package:intl/intl.dart';
+// ignore_for_file: library_private_types_in_public_api, prefer_final_fields, use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:stik_vendas/Controllers/PedidoController.dart';
-import 'package:stik_vendas/Views/FeedsPageView.dart';
-import 'package:stik_vendas/Views/HomePageView.dart';
-import 'package:stik_vendas/Views/LoginPageView.dart';
-import 'package:intl/intl.dart';
+import 'package:stik_vendas/Views/bottomNavigation.dart';
+import 'FuncoesNavegacao.dart';
 
 class PedidoPage extends StatefulWidget {
   const PedidoPage({Key? key}) : super(key: key);
@@ -19,7 +15,6 @@ class PedidoPage extends StatefulWidget {
 }
 
 class _PedidoPageState extends State<PedidoPage> {
-  int _currentIndex = 0;
   late PageController _pageController;
   String? _selectedTipoDocumento;
   String? _selectedTipoCobranca;
@@ -61,46 +56,7 @@ class _PedidoPageState extends State<PedidoPage> {
           ],
         ),
       ),
-      bottomNavigationBar: CurvedNavigationBar(
-        animationCurve: Curves.easeInOut,
-        backgroundColor: Colors.white,
-        color: const Color(0xFFD52B1E),
-        animationDuration: const Duration(milliseconds: 300),
-        items: const [
-          Icon(Icons.home, color: Colors.white),
-          Icon(Icons.exit_to_app, color: Colors.white),
-          Icon(Icons.feed, color: Colors.white),
-        ],
-        onTap: (index) async {
-          setState(() {
-            _currentIndex = index;
-          });
-          await Future.delayed(const Duration(seconds: 1));
-          if (_currentIndex == 1) {
-            AwesomeDialog(
-              context: context,
-              dialogType: DialogType.warning,
-              animType: AnimType.scale,
-              title: 'Confirmação',
-              desc: 'Tem certeza que deseja sair?',
-              btnCancelOnPress: () {},
-              btnOkOnPress: () {
-                _clearFieldsAndNavigate(context);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-            ).show();
-          } else if (_currentIndex == 0) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          } else if (_currentIndex == 2) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => FeedsPage()));
-          }
-        },
-      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 
@@ -207,51 +163,19 @@ class _PedidoPageState extends State<PedidoPage> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
-                child: _buildCurrencyTextFormField('Valor Base',
+                child: _buildCurrencyTextFormField('Vr Base',
                     controller: VrBaseController),
               ),
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: _buildCurrencyTextFormField('Preço Efetivo',
+                child: _buildCurrencyTextFormField('Vr Efetivo',
                     controller: PrEfetivoController),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 70),
-        TextFormField(
-          controller: VrBrutoController,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.monetization_on),
-            hintText: '0,0',
-            border: const OutlineInputBorder(),
-            labelText: 'Valor Bruto',
-            floatingLabelStyle:
-                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-              final Color color = states.contains(MaterialState.error)
-                  ? Theme.of(context).colorScheme.error
-                  : Colors.green;
-              return TextStyle(color: color, letterSpacing: 1);
-            }),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          ),
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            CurrencyPtBrInputFormatter()
-          ],
-          keyboardType: TextInputType.number,
-          validator: (String? value) {
-            if (value == null || value == '') {
-              return '';
-            }
-          },
-          autovalidateMode: AutovalidateMode.always,
-        ),
-        const SizedBox(height: 60),
-        _buildButtonRow(),
       ],
     );
   }
@@ -262,7 +186,7 @@ class _PedidoPageState extends State<PedidoPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _buildVoltarButton(),
-          SizedBox(width: 200),
+          const SizedBox(width: 200),
           _buildButton(Icons.done, () => _showDialog(context)),
         ],
       ),
@@ -272,7 +196,7 @@ class _PedidoPageState extends State<PedidoPage> {
   Widget _buildButton2(IconData icon, Function() onTap) {
     return InkWell(
       onTap: () {
-        if (_selectedOption != null && _selectedFrete != null){
+        if (_selectedOption != null && _selectedFrete != null) {
           _pageController.nextPage(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
@@ -330,6 +254,7 @@ class _PedidoPageState extends State<PedidoPage> {
         context: context,
         dialogType: DialogType.success,
         animType: AnimType.scale,
+        btnOkText: 'teste',
         title: 'Pedido feito!',
         btnOkOnPress: () {
           _clearFieldsAndNavigate(context);
@@ -453,14 +378,14 @@ class _PedidoPageState extends State<PedidoPage> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: _buildDateTextFormField('Data Pedido',
+            child: _buildDateTextFormField('Pedido',
                 controller: DtPedidoController),
           ),
         ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: _buildDateTextFormField('Data Entrega',
+            child: _buildDateTextFormField('Entrega',
                 controller: DtEntregaController),
           ),
         ),
@@ -561,7 +486,15 @@ class _PedidoPageState extends State<PedidoPage> {
         InkWell(
           onTap: () {
             if (_pageController.page == 0) {
-              _avancarParaProximaPagina1();
+              avancarproximapagina1(
+                  _pageController,
+                  DtPedidoController,
+                  DtEntregaController,
+                  ClienteController,
+                  _selectedTipoDocumento,
+                  _selectedTipoCobranca,
+                  _selectedFormaPagamento,
+                  context);
             } else {
               _pageController.nextPage(
                 duration: const Duration(milliseconds: 300),
@@ -616,53 +549,6 @@ class _PedidoPageState extends State<PedidoPage> {
     );
   }
 
-  void _avancarParaProximaPagina1() {
-    if (DtPedidoController.text.isNotEmpty &&
-            DtEntregaController.text.isNotEmpty &&
-            ClienteController.text.isNotEmpty &&
-            _selectedTipoDocumento != null &&
-            _selectedTipoCobranca != null &&
-            _selectedFormaPagamento != null
-        ) {
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    } else {
-      AwesomeDialog(
-        context: context,
-        dialogType: DialogType.warning,
-        animType: AnimType.scale,
-        title: 'Erro',
-        desc: 'Preencha todos os campos obrigatórios',
-        btnCancelOnPress: () {},
-        btnCancelText: 'Fechar',
-      ).show();
-    }
-  }
-
-  void _avancarParaProximaPagina2() {
-    if (_selectedOption != null &&
-            _selectedFrete != null &&
-            FreteController.text.isNotEmpty
-        ) {
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    } else {
-      AwesomeDialog(
-        context: context,
-        dialogType: DialogType.warning,
-        animType: AnimType.scale,
-        title: 'Erro',
-        desc: 'Preencha todos os campos obrigatórios',
-        btnCancelOnPress: () {},
-        btnCancelText: 'Fechar',
-      ).show();
-    }
-  }
-
   Widget _buildButtonRow2() {
     return Expanded(
       child: Row(
@@ -671,7 +557,9 @@ class _PedidoPageState extends State<PedidoPage> {
           _buildVoltarButton(),
           const SizedBox(width: 200),
           _buildButton2(
-              Icons.done, () => _avancarParaProximaPagina2()),
+              Icons.done,
+              () => avancarproximapagina2(_pageController, _selectedOption,
+                  _selectedFrete, FreteController, context)),
         ],
       ),
     );

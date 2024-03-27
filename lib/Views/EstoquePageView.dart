@@ -1,11 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:stik_vendas/Controllers/PedidoController.dart';
-import 'package:stik_vendas/Views/HomePageView.dart';
-import 'package:stik_vendas/Views/LoginPageView.dart';
-import 'package:stik_vendas/Views/FeedsPageView.dart';
+import 'package:stik_vendas/Views/bottomNavigation.dart';
 
 class EstoquePage extends StatefulWidget {
   const EstoquePage({Key? key}) : super(key: key);
@@ -84,12 +79,7 @@ class _EstoquePageState extends State<EstoquePage> {
       _filteredData = _data
           .where(
             (item) =>
-                // item['ID'].toString().toLowerCase().contains(searchTerm) ||
                 item['Title'].toString().toLowerCase().contains(searchTerm),
-            //item['quantidade estoque']
-            // .toString()
-            // .toLowerCase()
-            // .contains(searchTerm)
           )
           .toList();
     });
@@ -141,56 +131,7 @@ class _EstoquePageState extends State<EstoquePage> {
             ),
           ],
         ),
-        bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Colors.white,
-          color: const Color(0xFFD52B1E),
-          animationDuration: const Duration(milliseconds: 300),
-          items: const [
-            Icon(Icons.home, color: Colors.white),
-            Icon(Icons.exit_to_app, color: Colors.white),
-            Icon(Icons.feed, color: Colors.white),
-          ],
-          onTap: (index) async {
-            setState(() {
-              currentIndex = index;
-            });
-            await Future.delayed(const Duration(seconds: 1));
-            if (currentIndex == 1) {
-              AwesomeDialog(
-                context: context,
-                dialogType: DialogType.warning,
-                animType: AnimType.scale,
-                title: 'Confirmação',
-                desc: 'Tem certeza que deseja sair?',
-                btnCancelOnPress: () {},
-                btnOkOnPress: () {
-                DtPedidoController.clear();
-                DtEntregaController.clear();
-                ClienteController.clear();
-                FreteController.clear();
-                ObservacaoController.clear();
-                UndController.clear();
-                QtdController.clear();
-                OcClienteController.clear();
-                VrBaseController.clear();
-                PrEfetivoController.clear();
-                VrBrutoController.clear();
-                
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-              ).show();
-            } else if (currentIndex == 0) {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
-            } else if (currentIndex == 2) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => FeedsPage()));
-            }
-          },
-        ),
+        bottomNavigationBar: const CustomBottomNavigationBar(),
       );
 }
 
