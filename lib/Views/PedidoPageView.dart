@@ -4,7 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:stik_vendas/Controllers/PedidoController.dart';
-import 'package:stik_vendas/Views/bottomNavigation.dart';
+import 'package:stik_vendas/Views/BottomNavigation.dart';
+import 'package:stik_vendas/Views/bottomNavigationFeeds.dart';
 import 'FuncoesNavegacao.dart';
 
 class PedidoPage extends StatefulWidget {
@@ -253,7 +254,7 @@ class _PedidoPageState extends State<PedidoPage> {
         context: context,
         dialogType: DialogType.success,
         animType: AnimType.scale,
-        btnOkText: 'teste',
+        btnOkText: 'ok',
         title: 'Pedido feito!',
         btnOkOnPress: () {
           _clearFieldsAndNavigate(context);

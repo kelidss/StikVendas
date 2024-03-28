@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
-import 'package:stik_vendas/Views/bottomNavigation.dart';
+import 'package:stik_vendas/Views/BottomNavigation.dart';
 
 class EstoquePage extends StatefulWidget {
   const EstoquePage({Key? key}) : super(key: key);
@@ -26,41 +26,6 @@ class _EstoquePageState extends State<EstoquePage> {
     {'ID': 13, 'Title': 'Chll 05 Tingido', 'quantidade estoque': 105},
     {'ID': 14, 'Title': 'Chuly 14 mm Tipo B', 'quantidade estoque': 75},
     {'ID': 15, 'Title': 'Cintarela 230 mm Tipo B', 'quantidade estoque': 115},
-    {'ID': 16, 'Title': 'Cintarela 250 mm Tipo B', 'quantidade estoque': 125},
-    {'ID': 17, 'Title': 'Cintarela 270 mm  Tipo B', 'quantidade estoque': 135},
-    {'ID': 18, 'Title': 'Cintarela 270 mm Tipo B', 'quantidade estoque': 145},
-    {'ID': 19, 'Title': 'Cintarela 60 mm Tipo B', 'quantidade estoque': 165},
-    {'ID': 20, 'Title': 'Cintra 22 mm Tipo B ENF', 'quantidade estoque': 195},
-    {'ID': 21, 'Title': 'Cintra 38 Sublimado', 'quantidade estoque': 140},
-    {'ID': 22, 'Title': 'Class 14 mm', 'quantidade estoque': 160},
-    {'ID': 23, 'Title': 'Class 16 mm Tipo B', 'quantidade estoque': 175},
-    {'ID': 24, 'Title': 'Cleide 4 30 mm Em Disco', 'quantidade estoque': 185},
-    {'ID': 25, 'Title': 'Cleide 4 40 DT mm', 'quantidade estoque': 155},
-    {'ID': 26, 'Title': 'Cleide 4 40 DT mm Tipo B', 'quantidade estoque': 150},
-    {'ID': 27, 'Title': 'Cleide BP 4 35 DT mm', 'quantidade estoque': 125},
-    {
-      'ID': 28,
-      'Title': 'Cleide BP 4 35 DT mm Tipo B',
-      'quantidade estoque': 135
-    },
-    {'ID': 29, 'Title': 'Cleide BP 4 50 mm', 'quantidade estoque': 145},
-    {'ID': 30, 'Title': 'Cleide EDG 35 mm', 'quantidade estoque': 190},
-    {'ID': 31, 'Title': 'Cleide PP 35 mm', 'quantidade estoque': 200},
-    {'ID': 32, 'Title': 'Cleide PP 35 mm Tipo B', 'quantidade estoque': 205},
-    {'ID': 33, 'Title': 'Cris 16 (H) Tipo B', 'quantidade estoque': 195},
-    {'ID': 34, 'Title': 'Dakar 16 mm', 'quantidade estoque': 185},
-    {'ID': 35, 'Title': 'Dama 10 mm Tipo B', 'quantidade estoque': 175},
-    {
-      'ID': 36,
-      'Title': 'Dayane 13 UP N BR mm Tipo B',
-      'quantidade estoque': 165
-    },
-    {'ID': 37, 'Title': 'Dayane 17 UP mm Sublimado', 'quantidade estoque': 155},
-    {
-      'ID': 38,
-      'Title': 'Dayane 17 UP mm Sublimado Tipo B',
-      'quantidade estoque': 145
-    }
   ];
 
   final TextEditingController _searchController = TextEditingController();
@@ -125,6 +90,9 @@ class _EstoquePageState extends State<EstoquePage> {
                   suffixIcon: Icon(Icons.search),
                 ),
               ),
+              rowsPerPage: 10,
+              columnSpacing: 15,
+              horizontalMargin: 15,
             ),
             const SizedBox(
               height: 3,

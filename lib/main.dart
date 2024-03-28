@@ -4,6 +4,7 @@ import 'package:stik_vendas/Views/FaturamentoPageView.dart';
 import 'package:stik_vendas/Views/FeedsPageView.dart';
 import 'package:stik_vendas/Views/HomePageView.dart';
 import 'package:stik_vendas/Views/LoginPageView.dart';
+//import 'package:stik_vendas/Views/CarteiraDeClientesView.dart';
 
 void main() {
   runApp(const MyApp());

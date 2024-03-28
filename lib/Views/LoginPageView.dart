@@ -50,9 +50,9 @@ class _LoginPageState extends State<LoginPage>
                 Hero(
                   tag: 'logo',
                   child: SizedBox(
-                    height: 150,
+                    height: 160,
                     child: Image.asset(
-                      'assets/Logo_Stik_App.png',
+                      'assets/logo 2_Prancheta 1.png',
                       fit: BoxFit.contain,
                     ),
                   ),

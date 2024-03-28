@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:stik_vendas/Views/bottomNavigation.dart';
+import 'package:stik_vendas/Views/BottomNavigation.dart';
+import 'package:stik_vendas/Views/bottomNavigationFeeds.dart';
 
 class FeedsPage extends StatefulWidget {
   final String? nomeUsuario;
@@ -85,7 +86,7 @@ class FeedsPageState extends State<FeedsPage> {
           ),
         ],
       ),
-        bottomNavigationBar: const CustomBottomNavigationBar(),
+      bottomNavigationBar: const CustomBottomNavigationBarFeed(),
     );
   }
 }

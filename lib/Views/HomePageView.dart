@@ -3,12 +3,12 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:stik_vendas/Controllers/PedidoController.dart';
 import 'package:stik_vendas/Models/LoginModel.dart';
+import 'package:stik_vendas/Views/CarteiraDeClientesView.dart';
 import 'package:stik_vendas/Views/EstoquePageView.dart';
 import 'package:stik_vendas/Views/FaturamentoPageView.dart';
 import 'package:stik_vendas/Views/FeedsPageView.dart';
 import 'package:stik_vendas/Views/LoginPageView.dart';
 import 'package:stik_vendas/Views/PedidoPageView.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key, this.nomeUsuario}) : super(key: key);
@@ -17,7 +17,6 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => HomePageState();
-  final TextEditingController usuarioController = TextEditingController();
 }
 
 class HomePageState extends State<HomePage> {
@@ -55,138 +54,40 @@ class HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 12),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                crossAxisSpacing: 8,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const PedidoPage(),
-                        ),
-                      );
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Wrap(
+                spacing: 16.0,
+                runSpacing: 16.0,
+                children: [
+                  _buildMenuButton(
+                    icon: Icons.shopping_cart,
+                    label: 'Pedido',
+                    onPressed: () {
+                      _navigateToPage(const PedidoPage());
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFD52B1E),
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                      alignment: Alignment.center,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.shopping_cart,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Pedido',
-                            style: TextStyle(fontSize: 14, color: Colors.white),
-                          )
-                        ],
-                      ),
-                    ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const EstoquePage()),
-                      );
+                  _buildMenuButton(
+                    icon: Icons.work,
+                    label: 'Estoque',
+                    onPressed: () {
+                      _navigateToPage(const EstoquePage());
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFD52B1E),
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                      alignment: Alignment.center,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.work,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Estoque',
-                            style: TextStyle(fontSize: 14, color: Colors.white),
-                          )
-                        ],
-                      ),
-                    ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const FaturamentoPage()),
-                      );
+                  _buildMenuButton(
+                    icon: Icons.monetization_on,
+                    label: 'Faturamento',
+                    onPressed: () {
+                      _navigateToPage(const FaturamentoPage());
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFD52B1E),
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                      alignment: Alignment.center,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.monetization_on,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                          SizedBox(height: 8),
-                          Text('Faturamento',
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.white))
-                        ],
-                      ),
-                    ),
+                  ),
+                  _buildMenuButton(
+                    icon: Icons.wallet,
+                    label: 'Cliente',
+                    onPressed: () {
+                      _navigateToPage(CarteiraClientePage());
+                    },
                   ),
                 ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: Container(
-                height: 50,
-                width: 300,
-                decoration: const BoxDecoration(),
-                child: const Center(
-                  child: Text(
-                    'Progresso da sua meta.',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: CircularPercentIndicator(
-                animation: true,
-                radius: 100,
-                lineWidth: 20,
-                percent: 0.40,
-                progressColor: Colors.green,
-                backgroundColor: Colors.grey,
-                circularStrokeCap: CircularStrokeCap.round,
-                center: const Text(
-                  '40.0%',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                ),
               ),
             ),
           ],
@@ -196,43 +97,20 @@ class HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         color: const Color(0xFFD52B1E),
         animationDuration: const Duration(milliseconds: 300),
+        // index: currentIndex,
         items: const [
           Icon(Icons.home, color: Colors.white),
           Icon(Icons.exit_to_app, color: Colors.white),
           Icon(Icons.feed, color: Colors.white),
         ],
         onTap: (index) async {
+          //  if (index == currentIndex) return;
           setState(() {
             currentIndex = index;
           });
           await Future.delayed(const Duration(seconds: 1));
           if (currentIndex == 1) {
-            // ignore: use_build_context_synchronously
-            AwesomeDialog(
-              context: context,
-              dialogType: DialogType.warning,
-              animType: AnimType.scale,
-              title: 'Confirmação',
-              desc: 'Tem certeza que deseja sair?',
-              btnCancelText: 'Não',
-              btnOkText: 'Sim',
-              btnCancelOnPress: () {},
-              btnOkOnPress: () {
-                DtPedidoController.clear();
-                DtEntregaController.clear();
-                ClienteController.clear();
-                FreteController.clear();
-                ObservacaoController.clear();
-                UndController.clear();
-                QtdController.clear();
-                OcClienteController.clear();
-                VrBaseController.clear();
-                PrEfetivoController.clear();
-
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()));
-              },
-            ).show();
+            _showExitConfirmationDialog();
           } else if (currentIndex == 2) {
             Navigator.pushReplacement(
               context,
@@ -241,6 +119,83 @@ class HomePageState extends State<HomePage> {
           }
         },
       ),
+    );
+  }
+
+  Widget _buildMenuButton(
+      {required IconData icon,
+      required String label,
+      required VoidCallback onPressed}) {
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          color: const Color(0xFFD52B1E),
+          borderRadius: BorderRadius.circular(13),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 30,
+              color: Colors.white,
+            ),
+            SizedBox(height: 8),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14, color: Colors.white),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _navigateToPage(Widget page) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
+  void _showExitConfirmationDialog() {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.warning,
+      animType: AnimType.scale,
+      title: 'Confirmação',
+      desc: 'Tem certeza que deseja sair?',
+      btnCancelText: 'Não',
+      btnOkText: 'Sim',
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        _clearControllers();
+        _navigateToLoginPage();
+      },
+    ).show();
+  }
+
+  void _clearControllers() {
+    DtPedidoController.clear();
+    DtEntregaController.clear();
+    ClienteController.clear();
+    FreteController.clear();
+    ObservacaoController.clear();
+    UndController.clear();
+    QtdController.clear();
+    OcClienteController.clear();
+    VrBaseController.clear();
+    PrEfetivoController.clear();
+  }
+
+  void _navigateToLoginPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
 }

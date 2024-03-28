@@ -1,7 +1,3 @@
 {
-    "cmake.configureOnOpen": true,
-    "cmake.sourceDirectory": "C:/Users/ksoares/PROJETOS/StikVendas/windows/flutter",
-    "python.analysis.extraPaths": [
-        "./lib/CRUD"
-    ]
+    "cmake.sourceDirectory": "C:/Users/ksoares/PROJETOS/StikVendas/linux"
 }

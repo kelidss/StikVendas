@@ -6,7 +6,6 @@ class FaturamentoController {
     List<String> nomes = [
       'João Silva',
       'Maria Santos',
-     // 'Pedro Oliveira',
       'Ana Costa',
       'Luiz Pereira',
       'Juliana Souza',
@@ -19,7 +18,7 @@ class FaturamentoController {
       'Paula Rocha',
       'Lucas Cardoso',
       'Mariana Castro',
-      'Keliane Soares',
+      'Keliane dos Santos Soares',
       'Keroly Soares',
       'Alexandre Junior',
       'Jacqueline Ferreira',

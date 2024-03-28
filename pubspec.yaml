@@ -21,21 +21,18 @@ dependencies:
   d_chart: ^2.6.7
   percent_indicator: ^4.2.3
   mask_text_input_formatter: ^2.8.0
-  cloud_firestore: ^4.15.8
-  http: 1.2.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^2.0.0
 
 
 flutter:
   uses-material-design: true
   assets:
-    - assets/Logo_Stik_App.png
+    - assets/logo 2_Prancheta 1.png
   #fonts:
     #- family: Montserrart Regular
      # fonts:

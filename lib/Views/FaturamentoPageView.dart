@@ -1,9 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stik_vendas/Controllers/FaturamentoController.dart';
 import 'package:stik_vendas/Models/FaturamentoModel.dart';
-import 'package:stik_vendas/Views/bottomNavigation.dart';
+import 'package:stik_vendas/Views/BottomNavigation.dart';
+import 'package:stik_vendas/Views/bottomNavigationFeeds.dart';
 
 class FaturamentoPage extends StatefulWidget {
   const FaturamentoPage({Key? key}) : super(key: key);
@@ -63,9 +63,9 @@ class _FaturamentoPageState extends State<FaturamentoPage> {
               ),
               source: _FaturamentoDataSource(_filteredData),
               rowsPerPage: 10,
-              columnSpacing: 30,
+              columnSpacing: 15,
               showFirstLastButtons: true,
-              horizontalMargin: 20,
+              horizontalMargin: 15,
             ),
           ],
         ),
