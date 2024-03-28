@@ -176,6 +176,7 @@ class _PedidoPageState extends State<PedidoPage> {
             ),
           ],
         ),
+        _buildButtonRow()
       ],
     );
   }
@@ -247,9 +248,7 @@ class _PedidoPageState extends State<PedidoPage> {
   }
 
   void _showDialog(BuildContext context) {
-    if (UndController.text.isNotEmpty &&
-        QtdController.text.isNotEmpty &&
-        VrBrutoController.text.isNotEmpty) {
+    if (UndController.text.isNotEmpty && QtdController.text.isNotEmpty) {
       AwesomeDialog(
         context: context,
         dialogType: DialogType.success,

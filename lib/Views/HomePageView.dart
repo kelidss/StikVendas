@@ -162,9 +162,7 @@ class HomePageState extends State<HomePage> {
               child: Container(
                 height: 50,
                 width: 300,
-                decoration: const BoxDecoration(
-                    // color: Colors.green,
-                    ),
+                decoration: const BoxDecoration(),
                 child: const Center(
                   child: Text(
                     'Progresso da sua meta.',
@@ -178,7 +176,6 @@ class HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: CircularPercentIndicator(
-                // Configurações do CircularPercentIndicator
                 animation: true,
                 radius: 100,
                 lineWidth: 20,
@@ -231,15 +228,12 @@ class HomePageState extends State<HomePage> {
                 OcClienteController.clear();
                 VrBaseController.clear();
                 PrEfetivoController.clear();
-                VrBrutoController.clear();
 
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const LoginPage()));
-                //   );
               },
             ).show();
           } else if (currentIndex == 2) {
-            // ignore: use_build_context_synchronously
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => FeedsPage()),
