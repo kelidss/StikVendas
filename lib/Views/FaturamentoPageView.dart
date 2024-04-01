@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:stik_vendas/Controllers/FaturamentoController.dart';
 import 'package:stik_vendas/Models/FaturamentoModel.dart';
 import 'package:stik_vendas/Views/BottomNavigation.dart';
-import 'package:stik_vendas/Views/bottomNavigationFeeds.dart';
 
 class FaturamentoPage extends StatefulWidget {
   const FaturamentoPage({Key? key}) : super(key: key);

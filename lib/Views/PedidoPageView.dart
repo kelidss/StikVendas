@@ -5,7 +5,6 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:stik_vendas/Controllers/PedidoController.dart';
 import 'package:stik_vendas/Views/BottomNavigation.dart';
-import 'package:stik_vendas/Views/bottomNavigationFeeds.dart';
 import 'FuncoesNavegacao.dart';
 
 class PedidoPage extends StatefulWidget {

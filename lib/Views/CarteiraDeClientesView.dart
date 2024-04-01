@@ -1,8 +1,5 @@
-// ignore_for_file: prefer_final_fields
-
 import 'package:flutter/material.dart';
 import 'package:stik_vendas/Views/BottomNavigation.dart';
-import 'package:stik_vendas/Views/bottomNavigationFeeds.dart';
 
 class CarteiraClientePage extends StatefulWidget {
   const CarteiraClientePage({Key? key}) : super(key: key);
@@ -14,38 +11,48 @@ class CarteiraClientePage extends StatefulWidget {
 class _CarteiraClientePageState extends State<CarteiraClientePage> {
   final TextEditingController _searchController = TextEditingController();
   List<Cliente> _filteredData = [];
-  List<Cliente> _data = [
+  final List<Cliente> _data = [
     Cliente(
-        nome: 'Cliente A',
+        nome: 'Keliane',
         limiteCredito: 1000,
         saldoLimite: 500,
         inadimplencia: true),
     Cliente(
-        nome: 'Cliente B',
+        nome: 'Soares',
         limiteCredito: 2000,
         saldoLimite: 1500,
         inadimplencia: false),
     Cliente(
-        nome: 'Cliente C',
+        nome: 'Ferreira',
         limiteCredito: 3000,
         saldoLimite: 2000,
         inadimplencia: true),
     Cliente(
-        nome: 'Cliente D',
+        nome: 'Nascimento',
         limiteCredito: 4000,
         saldoLimite: 2500,
         inadimplencia: false),
     Cliente(
-        nome: 'Cliente E',
+        nome: 'Morais',
         limiteCredito: 5000,
         saldoLimite: 3000,
+        inadimplencia: true),
+    Cliente(
+        nome: 'Souza',
+        limiteCredito: 6000,
+        saldoLimite: 3500,
+        inadimplencia: false),
+    Cliente(
+        nome: 'Silva',
+        limiteCredito: 7000,
+        saldoLimite: 4000,
         inadimplencia: true),
   ];
 
   @override
   void initState() {
     super.initState();
-    _filteredData.addAll(_data);
+    _filteredData = List.from(_data);
   }
 
   void _filterData(String searchTerm) {
@@ -75,31 +82,36 @@ class _CarteiraClientePageState extends State<CarteiraClientePage> {
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: _searchController,
-                onChanged: _filterData,
                 decoration: const InputDecoration(
                   labelText: 'Procurar...',
                   suffixIcon: Icon(Icons.search),
                 ),
+                onChanged: _filterData,
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _filteredData.length,
-                itemBuilder: (context, index) {
-                  final cliente = _filteredData[index];
-                  return ListTile(
-                    title: Text(cliente.nome),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Limite de Crédito: ${cliente.limiteCredito}'),
-                        Text('Saldo do Limite: ${cliente.saldoLimite}'),
-                        Text(
-                            'Inadimplência: ${cliente.inadimplencia ? 'Sim' : 'Não'}'),
-                      ],
-                    ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DataTable(
+                columnSpacing: 20.0,
+                columns: const [
+                  DataColumn(label: Text('Nome')),
+                  DataColumn(label: Text('Crédito')),
+                  DataColumn(label: Text('Saldo')),
+                  DataColumn(
+                      label: Text('Inadimplente', textAlign: TextAlign.center)),
+                ],
+                rows: _filteredData.map((cliente) {
+                  return DataRow(
+                    cells: [
+                      DataCell(Text(cliente.nome)),
+                      DataCell(Text('${cliente.limiteCredito}')),
+                      DataCell(Text('${cliente.saldoLimite}')),
+                      DataCell(Text(cliente.inadimplencia
+                          ? 'R\$ ${cliente.limiteCredito - cliente.saldoLimite}'
+                          : 'Não')),
+                    ],
                   );
-                },
+                }).toList(),
               ),
             ),
           ],
